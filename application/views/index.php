@@ -545,7 +545,7 @@ var _hmt = _hmt || [];
       <ul class="user-menu">
       	<!--<li class="qq"><a href="" target="_blank" id="mobile" title="手机版">手机版</a></li>
       	<li class="space">|</li>-->
-      	<li class="qq"><a href="" onClick="return false;" id="wpa">QQ咨询：209887082</a></li>
+      	<li class="qq"><a href="" onClick="return false;" id="wpa">QQ咨询：471607572</a></li>
       	<li class="space">|</li>
         
       	<li class="telphone">电话：400-800-1234</li>
