@@ -48,7 +48,7 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
+$db['default']['hostname'] = '120.27.27.21';
 $db['default']['username'] = 'root';
 $db['default']['password'] = 'root_2017';
 $db['default']['database'] = 'erp_db';
