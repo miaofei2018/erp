@@ -63,7 +63,7 @@ $(document).keydown(function(event) {
           <input type="text" value="" class="ui-input ui-datepicker-input" name="filter-fromDate" id="filter-fromDate" /> - <input type="text" value="" class="ui-input ui-datepicker-input" name="filter-toDate" id="filter-toDate" />
         </li>
         <li>
-          <label>仓库:</label>
+          <label>库存:</label>
           <span class="mod-choose-input" id="filter-storage"><input type="text" class="ui-input" id="storageAuto"/><span class="ui-icon-ellipsis"></span></span>
         </li>
         <li>

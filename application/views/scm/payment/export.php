@@ -7,7 +7,7 @@
 				<tr>
 				    <th width="100" align="center">单据日期</th>
 				    <th width="150" align="center">单据编号</th>
-				    <th width="120" align="center">购货单位</th>
+				    <th width="120" align="center">采购单位</th>
 					<th width="60" align="center">付款金额</th>
 					<th width="100" align="center">备注</th>
 					<th width="200" align="center">结算账户</th>

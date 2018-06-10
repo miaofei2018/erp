@@ -39,7 +39,7 @@ $(document).keydown(function(event) {
     <div class="con-header">
       <dl class="cf">
         <dd class="pct40">
-          <label>购货单位：</label>
+          <label>采购单位：</label>
           <span class="ui-combo-wrap" id="customer">
           <input type="text" name="" class="input-txt" autocomplete="off" value="" data-ref="date">
           <i class="ui-icon-ellipsis"></i></span></dd>

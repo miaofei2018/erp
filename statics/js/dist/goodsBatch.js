@@ -276,12 +276,12 @@ var api = frameElement.api,
 					hidden: !0
 				}, {
 					name: "locationId",
-					label: "仓库ID",
+					label: "库存ID",
 					width: 0,
 					hidden: !0
 				}, {
 					name: "locationName",
-					label: "仓库名称",
+					label: "库存名称",
 					width: 0,
 					hidden: !0
 				}, {

@@ -59,7 +59,7 @@ a.ui-btn{margin-left:10px;}
  class="ui-btn dn" id="audit">审核</a><a class="ui-btn" id="reAudit">反审核</a></div>
   </div>
 <!--  <div class="mod-toolbar-top cf">
-    <div class="fl"><strong class="tit">仓库</strong></div>
+    <div class="fl"><strong class="tit">库存</strong></div>
     <div class="fr"><a class="ui-btn ui-btn-sp mrb" id="search">新增</a><a class="ui-btn" id="export">
 导出</a></div>
   </div>-->

@@ -52,7 +52,7 @@ function initEvent() {
 			}
 			parent.tab.addTabItem({
 				tabid: "purchase-purchase",
-				text: "购货单",
+				text: "采购单",
 				url: "../scm/invpu?action=editPur&id=" + b
 			}), $(this).addClass("tr-hover"), $_curTr = $(this)
 		}

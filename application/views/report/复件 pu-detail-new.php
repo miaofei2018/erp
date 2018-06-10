@@ -78,7 +78,7 @@ $(document).keydown(function(event) {
 查询）</p>
               </li>
               <li>
-                <label class="tit">仓库:</label>
+                <label class="tit">库存:</label>
                 <span class="mod-choose-input" id="filter-storage"><input type="text" class="ui-input"
  id="storageAuto"/><span class="ui-icon-ellipsis"></span></span>
               </li>

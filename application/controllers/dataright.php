@@ -24,7 +24,7 @@ class Dataright extends CI_Controller {
 	public function dt() {
 	    $ids = str_enhtml($this->input->post('userName',TRUE));
 		die('{"status":200,"data":{"items":[
-		{"FNAME":"仓库","FRIGHT":"1","FRIGHTID":"1","FNUMBER":"location"},
+		{"FNAME":"库存","FRIGHT":"1","FRIGHTID":"1","FNUMBER":"location"},
 		{"FNAME":"客户","FRIGHT":"2","FRIGHTID":"2","FNUMBER":"customer"},
 		{"FNAME":"供应商","FRIGHT":"4","FRIGHTID":"4","FNUMBER":"supplier"},
 		{"FNAME":"制单人","FRIGHT":"8","FRIGHTID":"8","FNUMBER":"user"}

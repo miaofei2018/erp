@@ -76,7 +76,7 @@ define(["jquery", "print"], function(a, b, c) {
 			align: "center"
 		}, {
 			name: "location",
-			label: "仓库",
+			label: "库存",
 			width: 100,
 			align: "center"
 		}, {
@@ -158,7 +158,7 @@ define(["jquery", "print"], function(a, b, c) {
 					b.billType;
 					parent.tab.addTabItem({
 						tabid: "purchase-purchase",
-						text: "购货单",
+						text: "采购单",
 						url: "../scm/invPu?action=editPur&id=" + c
 					})
 				}

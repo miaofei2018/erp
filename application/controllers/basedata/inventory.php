@@ -629,7 +629,7 @@ class Inventory extends CI_Controller {
 			$locationId   =  array_column($storage,'id'); 
 			$locationName =  array_column($storage,'name','id');
 			foreach ($list as $arr=>$row) {
-				!in_array($row['locationId'],$locationId) && str_alert(-1,$locationName[$row['locationId']].'仓库不存在或不可用！'); 
+				!in_array($row['locationId'],$locationId) && str_alert(-1,$locationName[$row['locationId']].'库存不存在或不可用！'); 
 			} 
 		}
 		$data['warehousePropertys'] = isset($data['warehousePropertys']) ? $data['warehousePropertys'] :'[]';

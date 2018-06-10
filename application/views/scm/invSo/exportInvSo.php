@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');?>
 <table width="1500px" class="list">
-  			<tr><td class='H' align="center" colspan="21"><h3>销货订单记录</h3></td></tr>
+  			<tr><td class='H' align="center" colspan="21"><h3>销售订单记录</h3></td></tr>
   		</table>
 		<table width="1500px" class="list"  border="1">
 			<thead>
@@ -23,7 +23,7 @@
 					<th width="60" align="center">折扣率(%)</th>
 					<th width="60" align="center">折扣额</th>	
 					<th width="60" align="center">金额</th>	
-					<th width="60" align="center">仓库</th>	
+					<th width="60" align="center">库存</th>	
 					<th width="100" align="center">备注</th>	
 					<th width="100" align="center">源单号</th>
 				</tr>

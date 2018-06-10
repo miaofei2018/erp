@@ -14,7 +14,7 @@
 					<th width="200" align="center">商品</th>
 					<th width="60" align="center">单位</th>
 					<th width="80" align="center">调整金额</th>	
-					<th width="60" align="center">仓库</th>	
+					<th width="60" align="center">库存</th>	
 					<th width="100" align="center">备注</th>	
 				</tr>
 			</thead>

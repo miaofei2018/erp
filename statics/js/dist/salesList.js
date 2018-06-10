@@ -189,10 +189,10 @@ var THISPAGE = {
 			var b = $(this).parent().data("id"),
 				c = $("#grid").jqGrid("getRowData", b),
 				d = 1 == c.disEditable ? "&disEditable=true" : "",
-				e = ($("#grid").jqGrid("getDataIDs"), "销货单"),
+				e = ($("#grid").jqGrid("getDataIDs"), "销售订单"),
 				f = "sales-sales";
 			if ("150602" == queryConditions.transType) {
-				var e = "销货退货单",
+				var e = "销售退货单",
 					f = "sales-salesBack";
 				parent.cacheList.salesBackId = $("#grid").jqGrid("getDataIDs")
 			} else parent.cacheList.salesId = $("#grid").jqGrid("getDataIDs");
@@ -204,7 +204,7 @@ var THISPAGE = {
 		}), $(".grid-wrap").on("click", ".ui-icon-trash", function(a) {
 			if (a.preventDefault(), Business.verifyRight("SA_DELETE")) {
 				var b = $(this).parent().data("id");
-				$.dialog.confirm("您确定要删除该销货记录吗？", function() {
+				$.dialog.confirm("您确定要删除该销售记录吗？", function() {
 					Public.ajaxGet("../scm/invSa/delete?action=delete", {
 						id: b
 					}, function(a) {
@@ -219,7 +219,7 @@ var THISPAGE = {
 			}
 		}), $(".wrapper").on("click", "#print", function(a) {
 			a.preventDefault(), Business.verifyRight("SA_PRINT") && Public.print({
-				title: "销货单列表",
+				title: "销售订单列表",
 				$grid: $("#grid"),
 				pdf: "../scm/invSa/toPdf?action=toPdf",
 				billType: 10201,
@@ -316,9 +316,9 @@ var THISPAGE = {
 			THISPAGE.reloadData(queryConditions)
 		}), $("#add").click(function(a) {
 			if (a.preventDefault(), Business.verifyRight("SA_ADD")) {
-				var b = "销货单",
+				var b = "销售订单",
 					c = "sales-sales";
-				if ("150602" == queryConditions.transType) var b = "销货退货单",
+				if ("150602" == queryConditions.transType) var b = "销售退货单",
 					c = "sales-salesBack";
 				parent.tab.addTabItem({
 					tabid: c,

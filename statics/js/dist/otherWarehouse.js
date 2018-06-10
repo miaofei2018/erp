@@ -241,7 +241,7 @@ var curRow, curCol, loading, urlParam = Public.urlParam(),
 					hidden: !0
 				}, {
 					name: "locationName",
-					label: "仓库",
+					label: "库存",
 					nameExt: '<small id="batchStorage">(批量)</small>',
 					width: 100,
 					title: !0,
@@ -815,7 +815,7 @@ var curRow, curCol, loading, urlParam = Public.urlParam(),
 					var k = $("#" + g).data("storageInfo");
 					if (!k || !k.id) return parent.Public.tips({
 						type: 2,
-						content: "请选择相应的仓库！"
+						content: "请选择相应的库存！"
 					}), $("#grid").jqGrid("editCellByColName", g, "locationName"), !1;
 					var l = $("#" + g).data("unitInfo") || {};
 					if (SYSTEM.ISSERNUM) {
@@ -826,7 +826,7 @@ var curRow, curCol, loading, urlParam = Public.urlParam(),
 								o = "点击";
 							if (1 == i.isSerNum && (n = !0, a.checkSerNum && (n = !0)), n) return parent.Public.tips({
 								type: 2,
-								content: "请" + o + "数量设置【" + i.name + "】的序列号"
+								content: "请" + o + "数量配置【" + i.name + "】的序列号"
 							}), $("#grid").jqGrid("editCellByColName", g, "qty"), !1
 						}
 					}

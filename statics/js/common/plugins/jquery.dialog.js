@@ -151,7 +151,7 @@ try{
 
 /*!
  * IE6下Fixed无抖动静止定位
- * 如果你的页面的html元素设定了背景图片请把设置背景图片的css写到body元素上
+ * 如果你的页面的html元素设定了背景图片请把配置背景图片的css写到body元素上
  * 如果你不需要组件静止定位（也就是随屏滚动）或此段代码影响了你的页面布局可将此段代码删除
  */
 _ie6 && (function(bg){
@@ -353,7 +353,7 @@ lhgdialog.fn = lhgdialog.prototype =
 	},
 	
 	/**
-	 * 设置标题
+	 * 配置标题
 	 * @param	{String, Boolean}	标题内容. 为false则隐藏标题栏
 	 * @return	{this}	如果无参数则返回对象本身
 	 */
@@ -382,7 +382,7 @@ lhgdialog.fn = lhgdialog.prototype =
 	},
 	
 	/*!
-	 * 设置内容
+	 * 配置内容
 	 * @param	{String}	内容 (如果内容前3个字符为‘url:’就加载单独页面的内容页)
 	 * @param   {Boolean}   是否为后增加的内容
 	 * @param   {Boolean}   是否使用iframe方式加载内容页
@@ -574,10 +574,10 @@ lhgdialog.fn = lhgdialog.prototype =
 			top = lhgdialog.focus,
 			index = lhgdialog.setting.zIndex++;
 		
-		// 设置叠加高度
+		// 配置叠加高度
 		DOM.wrap[0].style.zIndex = index;
 		
-		// 设置最高层的样式
+		// 配置最高层的样式
 		top && top.DOM.border.removeClass('ui_state_focus');
 		lhgdialog.focus = that;
 		DOM.border.addClass('ui_state_focus');
@@ -592,7 +592,7 @@ lhgdialog.fn = lhgdialog.prototype =
 		return that;
 	},
 	
-	/*! 设置焦点 */
+	/*! 配置焦点 */
 	focus: function()
 	{
 	    try{
@@ -917,7 +917,7 @@ lhgdialog.fn = lhgdialog.prototype =
 	},
 	
 	/*!
-	 * 设置iframe方式加载内容页
+	 * 配置iframe方式加载内容页
 	 */
 	_iframe: function( url )
 	{
@@ -1116,7 +1116,7 @@ lhgdialog.fn = lhgdialog.prototype =
 		this[this.config.fixed ? '_setFixed' : '_setAbsolute']();
 	},
 	
-	/*! 设置静止定位 */
+	/*! 配置静止定位 */
 	_setFixed: function( el )
 	{
 		var style = el ? el.style : this.DOM.wrap[0].style;
@@ -1139,7 +1139,7 @@ lhgdialog.fn = lhgdialog.prototype =
 			style.position = 'fixed';
 	},
 	
-	/*! 设置绝对定位 */
+	/*! 配置绝对定位 */
 	_setAbsolute: function()
 	{
 		var style = this.DOM.wrap[0].style;

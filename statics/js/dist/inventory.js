@@ -24,7 +24,7 @@ var curRow, curCol, loading = null,
 				width: 120,
 				defaultSelected: 0,
 				addOptions: {
-					text: "所有仓库",
+					text: "所有库存",
 					value: -1
 				},
 				cache: !1
@@ -46,12 +46,12 @@ var curRow, curCol, loading = null,
 				gridview: !0,
 				colModel: [{
 					name: "locationId",
-					label: "仓库ID",
+					label: "库存ID",
 					width: 0,
 					hidden: !0
 				}, {
 					name: "locationName",
-					label: "仓库",
+					label: "库存",
 					width: 100
 				}, {
 					name: "assistName",

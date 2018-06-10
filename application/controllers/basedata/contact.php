@@ -178,7 +178,7 @@ class Contact extends CI_Controller {
 		$billType  = str_enhtml($this->input->post('billType',TRUE));
 		$transType = intval($this->input->post('transType',TRUE));
 		$where = '(isDelete=0)'; 
-		$where .= ($transType==150501||$transType==150502) ? ' and type=10' :' and type=-10';//mody by michen 20170820 修正购货退货单默认供应商不正确
+		$where .= ($transType==150501||$transType==150502) ? ' and type=10' :' and type=-10';//mody by michen 20170820 修正采购退货单默认供应商不正确
 		$where .= $this->common_model->get_contact_purview();
 	    $data = $this->mysql_model->get_rows('contact',$where); 
 	    //die(var_export($data,true));

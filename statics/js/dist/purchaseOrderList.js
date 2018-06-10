@@ -17,7 +17,7 @@ var queryConditions = {
 				return d
 			}
 			function b(a, b, c) {
-				return 150501 === a ? "购货" : (d.markRow.push(c.id), "退货")
+				return 150501 === a ? "采购" : (d.markRow.push(c.id), "退货")
 			}
 			var c = Public.setGrid(),
 				d = this;
@@ -56,7 +56,7 @@ var queryConditions = {
 				width: 200
 			}, {
 				name: "totalAmount",
-				label: "购货金额",
+				label: "采购金额",
 				index: "totalAmount",
 				hidden: hiddenAmount,
 				width: 100,
@@ -180,7 +180,7 @@ var queryConditions = {
 					d = 1 == c.disEditable ? "&disEditable=true" : "";
 				parent.tab.addTabItem({
 					tabid: "purchase-purchaseOrder",
-					text: "购货订单",
+					text: "采购订单",
 					url: "../scm/invPo?action=editPo&id=" + b + "&flag=list" + d
 				});
 				$("#grid").jqGrid("getDataIDs");
@@ -188,7 +188,7 @@ var queryConditions = {
 			}), $(".grid-wrap").on("click", ".ui-icon-trash", function(a) {
 				if (a.preventDefault(), Business.verifyRight("PO_DELETE")) {
 					var b = $(this).parent().data("id");
-					$.dialog.confirm("您确定要删除该购货记录吗？", function() {
+					$.dialog.confirm("您确定要删除该采购记录吗？", function() {
 						Public.ajaxGet("../scm/invPo/delete?action=delete", {
 							id: b
 						}, function(a) {
@@ -203,7 +203,7 @@ var queryConditions = {
 				}
 			}), $(".wrapper").on("click", "#print", function(a) {
 				a.preventDefault(), Business.verifyRight("PO_PRINT") && Public.print({
-					title: "购货订单列表",
+					title: "采购订单列表",
 					$grid: $("#grid"),
 					pdf: "../scm/invPo/toPdf?action=toPdf",
 					billType: 10301,
@@ -304,7 +304,7 @@ var queryConditions = {
 			}), $("#add").click(function(a) {
 				a.preventDefault(), Business.verifyRight("PO_ADD") && parent.tab.addTabItem({
 					tabid: "purchase-purchaseOrder",
-					text: "购货订单",
+					text: "采购订单",
 					url: "../scm/invPo?action=initPo"
 				})
 			}), $(window).resize(function() {

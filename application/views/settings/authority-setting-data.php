@@ -215,7 +215,7 @@ $(function(){
 				  datatype: "json",
 				  autowidth: true,//如果为ture时，则当表格在首次被创建时会根据父元素比例重新调整表格宽度。如果父元素宽度改变，为了使表格宽度能够自动调整则需要实现函数：setGridWidth
 				  height:  Public.setGrid().h,
-				  altRows: true, //设置隔行显示
+				  altRows: true, //配置隔行显示
 				  colModel:[
 				      {name:'FITEMID', label:'ID',width:200,hidden:true},
 					  {name:'FNAME', label:'名称',width:200},

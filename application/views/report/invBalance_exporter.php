@@ -9,7 +9,7 @@
   				<th width="216" rowspan="2">商品名称</th>
   				<th width="216" rowspan="2">规格型号</th>
   				<th width="114" rowspan="2">单位</th>
-  				<th colspan="2">所有仓库</th>
+  				<th colspan="2">所有库存</th>
 				<?php 
 				$i = 2;
 				$qty_1  = $cost_1 = $cost1 = 0;

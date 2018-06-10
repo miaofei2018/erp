@@ -128,7 +128,7 @@ class InvPu extends CI_Controller {
 			$v[$arr]['billId']       = intval($row['id']);
 			$v[$arr]['billNo']       = $row['billNo'];
 			$v[$arr]['billType']     = $row['billType'];
-			$v[$arr]['transType']    = $row['transType']==150501 ? '购货' : '退货';
+			$v[$arr]['transType']    = $row['transType']==150501 ? '采购' : '退货';
 			$v[$arr]['billDate']     = $row['billDate'];
 			$v[$arr]['billPrice']    = (float)$row['amount'];
 			$v[$arr]['hasCheck']     = (float)$row['nowCheck'];
@@ -163,7 +163,7 @@ class InvPu extends CI_Controller {
 				str_alert(-1,'SQL错误'); 
 			} else {
 			    $this->db->trans_commit(); 
-				$this->common_model->logs('新增购货 单据编号：'.$info['billNo']);//.'，报文：'.$_POST['postData']//stripslashes(json_encode($info))
+				$this->common_model->logs('新增采购 单据编号：'.$info['billNo']);//.'，报文：'.$_POST['postData']//stripslashes(json_encode($info))
 				str_alert(200,'success',array('id'=>intval($iid))); 
 			}
 		}
@@ -196,7 +196,7 @@ class InvPu extends CI_Controller {
 				str_alert(-1,'SQL错误'); 
 			} else {
 			    $this->db->trans_commit();
-				$this->common_model->logs('修改购货单 单据编号：'.$data['billNo']);
+				$this->common_model->logs('修改采购单 单据编号：'.$data['billNo']);
 				str_alert(200,'success',array('id'=>$data['id'])); 
 			}
 		}
@@ -366,7 +366,7 @@ class InvPu extends CI_Controller {
 				str_alert(-1,'删除失败'); 
 			} else {
 			    $this->db->trans_commit();
-				$this->common_model->logs('删除购货订单 单据编号：'.$billNo);
+				$this->common_model->logs('删除采购订单 单据编号：'.$billNo);
 				str_alert(200,$msg); 	 
 			}
 		}
@@ -392,7 +392,7 @@ class InvPu extends CI_Controller {
 				str_alert(-1,'删除失败'); 
 			} else {
 			    $this->db->trans_commit();
-				$this->common_model->logs('删除购货订单 单据编号：'.$data['billNo']);
+				$this->common_model->logs('删除采购订单 单据编号：'.$data['billNo']);
 				str_alert(200,'success'); 	 
 			}
 		}
@@ -462,7 +462,7 @@ class InvPu extends CI_Controller {
 			$sql = $this->mysql_model->update('invoice',array('checked'=>1,'checkName'=>$this->jxcsys['name']),'(id in('.$id.'))'); 
 			if ($sql) {
 			    //$this->mysql_model->update('invoice_info',array('checked'=>1),'(iid in('.$id.'))'); 
-				$this->common_model->logs('购货单编号：'.$billNo.'的单据已被审核！');
+				$this->common_model->logs('采购单编号：'.$billNo.'的单据已被审核！');
 				str_alert(200,'单据编号：'.$billNo.'的单据已被审核！');
 			} 
 			str_alert(-1,'审核失败');  
@@ -474,7 +474,7 @@ class InvPu extends CI_Controller {
     public function rsBatchCheckInvPu() {
 	    $this->common_model->checkpurview(87);
 	    $id   = str_enhtml($this->input->post('id',TRUE));
-	    $this->mysql_model->get_count('verifica_info','(billId='.$id.')')>0 && str_alert(-1,'存在关联的“付款单据”，无法删除！请先在“付款单”中删除该销货单！');//add
+	    $this->mysql_model->get_count('verifica_info','(billId='.$id.')')>0 && str_alert(-1,'存在关联的“付款单据”，无法删除！请先在“付款单”中删除该销售订单！');//add
 		$data = $this->mysql_model->get_results('invoice','(id in('.$id.')) and billType="PUR" and isDelete=0');  
 		if (count($data)>0) {
 		    foreach($data as $arr=>$row) {
@@ -490,8 +490,8 @@ class InvPu extends CI_Controller {
 			$sql = $this->mysql_model->update('invoice',array('checked'=>0,'checkName'=>''),'(id in('.$id.'))'); 
 			if ($sql) {
 			    //$this->mysql_model->update('invoice_info',array('checked'=>0),'(iid in('.$id.'))'); 
-				$this->common_model->logs('购货单单号：'.$billNo.'的单据已被反审核！');
-				str_alert(200,'购货单编号：'.$billNo.'的单据已被反审核！'); 
+				$this->common_model->logs('采购单单号：'.$billNo.'的单据已被反审核！');
+				str_alert(200,'采购单编号：'.$billNo.'的单据已被反审核！'); 
 			} 
 			str_alert(-1,'反审核失败');  
 		}
@@ -502,7 +502,7 @@ class InvPu extends CI_Controller {
 	private function validform($data) {
 	    $data['id']              = isset($data['id']) ? intval($data['id']) : 0;
 		$data['billType']        = 'PUR';
-		$data['transTypeName']   = $data['transType']==150501 ? '购货' : '退货';
+		$data['transTypeName']   = $data['transType']==150501 ? '采购' : '退货';
 		$data['billDate']        = $data['date'];
 		$data['buId']            = intval($data['buId']);
 		$data['accId']           = intval($data['accId']);
@@ -561,7 +561,7 @@ class InvPu extends CI_Controller {
 		} 
 		
  
-		$this->mysql_model->get_count('contact',array('id'=>$data['buId'])) < 1 && str_alert(-1,'购货单位不存在');   
+		$this->mysql_model->get_count('contact',array('id'=>$data['buId'])) < 1 && str_alert(-1,'采购单位不存在');   
 		
 		 
 		$system  = $this->common_model->get_option('system');
@@ -577,7 +577,7 @@ class InvPu extends CI_Controller {
 			(float)$row['qty'] < 0  && str_alert(-1,'商品数量要为数字，请输入有效数字！'); 
 			(float)$row['price'] < 0  && str_alert(-1,'商品销售单价要为数字，请输入有效数字！'); 
 			(float)$row['discountRate'] < 0  && str_alert(-1,'折扣率要为数字，请输入有效数字！');
-			intval($row['locationId']) < 1 && str_alert(-1,'请选择相应的仓库！'); 
+			intval($row['locationId']) < 1 && str_alert(-1,'请选择相应的库存！'); 
 			!in_array($row['locationId'],$storage) && str_alert(-1,$row['locationName'].'不存在或不可用！');
 		 
 			if ($system['requiredCheckStore']==1 && $data['id']<1) {  

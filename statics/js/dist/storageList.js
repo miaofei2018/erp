@@ -6,14 +6,14 @@ function initEvent() {
 		var b = $("#grid").jqGrid("getGridParam", "selarrrow").concat();
 		return b && 0 != b.length ? void handle.setStatuses(b, !0) : void parent.Public.tips({
 			type: 1,
-			content: " 请先选择要禁用的仓库！"
+			content: " 请先选择要禁用的库存！"
 		})
 	}), $("#btn-enable").click(function(a) {
 		a.preventDefault();
 		var b = $("#grid").jqGrid("getGridParam", "selarrrow").concat();
 		return b && 0 != b.length ? void handle.setStatuses(b, !1) : void parent.Public.tips({
 			type: 1,
-			content: " 请先选择要启用的仓库！"
+			content: " 请先选择要启用的库存！"
 		})
 	}), $("#btn-import").click(function(a) {
 		a.preventDefault()
@@ -44,7 +44,7 @@ function initEvent() {
 	})
 }
 function initGrid() {
-	var a = ["操作", "仓库编号", "仓库名称", "状态"],
+	var a = ["操作", "库存编号", "库存名称", "状态"],
 		b = [{
 			name: "operate",
 			width: 60,
@@ -104,11 +104,11 @@ function initGrid() {
 				}
 				$("#grid").data("gridData", b), 0 == a.rows.length && parent.Public.tips({
 					type: 2,
-					content: "没有仓库数据！"
+					content: "没有库存数据！"
 				})
 			} else parent.Public.tips({
 				type: 2,
-				content: "获取仓库数据失败！" + a.msg
+				content: "获取库存数据失败！" + a.msg
 			})
 		},
 		loadError: function() {
@@ -126,12 +126,12 @@ function statusFmatter(a, b, c) {
 }
 var handle = {
 	operate: function(a, b) {
-		if ("add" == a) var c = "新增仓库",
+		if ("add" == a) var c = "新增库存",
 			d = {
 				oper: a,
 				callback: this.callback
 			};
-		else var c = "修改仓库",
+		else var c = "修改库存",
 			d = {
 				oper: a,
 				rowData: $("#grid").data("gridData")[b],
@@ -155,15 +155,15 @@ var handle = {
 		d || (d = {}, $("#grid").data("gridData", d)), d[a.id] = a, "edit" == b ? ($("#grid").jqGrid("setRowData", a.id, a), c && c.api.close()) : ($("#grid").jqGrid("addRowData", a.id, a, "last"), c && c.resetForm(a))
 	},
 	del: function(a) {
-		$.dialog.confirm("删除的仓库将不能恢复，请确认是否删除？", function() {
+		$.dialog.confirm("删除的库存将不能恢复，请确认是否删除？", function() {
 			Public.ajaxPost("../basedata/invlocation/delete", {
 				locationId: a
 			}, function(b) {
 				b && 200 == b.status ? (parent.Public.tips({
-					content: "仓库删除成功！"
+					content: "库存删除成功！"
 				}), $("#grid").jqGrid("delRowData", a)) : parent.Public.tips({
 					type: 1,
-					content: "仓库删除失败！" + b.msg
+					content: "库存删除失败！" + b.msg
 				})
 			})
 		})
@@ -174,10 +174,10 @@ var handle = {
 			disable: Number(b)
 		}, function(c) {
 			c && 200 == c.status ? (parent.Public.tips({
-				content: "仓库状态修改成功！"
+				content: "库存状态修改成功！"
 			}), $("#grid").jqGrid("setCell", a, "delete", b)) : parent.Public.tips({
 				type: 1,
-				content: "仓库状态修改失败！" + c.msg
+				content: "库存状态修改失败！" + c.msg
 			})
 		})
 	},
@@ -188,7 +188,7 @@ var handle = {
 		}, function(c) {
 			if (c && 200 == c.status) {
 				parent.Public.tips({
-					content: "仓库状态修改成功！"
+					content: "库存状态修改成功！"
 				});
 				for (var d = 0; d < a.length; d++) {
 					var e = a[d];
@@ -196,7 +196,7 @@ var handle = {
 				}
 			} else parent.Public.tips({
 				type: 1,
-				content: "仓库状态修改失败！" + c.msg
+				content: "库存状态修改失败！" + c.msg
 			})
 		})
 	}

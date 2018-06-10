@@ -65,13 +65,13 @@ var queryConditions = {
 				title: !1
 			}, {
 				name: "outLocationName",
-				label: "调出仓库",
+				label: "调出库存",
 				width: 100,
 				formatter: b,
 				title: !1
 			}, {
 				name: "inLocationName",
-				label: "调入仓库",
+				label: "调入库存",
 				width: 100,
 				formatter: b,
 				title: !1

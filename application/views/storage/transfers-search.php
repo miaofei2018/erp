@@ -27,9 +27,9 @@ try{
         <input type="text" id="endDate" class="ui-input ui-datepicker-input">
       </li>
       <li>
-        <label>调出仓库:</label>
+        <label>调出库存:</label>
         <span id="storageA"></span>
-        <i>调入仓库:</i>
+        <i>调入库存:</i>
         <span id="storageB"></span></li>
     </ul>
   </div>

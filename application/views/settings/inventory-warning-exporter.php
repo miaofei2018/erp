@@ -11,7 +11,7 @@
 					<th width="80" >商品类别</th>
 					<th width="80" >规格型号</th>
 		            <th width="80" >单位</th>
-					<th width="80" >仓库</th>
+					<th width="80" >库存</th>
 					<th width="80" >最低库存</th>
 					<th width="80" >最高库存</th>
 					<th width="80" >结存数量</th>

@@ -189,7 +189,7 @@ var queryConditions = {
 					d = 1 == c.disEditable ? "&disEditable=true" : "";
 				parent.tab.addTabItem({
 					tabid: "sales-salesOrder",
-					text: "销货订单",
+					text: "销售订单",
 					url: "../scm/invSo?action=editSo&id=" + b + "&flag=list" + d
 				});
 				$("#grid").jqGrid("getDataIDs");
@@ -197,7 +197,7 @@ var queryConditions = {
 			}), $(".grid-wrap").on("click", ".ui-icon-trash", function(a) {
 				if (a.preventDefault(), Business.verifyRight("SO_DELETE")) {
 					var b = $(this).parent().data("id");
-					$.dialog.confirm("您确定要删除该销货记录吗？", function() {
+					$.dialog.confirm("您确定要删除该销售记录吗？", function() {
 						Public.ajaxGet("../scm/invSo/delete?action=delete", {
 							id: b
 						}, function(a) {
@@ -212,7 +212,7 @@ var queryConditions = {
 				}
 			}), $(".wrapper").on("click", "#print", function(a) {
 				a.preventDefault(), Business.verifyRight("SO_PRINT") && Public.print({
-					title: "购货单列表",
+					title: "采购单列表",
 					$grid: $("#grid"),
 					pdf: "../scm/invSo/toPdf?action=toPdf",
 					billType: 10303,

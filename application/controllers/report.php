@@ -960,7 +960,7 @@ class Report extends CI_Controller {
 			$select .= 'sum(case when a.locationId='.$row['id'].' then qty else 0 end ) as qty'.$i.',';
 		    $i++;
 		}
-		array_unshift($stoNames,'所有仓库');
+		array_unshift($stoNames,'所有库存');
 		array_unshift($colNames,'商品编号','商品名称','规格型号','单位','数量','成本');
 		array_unshift($colIndex,'invNo','invName','spec','unit','qty_1','cost_1');
 		$profit = $this->data_model->get_profit('and billDate<="'.$endDate.'"');                
@@ -1278,7 +1278,7 @@ class Report extends CI_Controller {
 		$json['status'] = 200;
 		$json['msg']    = 'success'; 
 		$json['data']['stoNames']  = array("期初","调拨入库","普通采购","销售退回","盘盈","其他入库","成本调整","入库合计","调拨出库","采购退回","普通销售","盘亏","其他出库","出库合计","结存");
-		$json['data']['colNames']  = array("商品编号","商品名称","规格型号","单位","仓库","数量","成本","数量","数量","数量","数量","数量","数量","数量","数量","数量","数量","数量","数量","数量","数量","成本");
+		$json['data']['colNames']  = array("商品编号","商品名称","规格型号","单位","库存","数量","成本","数量","数量","数量","数量","数量","数量","数量","数量","数量","数量","数量","数量","数量","数量","成本");
 		$json['data']['colIndex']  = array("invNo","invName","spec","unit","locationNo","qty_0","cost_0","qty_1","qty_2","qty_3","qty_4","qty_5","qty_6","qty_7","qty_8","qty_9","qty_10","qty_11","qty_12","qty_13","qty_14","cost_14");
 		$json['data']['page']      = $page;
 		$json['data']['records']   = 1;   

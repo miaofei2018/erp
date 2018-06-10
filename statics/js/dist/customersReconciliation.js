@@ -9,13 +9,13 @@ $(function() {
 			var f = {
 				SALE: {
 					tabid: "sales-sales",
-					text: "销货单",
+					text: "销售订单",
 					right: "SA_QUERY",
 					url: "../scm/invsa?action=editSale&id="
 				},
 				PUR: {
 					tabid: "purchase-purchase",
-					text: "购货单",
+					text: "采购单",
 					right: "PU_QUERY",
 					url: "../scm/invpu?action=editPur&id="
 				},
@@ -95,9 +95,9 @@ $(function() {
 							showDetail: $_matchChk[0].checked ? "true" : "false"
 						};
 						var e = b.$_customer.find("input");
-						if ("" === e.val() || "（请选择销货单位）" === e.val()) {
+						if ("" === e.val() || "（请选择销售单位）" === e.val()) {
 							var f = {};
-							f.id = 0, f.name = "（请选择销货单位）", b.$_customer.removeData("contactInfo")
+							f.id = 0, f.name = "（请选择销售单位）", b.$_customer.removeData("contactInfo")
 						} else {
 							var f = b.$_customer.data("contactInfo");
 							if (null === f) return setTimeout(function() {
@@ -134,7 +134,7 @@ $(function() {
 						else {
 							var a = $("#customer").prev().text().slice(0, -1),
 								c = "选择" + a;
-							if ("供应商" === a || "购货单位" === a) var d = "url:../settings/select_customer?type=10";
+							if ("供应商" === a || "采购单位" === a) var d = "url:../settings/select_customer?type=10";
 							else var d = "url:../settings/select_customer";
 							b.customerDialog = $.dialog({
 								width: 775,
@@ -159,13 +159,13 @@ $(function() {
 				$_fromDate.val(g.beginDate || ""), $_toDate.val(g.endDate || ""), $_match.cssCheckbox(), "true" == c.showDetail && ($_match.find("label").addClass("checked"), $_matchChk[0].checked = !0), g.beginDate && g.endDate && $("#selected-period").text(g.beginDate + "至" + g.endDate), b.customerCombo = Business.customerCombo($("#customer"), {
 					defaultSelected: 0,
 					addOptions: {
-						text: "（请选择销货单位）",
+						text: "（请选择销售单位）",
 						value: 0
 					}
 				}), c.customerId || ($(".grid-wrap").addClass("no-query"), $(".grid").remove()), b.$_customer.data("contactInfo", {
 					id: Number(c.customerId) || 0,
 					name: c.customerName || ""
-				}), b.customerCombo.input.val(c.customerName || "（请选择销货单位）"), b.$_customerText.html("客户：" + b.$_customer.find("input").val()), h(), i(), k(), window.THISPAGE = b
+				}), b.customerCombo.input.val(c.customerName || "（请选择销售单位）"), b.$_customerText.html("客户：" + b.$_customer.find("input").val()), h(), i(), k(), window.THISPAGE = b
 			}, a
 		}(a || {});
 	a.init(), Public.initCustomGrid($("table.list"))

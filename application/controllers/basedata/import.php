@@ -117,7 +117,7 @@ class Import extends CI_Controller {
         
         //$reader = new Excel_reader2(); // 实例化解析类Spreadsheet_Excel_Reader
 	    $reader = $this->excel_reader2;
-        $reader->setOutputEncoding("utf-8");    // 设置编码方式
+        $reader->setOutputEncoding("utf-8");    // 配置编码方式
         $reader->read("{$path['tmp_name']}");
         $data = $reader->sheets[0]['cells'];
         if(!isset($data[2])||!isset($data[2][1]))
@@ -145,14 +145,14 @@ class Import extends CI_Controller {
                 $good['sonGoods'] = '[]';
                 $good['dopey'] = 0;
                 empty($row[5])&&str_alert(-1,'商品【'.$row[2].'】类别不能为空！');
-                empty($row[6])&&str_alert(-1,'商品【'.$row[2].'】仓库不能为空！');
+                empty($row[6])&&str_alert(-1,'商品【'.$row[2].'】库存不能为空！');
                 empty($row[9])&&str_alert(-1,'商品【'.$row[2].'】计量单位不能为空！');
                 $list = $this->mysql_model->get_rows('storage',array('isDelete'=>0,'name'=>$row[6]));
                 if (count($list) > 0) {
                     $good['locationId']= $list['id'];
                     $good['locationName']= $row[6];
                 }else 
-                    str_alert(-1,'仓库【'.$row[6].'】不存在,请先添加仓库后再导入！');
+                    str_alert(-1,'库存【'.$row[6].'】不存在,请先添加库存后再导入！');
                 $list = $this->mysql_model->get_rows('category',array('name'=>$row[5],'typeNumber'=>'trade'));
                 if (count($list) > 0) {
                     $good['categoryId']= $list['id'];

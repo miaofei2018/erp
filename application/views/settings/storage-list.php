@@ -31,7 +31,7 @@ $(document).keydown(function(event) {
 <body>
 <div class="wrapper">
 	<div class="mod-toolbar-top cf">
-	    <div class="fl"><strong class="tit">仓库</strong></div>
+	    <div class="fl"><strong class="tit">库存</strong></div>
 	    <div class="fr"><a href="#" class="ui-btn ui-btn-sp mrb" id="btn-add">新增</a><!--<a class="ui-btn
  mrb" id="btn-disable">禁用</a><a class="ui-btn mrb" id="btn-enable">启用</a>--><!--<a class="ui-btn mrb"
  id="btn-print">打印</a>--><!--<a class="ui-btn mrb" id="btn-import">导入</a>--><!--<a class="ui-btn mrb"

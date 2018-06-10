@@ -67,7 +67,7 @@ $(document).keydown(function(event) {
  id="filter-toDate" />
         </li>
         <li>
-          <label>仓库:</label>
+          <label>库存:</label>
           <span class="mod-choose-input" id="filter-storage"><input type="text" class="ui-input" id="storageAuto"
 /><span class="ui-icon-ellipsis"></span></span>
         </li>

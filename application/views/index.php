@@ -174,7 +174,7 @@ function getGoods() {
 		SYSTEM.goodsInfo = [];
 	}
 };
-//缓存仓库信息
+//缓存库存信息
 function getStorage() {
 	if(SYSTEM.isAdmin || SYSTEM.rights.INVLOCTION_QUERY) {
 		Public.ajaxGet('<?php echo site_url()?>/basedata/invlocation?action=list&isDelete=2', {}, function(data){
@@ -464,19 +464,19 @@ var _hmt = _hmt || [];
           </div>
           </div>
       </li>
-      <li class="item item-purchase"> <a href="javascript:void(0);" class="purchase main-nav">购货<span class="arrow">&gt;</span></a>
+      <li class="item item-purchase"> <a href="javascript:void(0);" class="purchase main-nav">采购<span class="arrow">&gt;</span></a>
         <div class="sub-nav-wrap single-nav">
           <ul class="sub-nav" id="purchase">
           </ul>
         </div>
       </li>
-      <li class="item item-sales"> <a href="javascript:void(0);" class="sales main-nav">销货<span class="arrow">&gt;</span></a>
+      <li class="item item-sales"> <a href="javascript:void(0);" class="sales main-nav">销售<span class="arrow">&gt;</span></a>
         <div class="sub-nav-wrap single-nav">
           <ul class="sub-nav" id="sales">
           </ul>
         </div>
       </li>
-      <li class="item item-storage"> <a href="javascript:void(0);" class="storage main-nav">仓库<span class="arrow">&gt;</span></a>
+      <li class="item item-storage"> <a href="javascript:void(0);" class="storage main-nav">库存<span class="arrow">&gt;</span></a>
         <div class="sub-nav-wrap single-nav">
           <ul class="sub-nav" id="storage">
           </ul>
@@ -514,7 +514,7 @@ var _hmt = _hmt || [];
           
        </div>
       </li>
-      <li class="item item-setting"> <a href="javascript:void(0);" class="setting main-nav">设置<span class="arrow">&gt;</span></a>
+      <li class="item item-setting"> <a href="javascript:void(0);" class="setting main-nav">配置<span class="arrow">&gt;</span></a>
         <div class="sub-nav-wrap cf group-nav group-nav-b0 setting-nav">
           <div class="nav-item">
             <h3>基础资料</h3>
@@ -527,7 +527,7 @@ var _hmt = _hmt || [];
             </ul>
           </div>
           <div class="nav-item cf last">
-            <h3>高级设置</h3>
+            <h3>高级配置</h3>
             <ul class="sub-nav" id="setting-advancedSetting">
             </ul>
             <ul class="sub-nav" id="setting-advancedSetting-right">

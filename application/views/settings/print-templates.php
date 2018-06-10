@@ -204,7 +204,7 @@ function validMaxForShare(){
 		if (row.admin || row.share === false) {
 			return '&nbsp;';
 		} else {
-			return '<div class="operating" data-id="' + row.userId + '"><a class="ui-icon ui-icon-pencil" title="详细设置授权信息" href="../settings/authority_setting?userName=' + row.userName + '"></a></div>';
+			return '<div class="operating" data-id="' + row.userId + '"><a class="ui-icon ui-icon-pencil" title="详细配置授权信息" href="../settings/authority_setting?userName=' + row.userName + '"></a></div>';
 		}
     };
     function edit(val, opt, row) {
@@ -213,7 +213,7 @@ function validMaxForShare(){
 		} else {
 		    var d = '<div class="operating" data-id="' + row.id + '"><a class="ui-icon ui-icon-pencil" href="../Noteprinttemp/edit?id=' + row.id + '" title="修改"></a><a class="ui-icon ui-icon-trash" title="删除" href="../Noteprinttemp/del?id=' + row.id + '"></a></div>';
 			return d
-			//return '<a class="ui-icon ui-icon-pencil" title="详细设置授权信息" href="../settings/Noteprinttemp/edit?id=' + row.id + '"></a> <a class="ui-icon ui-icon-trash" title="删除"></a>';
+			//return '<a class="ui-icon ui-icon-pencil" title="详细配置授权信息" href="../settings/Noteprinttemp/edit?id=' + row.id + '"></a> <a class="ui-icon ui-icon-trash" title="删除"></a>';
 		}
     };
 	

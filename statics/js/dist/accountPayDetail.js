@@ -8,13 +8,13 @@ $(function() {
 			var e = {
 				SALE: {
 					tabid: "sales-sales",
-					text: "销货单",
+					text: "销售订单",
 					right: "SA_QUERY",
 					url: "../scm/invsa?action=editSale&id="
 				},
 				PUR: {
 					tabid: "purchase-purchase",
-					text: "购货单",
+					text: "采购单",
 					right: "PU_QUERY",
 					url: "../scm/invpu?action=editPur&id="
 				},

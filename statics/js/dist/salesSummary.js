@@ -52,7 +52,7 @@ define(["jquery", "print"], function(a, b, c) {
 			width: 100
 		}, {
 			name: "locationNo",
-			label: "仓库编码",
+			label: "库存编码",
 			width: 0,
 			hidden: !0
 		}, {
@@ -73,7 +73,7 @@ define(["jquery", "print"], function(a, b, c) {
 			align: "center"
 		}, {
 			name: "location",
-			label: "仓库",
+			label: "库存",
 			width: 100,
 			classes: "ui-ellipsis",
 			title: !0

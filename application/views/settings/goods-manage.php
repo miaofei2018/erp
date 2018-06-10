@@ -85,7 +85,7 @@ body{background: #fff;}
 		<li class="cur tabItem">基础资料</li>
         <li class="tabItem">库存预警</li>
         <li class="tabItem">高级</li>
-        <li class="tabItem">期初设置</li>
+        <li class="tabItem">期初配置</li>
         <li class="tabItem">套餐</li>
 	</ul>
 </div>
@@ -116,7 +116,7 @@ body{background: #fff;}
                         <div class="ctn-wrap"><span id="category"></span></div>
                     </li>
                     <li class="row-item">
-                        <div class="label-wrap"><label for="storage">首选仓库</label></div>
+                        <div class="label-wrap"><label for="storage">首选库存</label></div>
                         <div class="ctn-wrap"><span id="storage"></span></div>
                     </li>
                       
@@ -210,7 +210,7 @@ body{background: #fff;}
     <div class="manage-wrapper dn">
         <div id="manage-wrap" class="manage-wrap">
             <div class="cf">
-                <!-- <h3>库存预警</h3> --><label id='warning'><input type="checkbox">启用分仓预警</label><label id='warningSku' class="dn"><input type="checkbox">根据属性设置</label>
+                <!-- <h3>库存预警</h3> --><label id='warning'><input type="checkbox">启用分仓预警</label><label id='warningSku' class="dn"><input type="checkbox">根据属性配置</label>
                 <ul class="mod-form-rows base-form cf">
                     <li class="row-item">
                         <div class="label-wrap"><label for="minInventory">最低库存</label></div>
@@ -232,7 +232,7 @@ body{background: #fff;}
     <div class="manage-wrapper dn">
         <div id="manage-wrap" class="manage-wrap">
             <div class="cf">
-                <!-- <h3>高级设置</h3> -->
+                <!-- <h3>高级配置</h3> -->
                 <div class="row-item prop-wrap on dn">
                     <span class="check-wrap adjust-item">
                         <!-- <input type="checkbox" name="isItem" id="isItem"> -->
@@ -269,7 +269,7 @@ body{background: #fff;}
     <div class="manage-wrapper dn">
         <div id="manage-wrap" class="manage-wrap">
             <div class="cf">
-                <!-- <h3>期初设置</h3> -->
+                <!-- <h3>期初配置</h3> -->
                 <div class="contacters">
                     <div class="grid-wrap">
                       <table id="grid">

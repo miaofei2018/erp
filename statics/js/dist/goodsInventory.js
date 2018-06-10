@@ -47,7 +47,7 @@ var api = frameElement.api,
 				gridview: !0,
 				colModel: [{
 					name: "locationName",
-					label: "仓库名称",
+					label: "库存名称",
 					width: 100
 				}, {
 					name: "qty",

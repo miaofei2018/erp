@@ -52,7 +52,7 @@
     function Login() {
         var cookieEnabled = (navigator.cookieEnabled) ? true : false;
         if (!cookieEnabled) {
-            alert("该浏览器Cookie设置不正确，无法正常登录");
+            alert("该浏览器Cookie配置不正确，无法正常登录");
             return false;
         }
         var username = $.trim($("#username").val());

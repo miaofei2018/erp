@@ -34,11 +34,11 @@ function initValidator() {
 		},
 		messages: {
 			number: {
-				required: "仓库编号不能为空",
-				number: "仓库编号只能由数字、字母、-或_等字符组成"
+				required: "库存编号不能为空",
+				number: "库存编号只能由数字、字母、-或_等字符组成"
 			},
 			name: {
-				required: "仓库名称不能为空"
+				required: "库存名称不能为空"
 			}
 		},
 		errorClass: "valid-error"
@@ -48,7 +48,7 @@ function postData(a, b) {
 	if (!$("#manage-form").validate().form()) return void $("#manage-form").find("input.valid-error").eq(0).focus();
 	var c = $.trim($("#number").val()),
 		d = $.trim($("#name").val()),
-		e = "add" == a ? "新增仓库" : "修改仓库";
+		e = "add" == a ? "新增库存" : "修改库存";
 	params = rowData.id ? {
 		locationId: b,
 		locationNo: c,

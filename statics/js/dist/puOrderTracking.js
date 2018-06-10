@@ -136,7 +136,7 @@ define(["jquery", "print"], function(a) {
 				var b = i("#grid").getRowData(a).billId;
 				b && parent.tab.addTabItem({
 					tabid: "purchase-purchaseOrder",
-					text: "购货订单",
+					text: "采购订单",
 					url: "/purchase/purchaseOrder.jsp?id=" + b
 				})
 			},

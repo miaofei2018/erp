@@ -7,7 +7,7 @@ class Invlocation extends CI_Controller {
 		$this->common_model->checkpurview();
     }
 
-    //仓库列表
+    //库存列表
 	public function index(){
 		$list = $this->mysql_model->get_results('storage','(isDelete=0) '.$this->common_model->get_location_purview(1).' order by id desc');  
 		foreach ($list as $arr=>$row) {
@@ -42,7 +42,7 @@ class Invlocation extends CI_Controller {
 			$sql  = $this->mysql_model->insert('storage',elements(array('name','locationNo'),$data));
 			if ($sql) {
 				$data['id'] = $sql;
-				$this->common_model->logs('新增仓库:'.$data['name']);
+				$this->common_model->logs('新增库存:'.$data['name']);
 				str_alert(200,'success',$data);
 			}  
 		}
@@ -58,7 +58,7 @@ class Invlocation extends CI_Controller {
 			$sql  = $this->mysql_model->update('storage',elements(array('name','locationNo'),$data),array('id'=>$data['locationId']));
 			if ($sql) {
 				$data['id'] = $data['locationId'];
-				$this->common_model->logs('更新仓库:'.$data['name']);
+				$this->common_model->logs('更新库存:'.$data['name']);
 				str_alert(200,'success',$data);
 			}
 		}
@@ -71,10 +71,10 @@ class Invlocation extends CI_Controller {
 		$id   = intval($this->input->post('locationId',TRUE));
 		$data = $this->mysql_model->get_rows('storage',array('id'=>$id,'isDelete'=>0)); 
 		if (count($data) > 0) {
-		    $this->mysql_model->get_count('invoice_info',array('locationId'=>$id,'isDelete'=>0))>0 && str_alert(-1,'不能删除有业务关联的仓库！');
+		    $this->mysql_model->get_count('invoice_info',array('locationId'=>$id,'isDelete'=>0))>0 && str_alert(-1,'不能删除有业务关联的库存！');
 		    $sql = $this->mysql_model->update('storage',array('isDelete'=>1),array('id'=>$id));   
 		    if ($sql) {
-				$this->common_model->logs('删除仓库:ID='.$id.' 名称:'.$data['name']);
+				$this->common_model->logs('删除库存:ID='.$id.' 名称:'.$data['name']);
 				str_alert(200,'success');
 			}
 		}
@@ -90,7 +90,7 @@ class Invlocation extends CI_Controller {
 			$info['disable'] = intval($this->input->post('disable',TRUE));
 			$sql = $this->mysql_model->update('storage',$info,array('id'=>$id));
 		    if ($sql) {
-			    $actton = $info['disable']==0 ? '仓库启用' : '仓库禁用';
+			    $actton = $info['disable']==0 ? '库存启用' : '库存禁用';
 				$this->common_model->logs($actton.':ID='.$id.' 名称:'.$data['name']);
 				str_alert(200,'success');
 			}
@@ -100,7 +100,7 @@ class Invlocation extends CI_Controller {
 	
 	//公共验证
 	private function validform($data) {
-        strlen($data['name']) < 1 && str_alert(-1,'仓库名称不能为空');
+        strlen($data['name']) < 1 && str_alert(-1,'库存名称不能为空');
 		strlen($data['locationNo']) < 1 && str_alert(-1,'编号不能为空');
 		$data['locationId'] = intval($data['locationId']);
 		$where = $data['locationId']>0 ? ' and id<>'.$data['locationId'].'' :'';

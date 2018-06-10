@@ -45,7 +45,7 @@ $(document).keydown(function(event) {
           <input type="text" id="endDate" value="2015-05-05" class="ui-input ui-datepicker-input">
         </li>
         <li>
-          <label>仓库</label>
+          <label>库存</label>
           <span id="storageA"></span>
         </li>
         <li><a class="ui-btn mrb" id="search">查询</a></li>

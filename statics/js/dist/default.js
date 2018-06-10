@@ -118,7 +118,7 @@ var dataReflush, list = {
 		target: "vip-onlineStore"
 	},
 	onlineSalesList: {
-		name: "销货记录",
+		name: "销售记录",
 		href: "/scm/invSa.do?action=initSaleList",
 		dataRight: "SA_QUERY",
 		target: "vip-onlineStore"
@@ -136,13 +136,13 @@ var dataReflush, list = {
 		target: "vip-JDStorage"
 	},
 	JDStoragePurchaseOrderList: {
-		name: "购货订单上传",
+		name: "采购订单上传",
 		href: "/JDStorage/JDStoragePurchaseOrderList.jsp",
 		dataRight: "",
 		target: "vip-JDStorage"
 	},
 	JDStorageSaleOrderList: {
-		name: "销货订单上传",
+		name: "销售订单上传",
 		href: "/JDStorage/JDStorageSaleOrderList.jsp",
 		dataRight: "",
 		target: "vip-JDStorage"
@@ -155,14 +155,14 @@ var dataReflush, list = {
 	},
 	
 	purchase: {
-		name: "购货单",
+		name: "采购单",
 		href: "../scm/invPu?action=initPur",
 		dataRight: "PU_ADD",
 		target: "purchase",
 		list: "../scm/invPu?action=initPurList"
 	},
 	purchaseBack: {
-		name: "购货退货单",
+		name: "采购退货单",
 		href: "../scm/invPu?action=initPur&transType=150502",
 		dataRight: "PU_ADD",
 		target: "purchase",
@@ -176,14 +176,14 @@ var dataReflush, list = {
 		list: "../scm/invSo?action=initSoList"
 	},
 	sales: {
-		name: "销货单",
+		name: "销售订单",
 		href: "../scm/invSa?action=initSale",
 		dataRight: "SA_ADD",
 		target: "sales",
 		list: "../scm/invSa?action=initSaleList"
 	},
 	salesBack: {
-		name: "销货退货单",
+		name: "销售退货单",
 		href: "../scm/invSa?action=initSale&transType=150602",
 		dataRight: "SA_ADD",
 		target: "sales",
@@ -445,7 +445,7 @@ var dataReflush, list = {
 		target: "setting-base"
 	},
 	storageList: {
-		name: "仓库管理",
+		name: "库存管理",
 		href: "../settings/storage_list",
 		dataRight: "INVLOCTION_QUERY",
 		target: "setting-base"
@@ -525,7 +525,7 @@ var dataReflush, list = {
 		target: "setting-advancedSetting"
 	},
 	authority: {
-		name: "权限设置",
+		name: "权限配置",
 		href: "../settings/authority",
 		dataRight: "AUTHORITY",
 		target: "setting-advancedSetting"

@@ -112,7 +112,7 @@ th.ui-th-column div{
             <td width="150px">商品名称</td>
             <td>规格型号</td>
             <td>单位</td>
-            <td>仓库</td>
+            <td>库存</td>
             <td>数量</td>
             <td>单价</td>
             <td>销售收入</td>

@@ -54,7 +54,7 @@ define(["jquery", "print"], function(a, b, c) {
 			else {
 				var b = k("#customer").prev().text().slice(0, -1),
 					c = "选择" + b;
-				if ("供应商" === b || "购货单位" === b) var d = "url:../settings/select_customer?type=10&multiselect=false";
+				if ("供应商" === b || "采购单位" === b) var d = "url:../settings/select_customer?type=10&multiselect=false";
 				else var d = "url:../settings/select_customer?multiselect=false";
 				this.customerDialog = k.dialog({
 					width: 775,
@@ -237,7 +237,7 @@ define(["jquery", "print"], function(a, b, c) {
 					if (!Business.verifyRight("PU_QUERY")) return;
 					parent.tab.addTabItem({
 						tabid: "purchase-purchase",
-						text: "购货单",
+						text: "采购单",
 						url: "../scm/invPu?action=editPur&id=" + c
 					});
 					break;
@@ -245,7 +245,7 @@ define(["jquery", "print"], function(a, b, c) {
 					if (!Business.verifyRight("SA_QUERY")) return;
 					parent.tab.addTabItem({
 						tabid: "sales-sales",
-						text: "销售单",
+						text: "销售订单",
 						url: "../scm/invSa?action=editSale&id=" + c
 					});
 					break;
@@ -379,7 +379,7 @@ define(["jquery", "print"], function(a, b, c) {
 		r = k("#match").find("input"),
 		s = s || {};
 	s.$_customer = p, this.THISPAGE = s;
-	var t = "（请选择销货单位）";
+	var t = "（请选择销售单位）";
 	a("print");
 	var u = Public.mod_PageConfig.init("customersReconciliationNew");
 	d(), e(), f();

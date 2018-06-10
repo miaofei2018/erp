@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');?>
 <table width="1500px" class="list">
-  			<tr><td class='H' align="center" colspan="22"><H3>购货记录<H3></td></tr>
+  			<tr><td class='H' align="center" colspan="22"><H3>采购记录<H3></td></tr>
   		</table>
 		<table width="1500px" class="list"  border="1">
 			<thead>
@@ -8,7 +8,7 @@
 				    <th width="150" align="center">单据编号</th>
 				    <th width="120" align="center">业务类别</th>
 					<th width="120" align="center">供应商</th>
-					<th width="80" align="center">购货金额</th>
+					<th width="80" align="center">采购金额</th>
 					<th width="80" align="center">折扣率(%)</th>
 					<th width="80" align="center">折扣额</th>
 					<th width="80" align="center">折后金额</th>
@@ -22,11 +22,11 @@
 					<th width="200" align="center">商品</th>
 					<th width="60" align="center">单位</th>
 					<th width="60" align="center">数量</th>	
-					<th width="80" align="center">购货单价</th>	
+					<th width="80" align="center">采购单价</th>	
 					<th width="80" align="center">折扣率(%)</th>
 					<th width="60" align="center">折扣额</th>	
 					<th width="60" align="center">金额</th>	
-					<th width="60" align="center">仓库</th>	
+					<th width="60" align="center">库存</th>	
 					<th width="100" align="center">备注</th>	
 					<th width="100" align="center">源单号</th>
 				</tr>

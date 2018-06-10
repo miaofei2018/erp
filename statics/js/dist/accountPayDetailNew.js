@@ -138,7 +138,7 @@ define(["jquery", "print"], function(a, b, c) {
 					if (!Business.verifyRight("PU_QUERY")) return;
 					parent.tab.addTabItem({
 						tabid: "purchase-purchase",
-						text: "购货单",
+						text: "采购单",
 						url: "../scm/invPu?action=editPur&id=" + c
 					});
 					break;
@@ -146,7 +146,7 @@ define(["jquery", "print"], function(a, b, c) {
 					if (!Business.verifyRight("SA_QUERY")) return;
 					parent.tab.addTabItem({
 						tabid: "sales-sales",
-						text: "销售单",
+						text: "销售订单",
 						url: "../scm/invSa?action=editSale&id=" + c
 					});
 					break;

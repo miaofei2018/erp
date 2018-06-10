@@ -68,7 +68,7 @@ define(["jquery", "print"], function(a, b, c) {
 			align: "center"
 		}, {
 			name: "location",
-			label: "仓库",
+			label: "库存",
 			width: 80,
 			align: "center"
 		}, {

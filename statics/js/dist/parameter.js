@@ -151,7 +151,7 @@ var siType = 1,
 					$.dialog.confirm("修改系统参数将要刷新页面，是否确认修改？", function() {
 						var a = parent.$.dialog.tips("提交中，请稍候...", 1e3, "loading.gif", !0);
 						Public.ajaxPost("../basedata/systemProfile/update", g, function(b) {
-							200 === b.status ? (parent.window.$.cookie("ReloadTips", "系统参数设置成功"), parent.window.location.reload()) : (parent.Public.tips({
+							200 === b.status ? (parent.window.$.cookie("ReloadTips", "系统参数配置成功"), parent.window.location.reload()) : (parent.Public.tips({
 								type: 1,
 								content: b.msg
 							}), a.close())

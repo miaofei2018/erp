@@ -31,17 +31,17 @@ class Systemprofile extends CI_Controller {
 	}	
 	
 	
-	//系统设置
+	//系统配置
 	public function update() {
 	    $this->common_model->checkpurview(81);
 		$data = str_enhtml($this->input->post(NULL,TRUE));
 		if (is_array($data) && count($data)>0) { 
 			if ($this->common_model->insert_option('system',$data)) {
-			    $this->common_model->logs('系统设置成功');
+			    $this->common_model->logs('系统配置成功');
 				str_alert(200,'success');
 			}
 		}
-		str_alert(-1,'设置失败'); 
+		str_alert(-1,'配置失败'); 
 	}	
 	 
 	//切换皮肤 

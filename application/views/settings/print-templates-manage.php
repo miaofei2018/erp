@@ -66,7 +66,7 @@ KindEditor.ready(function(K) {
                     <label for="userName">模板类别</label>
                   </div>
                   <div class="ctn-wrap">
-				    <input name="type" type="radio" value="10101">采购单 <input name="type" type="radio" value="10201">  销售单  <input name="type" type="radio" value="10601">收款单  <input name="type" type="radio" value="10602">付款单
+				    <input name="type" type="radio" value="10101">采购单 <input name="type" type="radio" value="10201">  销售订单  <input name="type" type="radio" value="10601">收款单  <input name="type" type="radio" value="10602">付款单
                      
                     
                   </div>

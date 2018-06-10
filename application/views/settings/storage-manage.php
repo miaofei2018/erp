@@ -38,12 +38,12 @@ body{background: #fff;}
 	<form id="manage-form" action="#">
 		<ul class="mod-form-rows">
 			<li class="row-item">
-				<div class="label-wrap"><label for="number">仓库编号:</label></div>
+				<div class="label-wrap"><label for="number">库存编号:</label></div>
 				<div class="ctn-wrap"><input type="text" value="" class="ui-input" name="number" id="number"></div
 >
 			</li>
 			<li class="row-item">
-				<div class="label-wrap"><label for="name">仓库名称:</label></div>
+				<div class="label-wrap"><label for="name">库存名称:</label></div>
 				<div class="ctn-wrap"><input type="text" value="" class="ui-input" name="name" id="name"></div>
 
 			</li>

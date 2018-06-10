@@ -4,7 +4,7 @@
 				    <td colspan="9" align="center"><H3>盘点表</H3></td>
 				</tr>
 				<tr>
-				    <th width="120" align="center">仓库</th>
+				    <th width="120" align="center">库存</th>
 					<th width="180" >商品类别</th>
 					<th width="100" align="center">商品编号</th>
 					<th width="100" align="center">商品名称</th>
@@ -19,7 +19,7 @@
 			  foreach($list as $arr=>$row) { 
 			  ?>
 				<tr target="id">
-					<td ><?php echo $locationId > 0 ? $row['locationName'] : '所有仓库';?></td>
+					<td ><?php echo $locationId > 0 ? $row['locationName'] : '所有库存';?></td>
 					<td ><?php echo $row['categoryName']?></td>
 					<td ><?php echo $row['invNumber']?></td>
 					<td ><?php echo $row['invName']?></td>

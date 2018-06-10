@@ -18,7 +18,7 @@
 					<th width="60" align="center">数量</th>	
 					<th width="80" align="center">入库单价</th>		
 					<th width="80" align="center">入库金额</th>	
-					<th width="60" align="center">仓库</th>	
+					<th width="60" align="center">库存</th>	
 					<th width="100" align="center">备注</th>	
 				</tr>
 			</thead>

@@ -131,7 +131,7 @@ var curRow, curCol, curArrears, loading, urlParam = Public.urlParam(),
 					editable: !0
 				}, {
 					name: "locationName",
-					label: '仓库<small id="batchStorage">(批量)</small>',
+					label: '库存<small id="batchStorage">(批量)</small>',
 					width: 100,
 					title: !0,
 					editable: !0,

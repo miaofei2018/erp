@@ -53,7 +53,7 @@ $(document).keydown(function(event) {
 			    <div class="l">
 				    <ul class="ul-inline">
 				    	<li>
-				    		<label>仓库:</label>
+				    		<label>库存:</label>
           					<span class="mod-choose-input" id="filter-storage"></span>
 				    	</li>
 				    	<li>
@@ -63,7 +63,7 @@ $(document).keydown(function(event) {
 				    	<li>
 				         	<input type="text" id="matchCon" class="ui-input ui-input-ph matchCon" value="请输入商品编号/名称/规格/属性">
 				        </li>
-				        <li><a class="ui-btn mrb" id="search">查询</a><a href="#" class="ui-btn mrb" id="export">导出</a><a href="#" class="ui-btn" id="toPur">生成购货单</a></li>
+				        <li><a class="ui-btn mrb" id="search">查询</a><a href="#" class="ui-btn mrb" id="export">导出</a><a href="#" class="ui-btn" id="toPur">生成采购单</a></li>
 				    </ul>
 			    </div>
 			</div>
@@ -210,7 +210,7 @@ $(function(){
 					rowList.push(jsonData);
 				};
 				if(rowList.length){
-					var title = '购货单';
+					var title = '采购单';
 					var tabid = 'purchase-purchase';
 					var transType = '150501';
 					parent.parent.tab.addTabItem({tabid: tabid, text: title, url: '../scm/invPu?action=initPur&id=-1&goodsIds=' + JSON.stringify(rowList) + '&flag=list&turnBygoodList&transType='+ transType});
@@ -239,8 +239,8 @@ $(function(){
 			    	{name: 'skuId', label: '属性Id', width: 60, classes: 'ui-ellipsis',hidden:true},
 			    	{name: 'skuName', label: '属性', width: 60, classes: 'ui-ellipsis',hidden:!SYSTEM.enableAssistingProp},
 			    	{name: 'unitName', label: '单位', width: 40, align: 'center', title: false},
-			    	{name: 'locationId', label: '仓库ID',hidden: true},
-			    	{name: 'locationName', label: '仓库', width: 60, classes: 'ui-ellipsis'},
+			    	{name: 'locationId', label: '库存ID',hidden: true},
+			    	{name: 'locationName', label: '库存', width: 60, classes: 'ui-ellipsis'},
 			    	{name: 'lowQty', label: '最低库存', width: 60, align: 'center', title: false},
 			    	{name: 'highQty', label: '最高库存', width: 60, align: 'center', title: false},
 			    	{name: 'qty', label: '结存数量', width: 60, align: 'center', title: false},
@@ -297,7 +297,7 @@ $(function(){
 					title: false
 				}, {
 					name: 'locationName',
-					label: '仓库',
+					label: '库存',
 					width: 80,
 					align: 'center',
 					title: false,

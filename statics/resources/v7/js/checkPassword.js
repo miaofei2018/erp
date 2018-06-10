@@ -1,7 +1,7 @@
 /**
 *密码检测
 *@param {String, Object} 密码输入框的选择符
-*@param {Object} 参数设置
+*@param {Object} 参数配置
 */
 var checkPassword = function(obj,cfg){
 	typeof obj == 'string' ? (this.obj = $(obj)) : (this.obj = obj);
@@ -145,7 +145,7 @@ checkPassword.prototype = {
 	},
 	
 	/**
-	*设置密码强度条的颜色
+	*配置密码强度条的颜色
 	*@param {RGB}
 	*@param {RGB}
 	*@param {RGB}

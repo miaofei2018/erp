@@ -23,7 +23,7 @@ $(function(){
 	});
 });
 
-//设置表格宽高
+//配置表格宽高
 Public.setGrid = function(adjustH, adjustW){
 	var defaultPage = Public.getDefaultPage();
 	if(defaultPage.SYSTEM.skin === 'green'){
@@ -59,7 +59,7 @@ Public.initCustomGrid = function(tableObj){
 	//获取当前window对象的宽度作为报表原始的宽度
 	$(tableObj).width($(window).width() - 74);
 	$(tableObj).closest('.mod-report').height($(window).height() - 66);
-	//设置resize事件
+	//配置resize事件
 	var _throttle = function(method,context){
 		clearTimeout(method.tid);
 		method.tid = setTimeout(function(){
@@ -1424,7 +1424,7 @@ Business.serNumManage = function(opts){
 			callback: function(serNumList,win){
 				var curID = THISPAGE.curID;
 				// $grid.jqGrid("restoreCell", curRow, curCol);
-				//根据仓库分组
+				//根据库存分组
 				var storageList = {};
 				if(!$.isArray(serNumList)){
 					var _serNumList = [];
@@ -1464,12 +1464,12 @@ Business.serNumManage = function(opts){
 					rowHandle();
 				}
 				function rowHandle(){
-					//根据sku和仓库分组
+					//根据sku和库存分组
 					for (var i = 0; i < serNumList.length; i++) {
 						var _sernum = serNumList[i];
 						if(isCreate && !$.isEmptyObject(oldData.storageInfo)){
 							//新增的时候检查，不新增分录
-							//如果已经指定的仓库,序列号全部入到当前仓库
+							//如果已经指定的库存,序列号全部入到当前库存
 							var locationId = oldData.storageInfo.id || 0;
 						}else{
 							var locationId = _sernum.locationId || -1;
@@ -1590,7 +1590,7 @@ Business.serNumManage = function(opts){
 		},
 		lock: true,
 		ok:false,
-		focus:false,//很奇葩，不设置这个按回车会触发该控件上close按钮的click事件~~~
+		focus:false,//很奇葩，不配置这个按回车会触发该控件上close按钮的click事件~~~
 		/*cancel:function(){
 			$('#' + THISPAGE.curID).data('goodsInfo',oldData.goodsInfo)
 			.data('storageInfo', { 
@@ -1609,7 +1609,7 @@ Business.serNumManage = function(opts){
 		}
 	};
 	if(!isCreate && (!serNumUsedList || (enableSku || enableStorage))){
-		//出库,没有选序列号或者要更换仓库或者属性的时候 
+		//出库,没有选序列号或者要更换库存或者属性的时候 
 		params.title = '选择【'+goodsInfo.name+'】的序列号',
 		params.content = 'url:../settings/serNumList';
 		params.button = [{name: '确认',defClass:'ui_state_highlight', callback: function () {
@@ -1773,7 +1773,7 @@ Business.billSkuManage = function(parentTr , data, isSkuSingle){
 		},
 		lock: true,
 		ok:false,
-		focus:false,//很奇葩，不设置这个按回车会触发该控件上close按钮的click事件~~~
+		focus:false,//很奇葩，不配置这个按回车会触发该控件上close按钮的click事件~~~
 		cancle:false
 	});
 }
@@ -2477,7 +2477,7 @@ Business.billsEvent = function(obj, type, flag){
 			var skey = $(this).data('skey');
 			var lable = $('#customer').prev().text().slice(0, -1);
 			var title = '选择' + lable;
-			if(lable === '供应商' || lable === '购货单位') {
+			if(lable === '供应商' || lable === '采购单位') {
 				var content = 'url:../settings/select_customer?type=10';
 			} else {
 				var content = 'url:../settings/select_customer';
@@ -2918,13 +2918,13 @@ Business.filterStorage = function(){
 			}
 		}
 	});
-	//仓库
+	//库存
 	$('#filter-storage .ui-icon-ellipsis').on('click', function(){
 		var $input = $(this).prev('input');
 		$.dialog({
 			width: 510,
 			height: 500,
-			title: '选择仓库',
+			title: '选择库存',
 			content: 'url:../settings/storage_batch',
 			data:{isDelete:2},
 			lock: true,
@@ -3050,7 +3050,7 @@ $.fn.digital = function() {
 };
 
 /** 
- 1. 设置cookie的值，把name变量的值设为value   
+ 1. 配置cookie的值，把name变量的值设为value   
 example $.cookie(’name’, ‘value’);
  2.新建一个cookie 包括有效期 路径 域名等
 example $.cookie(’name’, ‘value’, {expires: 7, path: ‘/’, domain: ‘jquery.com’, secure: true});
@@ -3605,7 +3605,7 @@ $(function(){
 					$_wrapper.find('li:eq(0)').show();
 				},
 				button:[
-					{name: '恢复默认设置',defClass:'ui_state_highlight fl', callback: function () {
+					{name: '恢复默认配置',defClass:'ui_state_highlight fl', callback: function () {
 						var thisPop = this;
                         _cancelGridEdit();
 						$.dialog.confirm('该操作会刷新当前页签，是否继续?', function(){
@@ -3909,13 +3909,13 @@ Public.gotoDetailItem = function(params){
 	if(!params.id)return;
 	var urls = {
 		//SALE
-		'150601' : {tabid : 'sales-sales',text : '销货单',right:'SA_QUERY', url : '../sales/sales.jsp?id='},
+		'150601' : {tabid : 'sales-sales',text : '销售订单',right:'SA_QUERY', url : '../sales/sales.jsp?id='},
 		//SALEBACK
-		'150602' : {tabid : 'sales-salesBack',text : '销货退货单',right:'SA_QUERY', url : '../sales/sales.jsp?transType=150602&id='},
+		'150602' : {tabid : 'sales-salesBack',text : '销售退货单',right:'SA_QUERY', url : '../sales/sales.jsp?transType=150602&id='},
 		//PUR
-		'150501' : {tabid : 'purchase-purchase',text : '购货单',right:'PU_QUERY',url : '../purchase/purchase.jsp?id='},
+		'150501' : {tabid : 'purchase-purchase',text : '采购单',right:'PU_QUERY',url : '../purchase/purchase.jsp?id='},
 		//PUR
-		'150502' : {tabid : 'purchase-purchaseBack',text : '购货退货单',right:'PU_QUERY',url : '../purchase/purchase.jsp?transType=150502&id='},
+		'150502' : {tabid : 'purchase-purchaseBack',text : '采购退货单',right:'PU_QUERY',url : '../purchase/purchase.jsp?transType=150502&id='},
 		//TRANSFER
 		'103091' : {tabid : 'storage-transfers',text : '调拨单',right:'TF_QUERY',url : '../storage/transfers.jsp?id='},
 		//OO

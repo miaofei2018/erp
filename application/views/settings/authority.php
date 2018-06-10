@@ -203,14 +203,14 @@ function validMaxForShare(){
 		if (row.admin || row.share === false) {
 			return '&nbsp;';
 		} else {
-			return '<div class="operating" data-id="' + row.userId + '"><a class="ui-icon ui-icon-pencil" title="详细设置授权信息" href="../settings/authority_setting?userName=' + row.userName + '"></a></div>';
+			return '<div class="operating" data-id="' + row.userId + '"><a class="ui-icon ui-icon-pencil" title="详细配置授权信息" href="../settings/authority_setting?userName=' + row.userName + '"></a></div>';
 		}
     };
     function settingDataFormatter(val, opt, row) {
 		if (row.admin || row.share === false) {
 			return '&nbsp;';
 		} else {
-			return '<div class="operating" data-id="' + row.userId + '"><a class="ui-icon ui-icon-pencil" title="详细设置授权信息" href="../settings/authority_setting_data?userName=' + row.userName + '"></a></div>';
+			return '<div class="operating" data-id="' + row.userId + '"><a class="ui-icon ui-icon-pencil" title="详细配置授权信息" href="../settings/authority_setting_data?userName=' + row.userName + '"></a></div>';
 		}
     };
 	

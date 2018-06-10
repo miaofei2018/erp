@@ -12,8 +12,8 @@
 					<th width="150" align="center">商品</th>
 					<th width="60" align="center">单位</th>
 					<th width="60" align="center">数量</th>	
-					<th width="80" align="center">调出仓库</th>	
-					<th width="80" align="center">调入仓库</th>
+					<th width="80" align="center">调出库存</th>	
+					<th width="80" align="center">调入库存</th>
 					<th width="100" align="center">备注</th>	
 				</tr>
 			</thead>

@@ -42,7 +42,7 @@ var queryConditions = {
 					align: "center"
 				}, {
 					name: "contactName",
-					label: "购货单位",
+					label: "采购单位",
 					index: "contactName",
 					width: 200
 				}, {

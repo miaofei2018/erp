@@ -669,7 +669,7 @@ var THISPAGE = {
 				c = a.$_customer.data("contactInfo");
 			if (!c) return parent.Public.tips({
 				type: 1,
-				content: "请先选择销货单位！"
+				content: "请先选择销售单位！"
 			}), a.customerCombo.active = !0, a.customerCombo.doQuery(), a.customerCombo.input.focus().one("nextAction", function() {
 				b.trigger("click")
 			}), !1;

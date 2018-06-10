@@ -39,7 +39,7 @@ class Home extends CI_Controller {
 				$this->common_model->logs('密码修改成功 UID：'.$this->jxcsys['uid'].' 真实姓名改为：'.$info['name']);
 				str_alert(200,'密码修改成功');
 			}
-			str_alert(-1,'设置独立密码失败，请稍候重试！');
+			str_alert(-1,'配置独立密码失败，请稍候重试！');
 		} else {
 		    $data = $this->mysql_model->get_rows('admin','(uid='.$this->jxcsys['uid'].')');    
 		    $this->load->view('set_password',$data);

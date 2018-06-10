@@ -15,7 +15,7 @@ try{
 <body>
 <div class="wrapper">
   <div class="mod-toolbar-top cf">
-    <div class="fl"><h3 class="f14">详细权限设置<span class="fwn">（请勾选为 <b id="userName"></b> 分配的权限）</span></h3></div>
+    <div class="fl"><h3 class="f14">详细权限配置<span class="fwn">（请勾选为 <b id="userName"></b> 分配的权限）</span></h3></div>
     <div class="fr"><a class="ui-btn ui-btn-sp mrb" id="save">确定</a><a class="ui-btn" href="<?php echo site_url('settings/authority')?>">返回</a></div>
   </div>
   <div class="grid-wrap">
@@ -28,9 +28,9 @@ try{
   var urlParam = Public.urlParam(), userName = urlParam.userName, curGroup;
   var height = Public.setGrid().h;
   var relation = {
-			"购货单":[{name:'商品',rights:['查询']},{name:'仓库',rights:['查询']},{name:'供应商',rights:['查询']}],
-			"销货单":[{name:'商品',rights:['查询']},{name:'仓库',rights:['查询']},{name:'客户',rights:['查询']}],
-			"调拨单":[{name:'商品',rights:['查询']},{name:'仓库',rights:['查询']}]
+			"采购单":[{name:'商品',rights:['查询']},{name:'库存',rights:['查询']},{name:'供应商',rights:['查询']}],
+			"销售订单":[{name:'商品',rights:['查询']},{name:'库存',rights:['查询']},{name:'客户',rights:['查询']}],
+			"调拨单":[{name:'商品',rights:['查询']},{name:'库存',rights:['查询']}]
 	},
 	$grid = $('#grid'),
 	RelationalMapping = {};//Rowid与名字的映射
@@ -42,7 +42,7 @@ try{
 	  autowidth: true,//如果为ture时，则当表格在首次被创建时会根据父元素比例重新调整表格宽度。如果父元素宽度改变，为了使表格宽度能够自动调整则需要实现函数：setGridWidth
 	  //width: width,
 	  height: height,
-	  altRows: true, //设置隔行显示
+	  altRows: true, //配置隔行显示
 	  //rownumbers: true,//如果为ture则会在表格左边新增一列，显示行顺序号，从1开始递增。此列名为'rn'
 	  //gridview: true,
 	  colNames:['<input type="checkbox" id="all" class="vm">', '功能列表', '操作', '<label for="all">授权</label>'],

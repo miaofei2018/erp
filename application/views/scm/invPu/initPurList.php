@@ -86,7 +86,7 @@ a.ui-btn{margin-left:10px;}
 <!--    <div class="fr"><a class="ui-btn ui-btn-sp" id="add">新增</a><a class="ui-btn" id="print" target="_blank" href="javascript:void(0);">打印</a><a class="ui-btn" id="export" target="_blank" href="javascript:void(0);">导出</a> </div>
   </div>-->
 <!--  <div class="mod-toolbar-top cf">
-    <div class="fl"><strong class="tit">仓库</strong></div>
+    <div class="fl"><strong class="tit">库存</strong></div>
     <div class="fr"><a class="ui-btn ui-btn-sp mrb" id="search">新增</a><a class="ui-btn" id="export">导出</a></div>
   </div>-->
   <div class="grid-wrap">

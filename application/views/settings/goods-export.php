@@ -11,7 +11,7 @@
 					<th width="100" >商品条码</th>
 					<th width="80" >商品规格</th>
 					<th width="80" >商品类别</th>
-					<th width="80" >首选仓库</th>
+					<th width="80" >首选库存</th>
 					<th width="80" >当前库存</th>
 					<th width="80" >最低库存</th>
 					<th width="80" >最高库存</th>
@@ -23,7 +23,7 @@
 					<th width="120" >折扣率一（%）</th>
 					<th width="120" >折扣率二（%）</th>
 					<th width="120" >备注</th>
-					<th width="80" >仓库</th>
+					<th width="80" >库存</th>
 					<th width="70" align="center">初期数量</th>	
 					<th width="70" align="center">单位成本</th>	
 					<th width="70" align="center">初期总价</th>	

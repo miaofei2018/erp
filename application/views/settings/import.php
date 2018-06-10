@@ -136,7 +136,7 @@ function getTabWindow() { var curTabWin = null; var curTab = parent.$('#page-tab
 			data : formData, 
 			// 告诉jQuery不要去处理发送的数据
 			processData : false, 
-			// 告诉jQuery不要去设置Content-Type请求头
+			// 告诉jQuery不要去配置Content-Type请求头
 			contentType : false,
 			dataType:'json',
 			beforeSend:function(){

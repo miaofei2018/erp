@@ -30,7 +30,7 @@ define(["jquery", "print"], function(a) {
 		var a = l.storage ? l.storage.split(",") : "",
 			b = l.goods ? l.goods.split(",") : "",
 			c = "";
-		a && b ? c = "「您已选择了<b>" + a.length + "</b>个仓库，<b>" + b.length + "</b>个商品进行查询」" : a ? c = "「您已选择了<b>" + customer.length + "</b>个仓库进行查询」" : b && (c = "「您已选择了<b>" + b.length + "</b>个商品进行查询」"), j("#cur-search-tip").html(c)
+		a && b ? c = "「您已选择了<b>" + a.length + "</b>个库存，<b>" + b.length + "</b>个商品进行查询」" : a ? c = "「您已选择了<b>" + customer.length + "</b>个库存进行查询」" : b && (c = "「您已选择了<b>" + b.length + "</b>个商品进行查询」"), j("#cur-search-tip").html(c)
 	}
 	function d() {
 		j("#refresh").on("click", function(a) {
@@ -113,7 +113,7 @@ define(["jquery", "print"], function(a) {
 			title: !0
 		}, {
 			name: "location",
-			label: "仓库",
+			label: "库存",
 			width: 60,
 			classes: "ui-ellipsis",
 			title: !0
@@ -229,7 +229,7 @@ define(["jquery", "print"], function(a) {
 					if (!Business.verifyRight("PU_QUERY")) return;
 					parent.tab.addTabItem({
 						tabid: "purchase-purchase",
-						text: "购货单",
+						text: "采购单",
 						url: "../scm/invPu?action=editPur&id="+ c
 					});
 					break;
@@ -237,7 +237,7 @@ define(["jquery", "print"], function(a) {
 					if (!Business.verifyRight("SA_QUERY")) return;
 					parent.tab.addTabItem({
 						tabid: "sales-sales",
-						text: "销售单",
+						text: "销售订单",
 						url: "../scm/invSa?action=editSale&id="+ c
 					});
 					break;

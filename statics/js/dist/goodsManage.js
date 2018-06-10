@@ -302,11 +302,11 @@ function initField() {
 		var b = $(this);
 		if (hasEntriesData()) return a.preventDefault(), void defaultPage.Public.tips({
 			type: 2,
-			content: "设置了期初，不能修改该属性！"
+			content: "配置了期初，不能修改该属性！"
 		});
 		if ($("#warningSku").find("input")[0].checked) return a.preventDefault(), void defaultPage.Public.tips({
 			type: 2,
-			content: "库存预警启用了‘根据属性设置’，不能修改该属性！"
+			content: "库存预警启用了‘根据属性配置’，不能修改该属性！"
 		});
 		if (this.checked) {
 			var c = "gridSku_" + this.id;
@@ -328,12 +328,12 @@ function initField() {
 	}), initSkuField()), SYSTEM.ISSERNUM && ($isSerNum.parent().show(), $isSerNum.click(function(a) {
 		hasEntriesData("checkQty") && (a.preventDefault(), defaultPage.Public.tips({
 			type: 2,
-			content: "期初中设置了数量的分录，不能修改该属性！"
+			content: "期初中配置了数量的分录，不能修改该属性！"
 		}))
 	})), SYSTEM.ISWARRANTY && ($(".qur-wrap").show(), $isWarranty.click(function(a) {
 		hasEntriesData("checkSafeDays") ? (a.preventDefault(), defaultPage.Public.tips({
 			type: 2,
-			content: "期初中设置了保质期的分录，不能修改该属性！"
+			content: "期初中配置了保质期的分录，不能修改该属性！"
 		})) : ($(".isWarrantyIn").toggle(), this.checked ? $grid.jqGrid("showCol", "batch") : $grid.jqGrid("hideCol", "batch"))
 	}), $safeDays.blur(function(a) {
 		var b = $.trim($(this).val());
@@ -696,7 +696,7 @@ function initEvent() {
 			var g = getSkuEntriesData(!0);
 			if (!g || !g.length) return defaultPage.Public.tips({
 				type: 2,
-				content: "请先设置辅助属性组合！"
+				content: "请先配置辅助属性组合！"
 			}), void a.preventDefault()
 		}
 		this.checked ? THISPAGE.warningGrid && (THISPAGE.warningGrid.jqGrid("showCol", "skuName"), THISPAGE.warningGrid.jqGrid("showCol", "operating"), THISPAGE.warningGrid.jqGrid("setGridWidth", f), THISPAGE.warningGrid.jqGrid("setColProp", "name", {
@@ -741,7 +741,7 @@ function initEvent() {
 }
 function addStorage(a) {
 	parent.$.dialog({
-		title: "新增仓库",
+		title: "新增库存",
 		content: "url:../settings/storage_manage",
 		data: {
 			oper: "add",
@@ -754,7 +754,7 @@ function addStorage(a) {
 						var c = [];
 						parent.parent.Public.tips({
 							type: 1,
-							content: "获取仓库信息失败！" + b.msg
+							content: "获取库存信息失败！" + b.msg
 						})
 					}
 					storageCombo.loadData(c, "-1", !1), storageCombo.selectByValue(a.id)
@@ -854,7 +854,7 @@ function initGrid(a) {
 			hidden: rowData["delete"] ? !0 : !1
 		}, {
 			name: "locationName",
-			label: "仓库",
+			label: "库存",
 			width: 120,
 			title: !1,
 			editable: !0,
@@ -1257,12 +1257,12 @@ function initWarningGrid() {
 				hidden: !0
 			}, {
 				name: "name",
-				label: "仓库",
+				label: "库存",
 				width: 120,
 				title: !0
 			}, {
 				name: "id",
-				label: "仓库ID",
+				label: "库存ID",
 				hidden: !0
 			}, {
 				name: "skuAssistId",

@@ -39,7 +39,7 @@
 				<td width="60"  align="center">数量</td>
 				<td width="80"  align="center">出库单位成本</td>	
 				<td width="80"  align="center">出库成本</td>	
-				<td width="150" align="center">仓库</td>	
+				<td width="150" align="center">库存</td>	
 			</tr>
 		       <?php 
 			   $i = ($t-1)*$num + 1;

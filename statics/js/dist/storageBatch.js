@@ -63,12 +63,12 @@ var api = frameElement.api,
 				gridview: !0,
 				colModel: [{
 					name: "locationNo",
-					label: "仓库编号",
+					label: "库存编号",
 					width: 120,
 					title: !1
 				}, {
 					name: "name",
-					label: "仓库名称",
+					label: "库存名称",
 					width: 300,
 					classes: "ui-ellipsis"
 				}, {
@@ -131,7 +131,7 @@ var api = frameElement.api,
 		addEvent: function() {
 			var a = this;
 			$("#search").click(function() {
-				queryConditions.skey = "请输入仓库编号或名称" === a.$_matchCon.val() ? "" : a.$_matchCon.val(), THISPAGE.reloadData(queryConditions)
+				queryConditions.skey = "请输入库存编号或名称" === a.$_matchCon.val() ? "" : a.$_matchCon.val(), THISPAGE.reloadData(queryConditions)
 			}), $("#refresh").click(function() {
 				THISPAGE.reloadData(queryConditions)
 			})

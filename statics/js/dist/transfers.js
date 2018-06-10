@@ -297,7 +297,7 @@ var curRow, curCol, curArrears, loading, urlParam = Public.urlParam(),
 					editable: !0
 				}, {
 					name: "outLocationName",
-					label: "调出仓库",
+					label: "调出库存",
 					nameExt: '<small id="batch-storageA">(批量)</small>',
 					sortable: !1,
 					width: 100,
@@ -312,7 +312,7 @@ var curRow, curCol, curArrears, loading, urlParam = Public.urlParam(),
 					}
 				}, {
 					name: "inLocationName",
-					label: "调入仓库",
+					label: "调入库存",
 					nameExt: '<small id="batch-storageB">(批量)</small>',
 					width: 100,
 					title: !0,
@@ -920,11 +920,11 @@ var curRow, curCol, curArrears, loading, urlParam = Public.urlParam(),
 					}), $("#grid").jqGrid("editCellByColName", f, "skuName"), !1;
 					if (!i || !i.id) return parent.Public.tips({
 						type: 2,
-						content: "请选择调出仓库！"
+						content: "请选择调出库存！"
 					}), $("#grid").jqGrid("editCellByColName", f, "outLocationName"), !1;
 					if (!j || !j.id) return parent.Public.tips({
 						type: 2,
-						content: "请选择调入仓库！"
+						content: "请选择调入库存！"
 					}), $("#grid").jqGrid("editCellByColName", f, "inLocationName"), !1;
 					if (SYSTEM.ISSERNUM) {
 						var m = h.serNumList;
@@ -934,7 +934,7 @@ var curRow, curCol, curArrears, loading, urlParam = Public.urlParam(),
 								o = "点击";
 							if (1 == h.isSerNum && (n = !0), n) return parent.Public.tips({
 								type: 2,
-								content: "请" + o + "数量设置【" + h.name + "】的序列号"
+								content: "请" + o + "数量配置【" + h.name + "】的序列号"
 							}), $("#grid").jqGrid("editCellByColName", f, "qty"), !1
 						}
 					}

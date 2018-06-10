@@ -60,7 +60,7 @@ define(function(require){
         var timer = setInterval(function(){  
            if(iframe.contentWindow.canAccess){  
                  clearInterval(timer);  
-                 //iframe.contentWindow.document.body.innerHTML = '这是新设置的页面内容';  
+                 //iframe.contentWindow.document.body.innerHTML = '这是新配置的页面内容';  
                 // 重新构造jqgrid渲染的table为单个table
                 //win.document.write(html);
                 win.onafterprint = function() {

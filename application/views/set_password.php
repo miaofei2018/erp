@@ -2,7 +2,7 @@
 <!doctype html>
 <html>
 <head>
-	<title>设置独立密码</title>
+	<title>配置独立密码</title>
 	<meta charset="utf-8" />
 	<link rel="stylesheet" href="<?php echo base_url()?>statics/resources/v7/css/phone_validate.css" />
 	<script src="<?php echo base_url()?>statics/resources/v7/js/jquery.min.js"></script>
@@ -48,7 +48,7 @@
 				 
 				<li>
 					<label for="password">密码:</label>
-					<input type="password" class="ui-input" placeholder="设置登录密码" id="password"/>
+					<input type="password" class="ui-input" placeholder="配置登录密码" id="password"/>
 					<p class="tip">长度8~20位，同时包含数字、字母（区分大小写），可使用特殊符号</p>
 				</li>
 				<li>

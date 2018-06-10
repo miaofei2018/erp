@@ -245,7 +245,7 @@ var curRow, curCol, curArrears, loading, urlParam = Public.urlParam(),
 					}
 				}, {
 					name: "locationName",
-					label: "仓库",
+					label: "库存",
 					width: 100,
 					title: !0,
 					editable: !0,
@@ -565,7 +565,7 @@ var curRow, curCol, curArrears, loading, urlParam = Public.urlParam(),
 					}
 				}, {
 					name: "locationName",
-					label: '仓库<small id="batchStorage">(批量)</small>',
+					label: '库存<small id="batchStorage">(批量)</small>',
 					width: 100,
 					title: !0,
 					editable: !0,
@@ -1171,7 +1171,7 @@ var curRow, curCol, curArrears, loading, urlParam = Public.urlParam(),
 				e = $("#fix1").data("storageInfo");
 			if (!e || !e.id) return parent.Public.tips({
 				type: 2,
-				content: "请选择相应的仓库！"
+				content: "请选择相应的库存！"
 			}), $("#fixedGrid").jqGrid("editCell", n, 9, !0), !1;
 			var f = $("#fix1").data("unitInfo") || {};
 			if ("" === c.goods) return parent.Public.tips({
@@ -1186,7 +1186,7 @@ var curRow, curCol, curArrears, loading, urlParam = Public.urlParam(),
 						i = "点击";
 					if (d.isSerNum && (h = !0, a.checkSerNum && (h = !0)), h) return parent.Public.tips({
 						type: 2,
-						content: "请" + i + "数量设置【" + d.name + "】的序列号"
+						content: "请" + i + "数量配置【" + d.name + "】的序列号"
 					}), $("#fixedGrid").jqGrid("editCell", n, 6, !0), !1
 				}
 			}
@@ -1214,7 +1214,7 @@ var curRow, curCol, curArrears, loading, urlParam = Public.urlParam(),
 						q = $("#" + n).data("storageInfo");
 					if (!q || !q.id) return parent.Public.tips({
 						type: 2,
-						content: "请选择相应的仓库！"
+						content: "请选择相应的库存！"
 					}), $("#grid").jqGrid("editCell", n, 10, !0), !1;
 					var r = $("#" + n).data("unitInfo") || {},
 						g = p.serNumList;
@@ -1224,7 +1224,7 @@ var curRow, curCol, curArrears, loading, urlParam = Public.urlParam(),
 							i = "点击";
 						if (1 == p.isSerNum && (h = !0, a.checkSerNum && (h = !0)), h) return parent.Public.tips({
 							type: 2,
-							content: "请" + i + "数量设置【" + p.name + "】的序列号"
+							content: "请" + i + "数量配置【" + p.name + "】的序列号"
 						}), $("#grid").jqGrid("editCell", n, 7, !0), !1
 					}
 					m = {

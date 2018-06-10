@@ -93,7 +93,7 @@ $(document).keydown(function(event) {
               </div>
               <div class="ctn-wrap">
                 <input type="text" value="0" class="ui-input num-input" id="entrysPerNote" name="entrysPerNote"/>
-                <span class="tips">为0时，默认取套打模版中设置的打印分录数</span>
+                <span class="tips">为0时，默认取套打模版中配置的打印分录数</span>
               </div>
             </li>
             <li class="row-item">
@@ -113,7 +113,7 @@ $(document).keydown(function(event) {
             <li class="row-item">   
               <span class="radio-wrap"><input type="checkbox" name="isEmptyLinePrint" id="isEmptyLinePrint"  checked="checked"/><label for="isEmptyLinePrint">打印空白行</label></span>
               <span class="radio-wrap"><input type="checkbox" name="printFirstLayer" id="printFirstLayer"  checked="checked"/><label for="printFirstLayer">打印表格线</span></span>
-              <!--<span class="radio-wrap"><input type="checkbox" name="isSaveSettings" id="isSaveSettings" /><label for="isSaveSettings" checked="checked">保存该模版的设置</span></span>-->
+              <!--<span class="radio-wrap"><input type="checkbox" name="isSaveSettings" id="isSaveSettings" /><label for="isSaveSettings" checked="checked">保存该模版的配置</span></span>-->
             </li>
           </ul>
       </div>
@@ -131,7 +131,7 @@ $(document).keydown(function(event) {
     init();
     
     function init(){
-      //初始化设置
+      //初始化配置
       initPrintMethod(printMethod);
       initSettings();
 
@@ -167,7 +167,7 @@ $(document).keydown(function(event) {
         $('#taodaTips').html(taodaTips);
       }
 
-      //设置默认模版
+      //配置默认模版
       $('#setDefaultTemp').on('click', function(e){
           e.preventDefault();
           var templateId = $('#printTemp').getCombo().getValue();
@@ -177,7 +177,7 @@ $(document).keydown(function(event) {
             dataType: 'json',
             success: function(data){
               if (data.status == 200) {
-            	  parent.parent.Public.tips({content: '设置默认模版成功！'});
+            	  parent.parent.Public.tips({content: '配置默认模版成功！'});
               } else {
             	  parent.parent.Public.tips({type: 1,content: data.msg});
               }
@@ -281,7 +281,7 @@ $(document).keydown(function(event) {
     }
 
     function pdfPrint(){
-      pdfData.marginLeft = $('#pdfStatX').val(); //设置左边距
+      pdfData.marginLeft = $('#pdfStatX').val(); //配置左边距
       $.cookie('pdfMarginLeft', pdfData.marginLeft, {expires: 365});
       Business.getFile(pdfUrl, pdfData, true, false);
       frameElement.api.close();

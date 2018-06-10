@@ -128,7 +128,7 @@ class InvSo extends CI_Controller {
 				str_alert(-1,'SQL错误或者提交的是空数据'); 
 			} else {
 			    $this->db->trans_commit();
-				$this->common_model->logs('新增销货 单据编号：'.$data['billNo']);
+				$this->common_model->logs('新增销售 单据编号：'.$data['billNo']);
 				str_alert(200,'success',array('id'=>intval($iid))); 
 			}
 		}
@@ -159,7 +159,7 @@ class InvSo extends CI_Controller {
 				str_alert(-1,'SQL错误或者提交的是空数据'); 
 			} else {
 			    $this->db->trans_commit(); 
-				$this->common_model->logs('修改销货 单据编号：'.$data['billNo']);
+				$this->common_model->logs('修改销售 单据编号：'.$data['billNo']);
 				str_alert(200,'success',array('id'=>$data['id'])); 
 			}
 		}
@@ -244,7 +244,7 @@ class InvSo extends CI_Controller {
 	    $id   = intval($this->input->get_post('id',TRUE));
 		$data =  $this->data_model->get_order('a.isDelete=0 and a.id='.$id.' and a.billType="SALE"',1);
 		if (count($data)>0) {
-			$data['billStatus'] == 2 && str_alert(400,'订单 '.$data['billNo'].' 已全部出库，不能生成购货单！');  
+			$data['billStatus'] == 2 && str_alert(400,'订单 '.$data['billNo'].' 已全部出库，不能生成采购单！');  
 			$info['status'] = 200;
 			$info['msg']    = 'success'; 
 			$info['data']['id']                 = intval($data['id']);
@@ -370,7 +370,7 @@ class InvSo extends CI_Controller {
 				str_alert(-1,'删除失败'); 
 			} else {
 			    $this->db->trans_commit();
-				$this->common_model->logs('删除销货订单编号：'.$data['billNo']);
+				$this->common_model->logs('删除销售订单编号：'.$data['billNo']);
 				str_alert(200,'success'); 	 
 			}
 		}
@@ -387,7 +387,7 @@ class InvSo extends CI_Controller {
 	    $id   = str_enhtml($this->input->post('id',TRUE));
 		$data = $this->mysql_model->get_results('order','(id in('.$id.')) and billType="SALE" and checked=0 and isDelete=0');  
 		if (count($data)>0) {
-		    $this->mysql_model->get_count('invoice','(srcOrderId in('.$id.')) and isDelete=0')>0 && str_alert(-1,'有关联的销货单，不能对它进行审核！'); 
+		    $this->mysql_model->get_count('invoice','(srcOrderId in('.$id.')) and isDelete=0')>0 && str_alert(-1,'有关联的销售订单，不能对它进行审核！'); 
 			$sql = $this->mysql_model->update('order',array('checked'=>1,'checkName'=>$this->jxcsys['name']),'(id in('.$id.'))'); 
 			if ($sql) {
 				foreach($data as $arr=>$row) {
@@ -400,7 +400,7 @@ class InvSo extends CI_Controller {
 				if (strlen($srcOrderId)>0) {
 				    $this->mysql_model->update('order',array('billStatus'=>2),'(id in('.$srcOrderId.'))');
 				}
-				$this->common_model->logs('销货订单编号：'.$billno.'的单据已被审核！');
+				$this->common_model->logs('销售订单编号：'.$billno.'的单据已被审核！');
 				str_alert(200,'订单编号：'.$billno.'的单据已被审核！');
 			} 
 			str_alert(-1,'审核失败');  
@@ -414,12 +414,12 @@ class InvSo extends CI_Controller {
 	    $id   = str_enhtml($this->input->post('id',TRUE));
 		$data = $this->mysql_model->get_results('order','(id in('.$id.')) and billType="SALE" and checked=1 and (isDelete=0)');   
 		if (count($data)>0) {
-		    $this->mysql_model->get_count('invoice','(srcOrderId in('.$id.')) and isDelete=0')>0 && str_alert(-1,'有关联的销货单，不能对它进行反审核！'); 
+		    $this->mysql_model->get_count('invoice','(srcOrderId in('.$id.')) and isDelete=0')>0 && str_alert(-1,'有关联的销售订单，不能对它进行反审核！'); 
 			$sql = $this->mysql_model->update('order',array('checked'=>0,'checkName'=>''),'(id in('.$id.'))'); 
 			if ($sql) {
 				$billno = array_column($data,'billNo','id');
 				$billno = join(',',$billno);
-				$this->common_model->logs('销货订单：'.$billno.'的单据已被反审核！');
+				$this->common_model->logs('销售订单：'.$billno.'的单据已被反审核！');
 				str_alert(200,'订单编号：'.$billno.'的单据已被反审核！'); 
 			} 
 			str_alert(-1,'反审核失败');  
@@ -435,7 +435,7 @@ class InvSo extends CI_Controller {
 	    $data = $this->input->post('postData',TRUE);
 		if (strlen($data)>0) {
 			$data = $this->validform((array)json_decode($data, true));
-			$this->mysql_model->get_count('invoice',array('srcOrderId'=>$data['id'],'isDelete'=>0))>0 && str_alert(-1,'有关联的销货单，不能对它进行反审核！'); 
+			$this->mysql_model->get_count('invoice',array('srcOrderId'=>$data['id'],'isDelete'=>0))>0 && str_alert(-1,'有关联的销售订单，不能对它进行反审核！'); 
 			$data['checked']         = 1;
 			$data['checkName']       = $this->jxcsys['name']; 
 			$info = elements(array(
@@ -463,7 +463,7 @@ class InvSo extends CI_Controller {
 				str_alert(-1,'SQL错误或者提交的是空数据'); 
 			} else {
 			    $this->db->trans_commit(); 
-				$this->common_model->logs('销货单编号：'.$data['billNo'].'的单据已被审核！');
+				$this->common_model->logs('销售订单编号：'.$data['billNo'].'的单据已被审核！');
 				str_alert(200,'success',array('id'=>$data['id'])); 
 			}
 		}
@@ -478,10 +478,10 @@ class InvSo extends CI_Controller {
 	    $data = $this->input->post('postData',TRUE);
 		if (strlen($data)>0) {
 			$data = $this->validform((array)json_decode($data, true));
-			$this->mysql_model->get_count('invoice',array('srcOrderId'=>$data['id'],'isDelete'=>0))>0 && str_alert(-1,'有关联的销货单，不能对它进行反审核！'); 
+			$this->mysql_model->get_count('invoice',array('srcOrderId'=>$data['id'],'isDelete'=>0))>0 && str_alert(-1,'有关联的销售订单，不能对它进行反审核！'); 
 			$sql = $this->mysql_model->update('order',array('checked'=>0,'checkName'=>''),'(id='.$data['id'].')');
 			if ($sql) {
-				$this->common_model->logs('销货单号：'.$data['billNo'].'的单据已被反审核！');
+				$this->common_model->logs('销售订单号：'.$data['billNo'].'的单据已被反审核！');
 				str_alert(200,'success',array('id'=>$data['id'])); 
 			}
 		}
@@ -545,7 +545,7 @@ class InvSo extends CI_Controller {
 			(float)$row['qty'] < 0  && str_alert(-1,'商品数量要为数字，请输入有效数字！'); 
 			(float)$row['price'] < 0  && str_alert(-1,'商品销售单价要为数字，请输入有效数字！'); 
 			(float)$row['discountRate'] < 0  && str_alert(-1,'折扣率要为数字，请输入有效数字！');
-			intval($row['locationId']) < 1 && str_alert(-1,'请选择相应的仓库！'); 
+			intval($row['locationId']) < 1 && str_alert(-1,'请选择相应的库存！'); 
 			!in_array($row['locationId'],$storage) && str_alert(-1,$row['locationName'].'不存在或不可用！');
 		}
 		$data['postData'] = serialize($data);

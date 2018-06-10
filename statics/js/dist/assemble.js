@@ -273,7 +273,7 @@ var curRow, curCol, curArrears, loading, urlParam = Public.urlParam(),
 					hidden: !0
 				}, {
 					name: "locationName",
-					label: "仓库",
+					label: "库存",
 					width: 100,
 					title: !0,
 					editable: !0,
@@ -677,7 +677,7 @@ var curRow, curCol, curArrears, loading, urlParam = Public.urlParam(),
 					hidden: !0
 				}, {
 					name: "locationName",
-					label: "仓库",
+					label: "库存",
 					nameExt: '<small id="batchStorage">(批量)</small>',
 					width: 100,
 					title: !0,
@@ -1391,7 +1391,7 @@ var curRow, curCol, curArrears, loading, urlParam = Public.urlParam(),
 			var f = $("#fix1").data("storageInfo");
 			if (!f || !f.id) return parent.Public.tips({
 				type: 2,
-				content: "请选择相应的仓库！"
+				content: "请选择相应的库存！"
 			}), $("#fixedGrid").jqGrid("editCellByColName", "fix1", "locationName"), !1;
 			var g = $("#fix1").data("unitInfo") || {};
 			if ("" === c.goods) return parent.Public.tips({
@@ -1406,7 +1406,7 @@ var curRow, curCol, curArrears, loading, urlParam = Public.urlParam(),
 						j = "点击";
 					if (d.isSerNum && (i = !0, a.checkSerNum && (i = !0)), i) return parent.Public.tips({
 						type: 2,
-						content: "请" + j + "数量设置【" + d.name + "】的序列号"
+						content: "请" + j + "数量配置【" + d.name + "】的序列号"
 					}), $("#fixedGrid").jqGrid("editCellByColName", "fix1", "qty"), !1
 				}
 			}
@@ -1445,7 +1445,7 @@ var curRow, curCol, curArrears, loading, urlParam = Public.urlParam(),
 					var t = $("#" + p).data("storageInfo");
 					if (!t || !t.id) return parent.Public.tips({
 						type: 2,
-						content: "请选择相应的仓库！"
+						content: "请选择相应的库存！"
 					}), $("#grid").jqGrid("editCellByColName", p, "locationName"), !1;
 					var u = $("#" + p).data("unitInfo") || {},
 						h = r.serNumList;
@@ -1455,7 +1455,7 @@ var curRow, curCol, curArrears, loading, urlParam = Public.urlParam(),
 							j = "点击";
 						if (1 == r.isSerNum && (i = !0, a.checkSerNum && (i = !0)), i) return parent.Public.tips({
 							type: 2,
-							content: "请" + j + "数量设置【" + r.name + "】的序列号"
+							content: "请" + j + "数量配置【" + r.name + "】的序列号"
 						}), $("#grid").jqGrid("editCellByColName", p, "qty"), !1
 					}
 					o = {

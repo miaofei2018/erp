@@ -89,7 +89,7 @@ var defParams = {
       	 <ul class="ul-inline">
       	 	<li><strong class="tit mrb fl dn">查询条件</strong></li>
       	 	<li>
-                <label>销货单位:</label>
+                <label>销售单位:</label>
 		        <span class="ui-combo-wrap" id="customer">
 		        <input type="text" name="" class="input-txt" autocomplete="off" value="" data-ref="date">
 

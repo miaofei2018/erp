@@ -100,7 +100,7 @@ define(["jquery", "print"], function(a, b, c) {
 			align: "center"
 		}, {
 			name: "location",
-			label: "仓库",
+			label: "库存",
 			width: 60,
 			classes: "ui-ellipsis",
 			title: !0
@@ -194,7 +194,7 @@ define(["jquery", "print"], function(a, b, c) {
 					var b = l("#grid").getRowData(a).billId;
 					parent.tab.addTabItem({
 						tabid: "sales-sales",
-						text: "销售单",
+						text: "销售订单",
 						url: "../scm/invSa?action=editSale&id=" + b
 					})
 				}

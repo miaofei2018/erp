@@ -69,7 +69,7 @@ $(document).keydown(function(event) {
                 <p style="color:#999; padding:3px 0 0 0; ">（可用,分割多个编码如1001,1008,2001，或直接输入编码段如1001--1009查询）</p>
               </li>
               <li>
-                <label class="tit">仓库:</label>
+                <label class="tit">库存:</label>
                 <span class="mod-choose-input" id="filter-storage"><input type="text" class="ui-input" id="storageAuto"/><span class="ui-icon-ellipsis"></span></span>
               </li>
               <li class="chk-list dn" id="profit-wrap">
@@ -117,7 +117,7 @@ $(document).keydown(function(event) {
             <td width="150px">商品名称</td>
             <td>规格型号</td>
             <td>单位</td>
-            <td>仓库</td>
+            <td>库存</td>
             <td>数量</td>
             <td>单价</td>
             <td>销售收入</td>

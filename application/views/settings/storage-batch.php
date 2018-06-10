@@ -41,7 +41,7 @@ body{ background:#FFF; }
     <div class="fl">
       <ul class="ul-inline">
         <li>
-          <input type="text" id="matchCon" class="ui-input ui-input-ph" value="请输入仓库编号或名称">
+          <input type="text" id="matchCon" class="ui-input ui-input-ph" value="请输入库存编号或名称">
         </li>
         <li><a class="ui-btn mrb" id="search">查询</a><a class="ui-btn" id="refresh">刷新</a></li>
       </ul>

@@ -31,7 +31,7 @@ var THISPAGE = {
 			altRows: !0,
 			gridview: !0,
 			multiselect: !0,
-			colNames: ["操作", "单据日期", "单据编号", "供应商", "购货金额", "优惠后金额", "已" + c + "款", c + "款状态", "数量", "制单人", "审核人", "备注", "订单来源"],
+			colNames: ["操作", "单据日期", "单据编号", "供应商", "采购金额", "优惠后金额", "已" + c + "款", c + "款状态", "数量", "制单人", "审核人", "备注", "订单来源"],
 			colModel: [{
 				name: "operating",
 				width: 60,
@@ -175,9 +175,9 @@ var THISPAGE = {
 			var b = $(this).parent().data("id"),
 				c = $("#grid").jqGrid("getRowData", b),
 				d = 1 == c.disEditable ? "&disEditable=true" : "",
-				e = ($("#grid").jqGrid("getDataIDs"), "购货单"),
+				e = ($("#grid").jqGrid("getDataIDs"), "采购单"),
 				f = "purchase-purchase";
-			"150502" == queryConditions.transType ? (e = "购货退货单", f = "purchase-purchaseBack", parent.cacheList.purchaseBackId = $("#grid").jqGrid("getDataIDs")) : parent.cacheList.purchaseId = $("#grid").jqGrid("getDataIDs"), parent.tab.addTabItem({
+			"150502" == queryConditions.transType ? (e = "采购退货单", f = "purchase-purchaseBack", parent.cacheList.purchaseBackId = $("#grid").jqGrid("getDataIDs")) : parent.cacheList.purchaseId = $("#grid").jqGrid("getDataIDs"), parent.tab.addTabItem({
 				tabid: f,
 				text: e,
 				url: "../scm/invPu?action=editPur&id=" + b + "&flag=list" + d + "&transType=" + queryConditions.transType
@@ -185,7 +185,7 @@ var THISPAGE = {
 		}), $(".grid-wrap").on("click", ".ui-icon-trash", function(a) {
 			if (a.preventDefault(), Business.verifyRight("PU_DELETE")) {
 				var b = $(this).parent().data("id");
-				$.dialog.confirm("您确定要删除该购货记录吗？", function() {
+				$.dialog.confirm("您确定要删除该采购记录吗？", function() {
 					Public.ajaxGet("../scm/invPu/delete?action=delete", {
 						id: b
 					}, function(a) {
@@ -207,8 +207,8 @@ var THISPAGE = {
 				type: 2,
 				content: "请先选择需要删除的项！"
 			});
-			var d = "购货单";
-			"150502" == queryConditions.transType && (d = "购货退货单"), $.dialog.confirm("您确定要删除选中的" + d + "吗？", function() {
+			var d = "采购单";
+			"150502" == queryConditions.transType && (d = "采购退货单"), $.dialog.confirm("您确定要删除选中的" + d + "吗？", function() {
 				Public.ajaxPost("../scm/invPu/delete?action=delete", {
 					id: c
 				}, function(a) {
@@ -228,7 +228,7 @@ var THISPAGE = {
 		}), 
 			$(".wrapper").on("click", "#print", function(a) {
 			a.preventDefault(), Business.verifyRight("PU_PRINT") && Public.print({
-				title: "购货单列表",
+				title: "采购单列表",
 				$grid: $("#grid"),
 				pdf: "../scm/invPu/toPdf?action=toPdf",
 				billType: 10101,
@@ -292,9 +292,9 @@ var THISPAGE = {
 			queryConditions.matchCon = "请输入单据号或供应商或序列号或备注" === a.$_matchCon.val() ? "" : a.$_matchCon.val(), queryConditions.beginDate = a.$_beginDate.val(), queryConditions.endDate = a.$_endDate.val(), THISPAGE.reloadData(queryConditions)
 		}), $("#add").click(function(a) {
 			if (a.preventDefault(), Business.verifyRight("PU_ADD")) {
-				var b = "购货单",
+				var b = "采购单",
 					c = "purchase-purchase";
-				if ("150502" == queryConditions.transType) var b = "购货退货单",
+				if ("150502" == queryConditions.transType) var b = "采购退货单",
 					c = "purchase-purchaseBack";
 				parent.tab.addTabItem({
 					tabid: c,

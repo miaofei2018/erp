@@ -828,7 +828,7 @@ class InvOi extends CI_Controller {
 		     $data = (array)json_decode($data, true); 
 			 if (is_array($data['entries'])) {
 			     foreach ($data['entries'] as $arr=>$row) {
-				     intval($row['locationId']) < 1 && str_alert(-1,'必须选择某一仓库进行盘点'); 
+				     intval($row['locationId']) < 1 && str_alert(-1,'必须选择某一库存进行盘点'); 
 					 if (intval($row['invId'])>0) {
 						 if (intval($row['change'])>0) {  //盘盈
 							 $v[$arr]['goods']         = $row['invNumber'].' '.$row['invName'].' '.$row['invSpec'];
@@ -935,7 +935,7 @@ class InvOi extends CI_Controller {
 		    intval($row['invId']) < 1 && str_alert(-1,'请选择商品');    
 			(float)$row['qty'] < 0  && str_alert(-1,'商品数量要为数字，请输入有效数字！'); 
 			(float)$row['price'] < 0  && str_alert(-1,'商品销售单价要为数字，请输入有效数字！'); 
-			intval($row['locationId']) < 1 && str_alert(-1,'请选择相应的仓库！'); 
+			intval($row['locationId']) < 1 && str_alert(-1,'请选择相应的库存！'); 
 			!in_array($row['locationId'],$storage) && str_alert(-1,$row['locationName'].'不存在或不可用！');
 
 		
@@ -1029,7 +1029,7 @@ class InvOi extends CI_Controller {
 		    intval($row['invId']) < 1 && str_alert(-1,'请选择商品');    
 			(float)$row['qty'] < 0  && str_alert(-1,'商品数量要为数字，请输入有效数字！'); 
 			(float)$row['price'] < 0  && str_alert(-1,'商品销售单价要为数字，请输入有效数字！'); 
-			intval($row['locationId']) < 1 && str_alert(-1,'请选择相应的仓库！'); 
+			intval($row['locationId']) < 1 && str_alert(-1,'请选择相应的库存！'); 
 			!in_array($row['locationId'],$storage) && str_alert(-1,$row['locationName'].'不存在或不可用！');
 
 
@@ -1108,7 +1108,7 @@ class InvOi extends CI_Controller {
 		foreach ($data['entries'] as $arr=>$row) {
 		    intval($row['invId'])<1 && str_alert(-1,'选择商品');    
 			(float)$row['amount'] < 0 && str_alert(-1,'调整金额要为数字，请输入有效数字！'); 
-			intval($row['locationId']) < 1 && str_alert(-1,'请选择相应的仓库！'); 
+			intval($row['locationId']) < 1 && str_alert(-1,'请选择相应的库存！'); 
 			!in_array($row['locationId'],$storage) && str_alert(-1,$row['locationName'].'不存在或不可用！');
 			$locationId[]    = $row['locationId'];
 		}

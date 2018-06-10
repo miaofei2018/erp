@@ -15,13 +15,13 @@ $(function() {
 			var l = {
 				SALE: {
 					tabid: "sales-sales",
-					text: "销货单",
+					text: "销售订单",
 					right: "SA_QUERY",
 					url: "/sales/sales.jsp?id="
 				},
 				PUR: {
 					tabid: "purchase-purchase",
-					text: "购货单",
+					text: "采购单",
 					right: "PU_QUERY",
 					url: "/purchase/purchase.jsp?id="
 				},
@@ -101,9 +101,9 @@ $(function() {
 							showDetail: k[0].checked ? "true" : "false"
 						};
 						var e = b.$_customer.find("input");
-						if ("" === e.val() || "（请选择购货单位）" === e.val()) {
+						if ("" === e.val() || "（请选择采购单位）" === e.val()) {
 							var h = {};
-							h.id = 0, h.name = "（请选择购货单位）", b.$_customer.removeData("contactInfo")
+							h.id = 0, h.name = "（请选择采购单位）", b.$_customer.removeData("contactInfo")
 						} else {
 							var h = b.$_customer.data("contactInfo");
 							if (null === h) return setTimeout(function() {
@@ -140,7 +140,7 @@ $(function() {
 						else {
 							var a = $("#customer").prev().text().slice(0, -1),
 								c = "选择" + a;
-							if ("供应商" === a || "购货单位" === a) var d = "url:../settings/select_customer?type=10";
+							if ("供应商" === a || "采购单位" === a) var d = "url:../settings/select_customer?type=10";
 							else var d = "url:../settings/select_customer";
 							b.customerDialog = $.dialog({
 								width: 775,
@@ -165,13 +165,13 @@ $(function() {
 				f.val(m.beginDate || ""), g.val(m.endDate || ""), j.cssCheckbox(), "true" == c.showDetail && (j.find("label").addClass("checked"), k[0].checked = !0), m.beginDate && m.endDate && $("#selected-period").text(m.beginDate + "至" + m.endDate), b.customerCombo = Business.supplierCombo(h, {
 					defaultSelected: 0,
 					addOptions: {
-						text: "（请选择购货单位）",
+						text: "（请选择采购单位）",
 						value: 0
 					}
 				}), c.supplierId || ($(".grid-wrap").addClass("no-query"), $(".grid").remove()), b.$_customer.data("contactInfo", {
 					id: Number(c.supplierId) || 0,
 					name: c.supplierName || ""
-				}), b.customerCombo.input.val(c.supplierName || "（请选择购货单位）"), i.html("供应商：" + h.find("input").val()), n(), o(), q(), window.THISPAGE = b
+				}), b.customerCombo.input.val(c.supplierName || "（请选择采购单位）"), i.html("供应商：" + h.find("input").val()), n(), o(), q(), window.THISPAGE = b
 			}, a
 		}(a || {});
 	a.init(), Public.initCustomGrid($("table.list"))

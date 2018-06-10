@@ -10,7 +10,7 @@
   				<th width="216" rowspan="2">商品名称</th>
   				<th width="216" rowspan="2">规格型号</th>
   				<th width="114" rowspan="2">单位</th>
-  				<th width="24" rowspan="2">仓库</th>
+  				<th width="24" rowspan="2">库存</th>
 				<th>期初</th>
 				<th>调拨入库</th>
 				<th>普通采购</th>

@@ -74,12 +74,12 @@ define(["jquery", "print"], function(a) {
 			align: "center"
 		}, {
 			name: "locationNo",
-			label: "仓库编码",
+			label: "库存编码",
 			width: 0,
 			hidden: !0
 		}, {
 			name: "location",
-			label: "仓库",
+			label: "库存",
 			frozen: !0,
 			width: 100
 		}], d = a.colIndex, e = a.colNames, i = a.stoNames, k = [], m = "", n = 0, o = 5, p = d.length; p > o; o++) {

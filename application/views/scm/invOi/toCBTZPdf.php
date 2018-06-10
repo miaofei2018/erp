@@ -41,7 +41,7 @@
 					<td width="150" style="border:solid #000000;border-width:0 1px 1px 0;padding:2px; font-family:'宋体'; font-size:18px;height:15px;" align="center">单位</td>
 					
 					<td width="150" style="border:solid #000000;border-width:0 1px 1px 0;padding:2px; font-family:'宋体'; font-size:18px;height:15px;" align="center">调整金额</td>	
-					<td width="200" style="border:solid #000000;border-width:0 1px 1px 0;padding:2px; font-family:'宋体'; font-size:18px;height:15px;" align="center">仓库</td>	
+					<td width="200" style="border:solid #000000;border-width:0 1px 1px 0;padding:2px; font-family:'宋体'; font-size:18px;height:15px;" align="center">库存</td>	
 				</tr>
 				
 		       <?php 
