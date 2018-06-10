@@ -194,7 +194,7 @@ define(["jquery", "print"], function(a, b, c) {
 					var b = l("#grid").getRowData(a).billId;
 					parent.tab.addTabItem({
 						tabid: "sales-sales",
-						text: "销售订单",
+						text: "销售单",
 						url: "../scm/invSa?action=editSale&id=" + b
 					})
 				}

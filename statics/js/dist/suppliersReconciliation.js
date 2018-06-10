@@ -15,7 +15,7 @@ $(function() {
 			var l = {
 				SALE: {
 					tabid: "sales-sales",
-					text: "销售订单",
+					text: "销货单",
 					right: "SA_QUERY",
 					url: "/sales/sales.jsp?id="
 				},

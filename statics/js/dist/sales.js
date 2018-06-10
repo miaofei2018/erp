@@ -28,10 +28,10 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 				this.$linkAddress = $("#linkAddress"),
 				//add by michen 20170724 end
 					this.$_date = $("#date").val(system.endDate), this.$_number = $("#number"), this.$_note = $("#note"), this.$_discountRate = $("#discountRate"), this.$_deduction = $("#deduction"), this.$_discount = $("#discount"), this.$_payment = $("#payment"), this.$_arrears = $("#arrears"), this.$_totalArrears = $("#totalArrears"), this.$_toolTop = $("#toolTop"), this.$_toolBottom = $("#toolBottom"), this.$_paymentTxt = $("#paymentTxt"), this.$_accountInfo = $("#accountInfo"), this.$_userName = $("#userName"), this.$_modifyTime = $("#modifyTime"), this.$_createTime = $("#createTime"), this.$_checkName = $("#checkName"), this.$_customerFree = $("#customerFree"), this.customerArrears = 0, this.$_note.placeholder(), "150602" == originalData.transType) {
-				parent.$("#page-tab").find("li.l-selected").children("a").html("销售退货单");
+				parent.$("#page-tab").find("li.l-selected").children("a").html("销货退货单");
 				$("#paymentTxt").html("本次退款")
 			} else {
-				parent.$("#page-tab").find("li.l-selected").children("a").html("销售订单");
+				parent.$("#page-tab").find("li.l-selected").children("a").html("销货单");
 				$("#paymentTxt").html("本次收款")
 			}
 			if ("add" !== a.status || a.salesId) var c = ["id", a.salesId];
@@ -1358,9 +1358,9 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 				}
 			}), $(".wrapper").on("click", "#add", function(a) {
 				if (a.preventDefault(), Business.verifyRight("SA_ADD")) {
-					var b = "销售订单",
+					var b = "销货单",
 						c = "sales-sales";
-					if ("150602" == originalData.transType) var b = "销售退货单",
+					if ("150602" == originalData.transType) var b = "销货退货单",
 						c = "sales-salesBack";
 					parent.tab.overrideSelectedTabItem({
 						tabid: c,
@@ -1370,7 +1370,7 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 				}
 			}), $(".wrapper").on("click", "#print", function(a) {
 				a.preventDefault(), Business.verifyRight("SA_PRINT") && Public.print({
-					title: "销售单列表",
+					title: "销货单列表",
 					$grid: $("#grid"),
 					pdf: "../scm/invSa/toPdf?action=toPdf",
 					billType: 10201,
@@ -1381,7 +1381,7 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 			}), $(".wrapper").on("click", "#original", function(a) {
 				if (a.preventDefault(), originalData.buId <= 0) return parent.Public.tips({
 					type: 1,
-					content: "请先选择销售单位！"
+					content: "请先选择销货单位！"
 				}), !1;
 				var b = $("#grid");
 				$.dialog({

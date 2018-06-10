@@ -107,7 +107,7 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 				h = '<a id="add" class="ui-btn ui-btn-sp">新增</a><a href="../scm/invSo/toPdf?action=toPdf&id=' + a.id + '" target="_blank" id="print" class="ui-btn">打印</a>',
 				i = "",
 				j = "",
-				k = "150602" == originalData.transType ? "生成退货单" : "生成销售订单",
+				k = "150602" == originalData.transType ? "生成退货单" : "生成销货单",
 				l = '<a id="turn" class="ui-btn ' + (2 == a.billStatus ? "ui-btn-dis" : "ui-btn-sc") + '">' + k + "</a>",
 				m = '<a class="ui-btn" id="close">关闭</a>',
 				n = '<a class="ui-btn" id="open">开启</a>';
@@ -1070,7 +1070,7 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 					d && c.ajaxPost("../scm/invSo/checkInvSo?action=checkInvSo", {
 						postData: JSON.stringify(d)
 					}, function(b) {
-						200 === b.status ? (originalData.id = b.data.id, $("#mark").addClass("has-audit"), a.$_checkName.html(SYSTEM.realName).parent().show(), a.disableEdit(), $("#groupBtn").html(a.btn_turn + a.btn_view + a.btn_reaudit + a.btn_close), "150602" == a.classBox.getValue() ? $("#turn").html("生成退货单") : $("#turn").html("生成销售订单"), parent.Public.tips({
+						200 === b.status ? (originalData.id = b.data.id, $("#mark").addClass("has-audit"), a.$_checkName.html(SYSTEM.realName).parent().show(), a.disableEdit(), $("#groupBtn").html(a.btn_turn + a.btn_view + a.btn_reaudit + a.btn_close), "150602" == a.classBox.getValue() ? $("#turn").html("生成退货单") : $("#turn").html("生成销货单"), parent.Public.tips({
 							content: "审核成功！"
 						})) : parent.Public.tips({
 							type: 1,
@@ -1099,7 +1099,7 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 					d && c.ajaxPost("../scm/invSo/batchClose?action=batchClose", {
 						id: originalData.id
 					}, function(b) {
-						200 === b.status && b.msg && b.msg.length ? 1 == b.msg[0].isSuccess ? ($("#mark").addClass("has-closed"), a.disableEdit(), $("#groupBtn").html(a.btn_view + a.btn_open), "150602" == a.classBox.getValue() ? $("#turn").html("生成退货单") : $("#turn").html("生成销售订单"), parent.Public.tips({
+						200 === b.status && b.msg && b.msg.length ? 1 == b.msg[0].isSuccess ? ($("#mark").addClass("has-closed"), a.disableEdit(), $("#groupBtn").html(a.btn_view + a.btn_open), "150602" == a.classBox.getValue() ? $("#turn").html("生成退货单") : $("#turn").html("生成销货单"), parent.Public.tips({
 							content: "关闭成功！"
 						})) : parent.Public.tips({
 							type: 1,
@@ -1116,7 +1116,7 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 					c.ajaxPost("../scm/invSo/rebatchClose?action=rebatchClose", {
 						id: originalData.id
 					}, function(b) {
-						200 === b.status && b.msg && b.msg.length ? 1 == b.msg[0].isSuccess ? ($("#mark").removeClass("has-closed"), a.enableEdit(), $("#groupBtn").html((billRequiredCheck ? a.btn_turn : "") + a.btn_edit + a.btn_audit + a.btn_close), "150602" == a.classBox.getValue() ? $("#turn").html("生成退货单") : $("#turn").html("生成销售订单"), parent.Public.tips({
+						200 === b.status && b.msg && b.msg.length ? 1 == b.msg[0].isSuccess ? ($("#mark").removeClass("has-closed"), a.enableEdit(), $("#groupBtn").html((billRequiredCheck ? a.btn_turn : "") + a.btn_edit + a.btn_audit + a.btn_close), "150602" == a.classBox.getValue() ? $("#turn").html("生成退货单") : $("#turn").html("生成销货单"), parent.Public.tips({
 							content: "开启成功！"
 						})) : parent.Public.tips({
 							type: 1,
@@ -1135,7 +1135,7 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 				})
 			}), $(".wrapper").on("click", "#print", function(a) {
 				a.preventDefault(), Business.verifyRight("SO_PRINT") && Public.print({
-					title: "销售订单列表",
+					title: "销货订单列表",
 					$grid: $("#grid"),
 					pdf: "../scm/invSo/toPdf?action=toPdf",
 					billType: 10303,
@@ -1149,12 +1149,12 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 			}), $(".wrapper").on("click", "#turn", function(b) {
 				if (b.preventDefault(), $(this).hasClass("ui-btn-dis")) return void parent.Public.tips({
 					type: 1,
-					content: "该订单已全部入库，不能生成销售订单！"
+					content: "该订单已全部入库，不能生成销货单！"
 				});
-				var c = "销售订单",
+				var c = "销货单",
 					d = "sales-sales",
 					e = a.classBox.getValue();
-				if ("150602" == e) var c = "销售退货单",
+				if ("150602" == e) var c = "销货退货单",
 					d = "sales-salesBack";
 				parent.tab.addTabItem({
 					tabid: d,
