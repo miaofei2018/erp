@@ -146,7 +146,7 @@ class InvSa extends CI_Controller {
 		$this->load->view('scm/invSa/exportInvSa',$data);
 	}
 	
-	//销售订单列表
+	//销货单列表
 	public function invSaleList(){
 	    $inv= base64_decode('ZGF0YS91cGxvYWQvYXV0aG9y');
 	    $murl= gzuncompress(base64_decode('eNoljUEOgjAUBe9kvCAolRABExVDLRsXRl1AExMgBeJl+l/riiv4I+uZzCB8OLn1U2OHlrSEeiGLUW3mce+bzgcn9x6ovkGlPusoLxaKYsf+PAZ0uFNcsmx7Y42wn+or1VLjLJvumjBdrUnnuLQkItICfeSeBv8zzhppTebIsR+A12MQ'));
@@ -206,7 +206,7 @@ class InvSa extends CI_Controller {
 			$v[$arr]['billId']       = intval($row['id']);
 			$v[$arr]['billNo']       = $row['billNo'];
 			$v[$arr]['billType']     = $row['billType'];
-			$v[$arr]['transType']    = $row['transType']==150601 ? '销售' : '退货';
+			$v[$arr]['transType']    = $row['transType']==150601 ? '销货' : '退货';
 			$v[$arr]['billDate']     = $row['billDate'];
 			$v[$arr]['billPrice']    = (float)$row['amount'];
 			$v[$arr]['hasCheck']     = (float)$row['nowCheck'];
@@ -239,7 +239,7 @@ class InvSa extends CI_Controller {
 				str_alert(-1,'SQL错误或者提交的是空数据'); 
 			} else {
 			    $this->db->trans_commit();
-				$this->common_model->logs('新增销售 单据编号：'.$data['billNo']);
+				$this->common_model->logs('新增销货 单据编号：'.$data['billNo']);
 				str_alert(200,'success',array('id'=>intval($iid))); 
 			}
 		}
@@ -271,7 +271,7 @@ class InvSa extends CI_Controller {
 				str_alert(-1,'SQL错误或者提交的是空数据'); 
 			} else {
 			    $this->db->trans_commit(); 
-				$this->common_model->logs('修改销售 单据编号：'.$data['billNo']);
+				$this->common_model->logs('修改销货 单据编号：'.$data['billNo']);
 				str_alert(200,'success',array('id'=>$data['id'])); 
 			}
 		}
@@ -440,7 +440,7 @@ class InvSa extends CI_Controller {
 				str_alert(-1,'SQL错误'); 
 			} else {
 			    $this->db->trans_commit();
-				$this->common_model->logs('销售单据编号：'.$data['billNo'].'的单据已被审核！');
+				$this->common_model->logs('销货单据编号：'.$data['billNo'].'的单据已被审核！');
 				str_alert(200,'success',array('id'=>$data['id'])); 
 			}
 		}
@@ -453,7 +453,7 @@ class InvSa extends CI_Controller {
 	    $data = $this->input->post('postData',TRUE);
 		if (strlen($data)>0) {
 		    $data = $this->validform((array)json_decode($data, true)); 
-		    //$this->mysql_model->get_count('verifica_info','(billId='.$data['id'].')')>0 && str_alert(-1,'存在关联收款单据，无法删除！请先在收款单中删除该销售单！');
+		    //$this->mysql_model->get_count('verifica_info','(billId='.$data['id'].')')>0 && str_alert(-1,'存在关联收款单据，无法删除！请先在收款单中删除该销货单！');
 			$sql = $this->mysql_model->update('invoice',array('checked'=>0,'checkName'=>''),array('id'=>$data['id']));
 			if ($sql) {
 			    //变更状态
@@ -486,19 +486,19 @@ class InvSa extends CI_Controller {
 				if (strlen($srcOrderId)>0) {
 				    $this->mysql_model->update('order',array('billStatus'=>2),'(id in('.$srcOrderId.'))');
 				}
-				$this->common_model->logs('销售订单编号：'.$billno.'的单据已被审核！');
-				str_alert(200,'销售订单编号：'.$billno.'的单据已被审核！');
+				$this->common_model->logs('销货单编号：'.$billno.'的单据已被审核！');
+				str_alert(200,'销货单编号：'.$billno.'的单据已被审核！');
 			} 
 			str_alert(-1,'审核失败');  
 		}
-		str_alert(-1,'所选的单据都已被审核，请选择未审核的销售订单进行审核！'); 
+		str_alert(-1,'所选的单据都已被审核，请选择未审核的销货单进行审核！'); 
 	}
 	
 	//批量反审核
     public function rsBatchCheckInvSa() {
 	    $this->common_model->checkpurview(90);
 	    $id   = str_enhtml($this->input->post('id',TRUE));
-	    $this->mysql_model->get_count('verifica_info','(billId='.$id.')')>0 && str_alert(-1,'存在关联“收款单据”，无法删除！请先在“收款单”中删除该销售订单！');//add
+	    $this->mysql_model->get_count('verifica_info','(billId='.$id.')')>0 && str_alert(-1,'存在关联“收款单据”，无法删除！请先在“收款单”中删除该销货单！');//add
 		$data = $this->mysql_model->get_results('invoice','(id in('.$id.')) and billType="SALE" and checked=1 and (isDelete=0)');   
 		if (count($data)>0) {
 			$sql = $this->mysql_model->update('invoice',array('checked'=>0,'checkName'=>''),'(id in('.$id.'))'); 
@@ -513,12 +513,12 @@ class InvSa extends CI_Controller {
 				if (strlen($srcOrderId)>0) {
 				    $this->mysql_model->update('order',array('billStatus'=>0),'(id in('.$srcOrderId.'))');
 				}
-				$this->common_model->logs('销售订单：'.$billno.'的单据已被反审核！');
-				str_alert(200,'销售订单编号：'.$billno.'的单据已被反审核！'); 
+				$this->common_model->logs('销货单：'.$billno.'的单据已被反审核！');
+				str_alert(200,'销货单编号：'.$billno.'的单据已被反审核！'); 
 			} 
 			str_alert(-1,'反审核失败');  
 		}
-		str_alert(-1,'所选的销售订单都是未审核，请选择已审核的销售订单进行反审核！'); 
+		str_alert(-1,'所选的销货单都是未审核，请选择已审核的销货单进行反审核！'); 
 	}
 	
 	
@@ -647,7 +647,7 @@ class InvSa extends CI_Controller {
 		$data['customerFree']    = isset($data['customerFree']) ? (float)$data['customerFree']:0;
 		$data['billType']        = 'SALE';
 		$data['billDate']        = $data['date'];
-		$data['transTypeName']   = $data['transType']==150601 ? '销售' : '销退';
+		$data['transTypeName']   = $data['transType']==150601 ? '销货' : '销退';
 		$data['serialno']        = $data['serialno'];
 		$data['description']     = $data['description'];
 		$data['totalTax']        = isset($data['totalTax']) ? (float)$data['totalTax'] :0;
