@@ -84,10 +84,10 @@ $("#username").text(parent.SYSTEM.realName);
         </li>
         <li class="added-service">
         	<!--<a tabid="setting-addedServiceList" tabTxt="增值服务" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/addedServiceList')?>"><span></span>增值服务</a>-->
-			<a href="#" id="feedback"><span></span>增值服务</a>
+			<a href="#" id="feedback_"></a>
         </li>
         <li class="feedback">
-        	<a href="#" id="feedback"><span></span>意见反馈</a>
+        	<a href="#" id="feedback_"></a>
         </li>
       </ul>
     </div>
