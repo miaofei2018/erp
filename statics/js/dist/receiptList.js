@@ -41,7 +41,7 @@ var queryConditions = {
 					align: "center"
 				}, {
 					name: "contactName",
-					label: "销售单位",
+					label: "销货单位",
 					index: "contactName",
 					width: 200
 				}, {

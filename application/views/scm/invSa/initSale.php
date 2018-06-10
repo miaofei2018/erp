@@ -101,7 +101,7 @@ $(function() {
         <!-- <dd id="classes" class="pct15 tr">
           <label class="radio">
             <input type="radio" name="classes" value="150601">
-            销售</label>
+            销货</label>
           <label class="radio">
             <input type="radio" name="classes" value="150602">
             退货</label>
