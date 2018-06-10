@@ -470,7 +470,7 @@ var _hmt = _hmt || [];
           </ul>
         </div>
       </li>
-      <li class="item item-sales"> <a href="javascript:void(0);" class="sales main-nav">销售<span class="arrow">&gt;</span></a>
+      <li class="item item-sales"> <a href="javascript:void(0);" class="sales main-nav">销货<span class="arrow">&gt;</span></a>
         <div class="sub-nav-wrap single-nav">
           <ul class="sub-nav" id="sales">
           </ul>

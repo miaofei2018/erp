@@ -68,7 +68,7 @@ $("#username").text(parent.SYSTEM.realName);
         	<a tabid="purchase-purchase" data-right="PU_ADD" tabTxt="采购单" parentOpen="true" rel="pageTab" href="<?php echo site_url('scm/invPu?action=initPur')?>"><span></span>采购入库</a>
         </li>
         <li class="sales-sales">
-        	<a tabid="sales-sales" data-right="SA_ADD" tabTxt="销售订单" parentOpen="true" rel="pageTab" href="<?php echo site_url('scm/invSa?action=initSale')?>"><span></span>销售出库</a>
+        	<a tabid="sales-sales" data-right="SA_ADD" tabTxt="销货单" parentOpen="true" rel="pageTab" href="<?php echo site_url('scm/invSa?action=initSale')?>"><span></span>销货出库</a>
         </li>
         <li class="storage-transfers">
         	<a tabid="storage-transfers" data-right="TF_ADD" tabTxt="调拨单" parentOpen="true" rel="pageTab" href="<?php echo site_url('scm/invTf?action=initTf')?>"><span></span>库存调拨</a>
@@ -100,7 +100,7 @@ $("#username").text(parent.SYSTEM.realName);
             <li><!--<span class="bulk-import">导入</span>--><a tabid="setting-goodsList" data-right="INVENTORY_QUERY" tabTxt="商品管理" parentOpen="true" rel="pageTab" href="<?=site_url('settings/goods_list')?>">商品管理</a></li>
             <li><!--<span class="bulk-import">导入</span>--><a tabid="setting-customerList" data-right="BU_QUERY" tabTxt="客户管理" parentOpen="true" rel="pageTab" href="<?=site_url('settings/customer_list')?>">客户管理</a></li>
             <li><!--<span class="bulk-import">导入</span>--><a tabid="setting-vendorList" data-right="PUR_QUERY" tabTxt="供应商管理" parentOpen="true" rel="pageTab" href="<?=site_url('settings/vendor_list')?>">供应商管理</a></li>
-            <li><a tabid="sales-salesList" data-right="SA_QUERY" tabTxt="销售记录" parentOpen="true" rel="pageTab" href="<?=site_url('scm/invSa?action=initSaleList')?>">销售记录</a></li>
+            <li><a tabid="sales-salesList" data-right="SA_QUERY" tabTxt="销货记录" parentOpen="true" rel="pageTab" href="<?=site_url('scm/invSa?action=initSaleList')?>">销售记录</a></li>
             <li><a tabid="purchase-salesList" data-right="PU_QUERY" tabTxt="采购记录" parentOpen="true" rel="pageTab" href="<?=site_url('scm/invPu?action=initPurList')?>">采购记录</a></li>
         	<li><a href="<?=site_url('scm/receipt?action=initReceipt')?>" rel="pageTab" tabid="money-receiptList" tabTxt="收款记录" data-right="RECEIPT_QUERY" parentOpen="true">收款记录</a></li>
             <li><a href="<?=site_url('scm/payment?action=initPay')?>" rel="pageTab" tabid="money-paymentList" tabTxt="付款记录" data-right="PAYMENT_QUERY" parentOpen="true">付款记录</a></li>
