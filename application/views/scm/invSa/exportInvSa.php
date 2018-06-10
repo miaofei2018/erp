@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');?>
 <table width="1500px" class="list">
-  			<tr><td class='H' align="center" colspan="22"><h3>销售记录</h3></td></tr>
+  			<tr><td class='H' align="center" colspan="22"><h3>销货记录</h3></td></tr>
   		</table>
 		<table width="1500px" class="list"  border="1">
 			<thead>
