@@ -41,6 +41,12 @@ var THISPAGE = {
 				index: "billNo",
 				width: 150,
 				align: "center"
+			},{
+				name: "srcOrderNo",
+				label: "客户订单",
+				index: "srcOrderNo",
+				width: 150,
+				align: "center"
 			}, {
 				name: "salesName",
 				label: "销售人员",

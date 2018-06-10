@@ -245,6 +245,7 @@ var queryConditions = {
 					return c ? void Public.ajaxPost("../scm/invSo/batchCheckInvSo?action=batchCheckInvSo", {
 						id: c
 					}, function(a) {
+						
 						parent.Public.tips(200 === a.status ? {
 							content: a.msg
 						} : {
