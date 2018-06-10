@@ -118,7 +118,7 @@ var dataReflush, list = {
 		target: "vip-onlineStore"
 	},
 	onlineSalesList: {
-		name: "销售记录",
+		name: "销货记录",
 		href: "/scm/invSa.do?action=initSaleList",
 		dataRight: "SA_QUERY",
 		target: "vip-onlineStore"
@@ -142,7 +142,7 @@ var dataReflush, list = {
 		target: "vip-JDStorage"
 	},
 	JDStorageSaleOrderList: {
-		name: "销售订单上传",
+		name: "销货订单上传",
 		href: "/JDStorage/JDStorageSaleOrderList.jsp",
 		dataRight: "",
 		target: "vip-JDStorage"
@@ -176,14 +176,14 @@ var dataReflush, list = {
 		list: "../scm/invSo?action=initSoList"
 	},
 	sales: {
-		name: "销售订单",
+		name: "销货单",
 		href: "../scm/invSa?action=initSale",
 		dataRight: "SA_ADD",
 		target: "sales",
 		list: "../scm/invSa?action=initSaleList"
 	},
 	salesBack: {
-		name: "销售退货单",
+		name: "销货退货单",
 		href: "../scm/invSa?action=initSale&transType=150602",
 		dataRight: "SA_ADD",
 		target: "sales",

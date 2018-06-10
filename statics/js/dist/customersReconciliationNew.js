@@ -245,7 +245,7 @@ define(["jquery", "print"], function(a, b, c) {
 					if (!Business.verifyRight("SA_QUERY")) return;
 					parent.tab.addTabItem({
 						tabid: "sales-sales",
-						text: "销售订单",
+						text: "销售单",
 						url: "../scm/invSa?action=editSale&id=" + c
 					});
 					break;
@@ -379,7 +379,7 @@ define(["jquery", "print"], function(a, b, c) {
 		r = k("#match").find("input"),
 		s = s || {};
 	s.$_customer = p, this.THISPAGE = s;
-	var t = "（请选择销售单位）";
+	var t = "（请选择销货单位）";
 	a("print");
 	var u = Public.mod_PageConfig.init("customersReconciliationNew");
 	d(), e(), f();

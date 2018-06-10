@@ -146,7 +146,7 @@ define(["jquery", "print"], function(a, b, c) {
 					if (!Business.verifyRight("SA_QUERY")) return;
 					parent.tab.addTabItem({
 						tabid: "sales-sales",
-						text: "销售订单",
+						text: "销售单",
 						url: "../scm/invSa?action=editSale&id=" + c
 					});
 					break;

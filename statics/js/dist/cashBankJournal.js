@@ -10,7 +10,7 @@ $(function() {
 				h = {
 					SALE: {
 						tabid: "sales-sales",
-						text: "销售订单",
+						text: "销货单",
 						right: "SA_QUERY",
 						url: "../scm/invsa?action=editSale&id="
 					},
