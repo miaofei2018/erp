@@ -1541,7 +1541,7 @@ Business.serNumManage = function(opts){
 		}
 	};
 	if(enableStorage){
-		//如果是销售订单等使用序列号新增商品时， 或者改变库存时
+		//如果是销售单等使用序列号新增商品时， 或者改变库存时
 		params.title = '选择【'+data.name+'】的序列号',
 		params.content = 'url:../settings/serNumList';
 		params.button = [{name: '确认',defClass:'ui_state_highlight', callback: function () {
@@ -3784,9 +3784,9 @@ Public.gotoDetailItem = function(params){
 	if(!params.id)return;
 	var urls = {
 		//SALE
-		'150601' : {tabid : 'sales-sales',text : '销售订单',right:'SA_QUERY', url : '/sales/sales.jsp?id='},
+		'150601' : {tabid : 'sales-sales',text : '销货单',right:'SA_QUERY', url : '/sales/sales.jsp?id='},
 		//SALEBACK
-		'150602' : {tabid : 'sales-salesBack',text : '销售退货单',right:'SA_QUERY', url : '/sales/sales.jsp?transType=150602&id='},
+		'150602' : {tabid : 'sales-salesBack',text : '销货退货单',right:'SA_QUERY', url : '/sales/sales.jsp?transType=150602&id='},
 		//PUR
 		'150501' : {tabid : 'purchase-purchase',text : '采购单',right:'PU_QUERY',url : '/purchase/purchase.jsp?id='},
 		//PUR
