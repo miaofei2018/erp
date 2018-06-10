@@ -540,7 +540,7 @@ INSERT INTO `ci_menu` VALUES ('2', '新增', '1', '1,2', '2', '99', 'PU_ADD', '1
 INSERT INTO `ci_menu` VALUES ('3', '修改', '1', '1,3', '2', '99', 'PU_UPDATE', '1', 'trade', '1', '0', '0', '');
 INSERT INTO `ci_menu` VALUES ('4', '删除', '1', '1,4', '2', '99', 'PU_DELETE', '1', 'trade', '1', '0', '0', '');
 INSERT INTO `ci_menu` VALUES ('5', '导出', '1', '1,5', '2', '99', 'PU_EXPORT', '1', 'trade', '1', '0', '0', '');
-INSERT INTO `ci_menu` VALUES ('6', '销售订单', '0', '6', '1', '99', 'SA_QUERY', '1', 'trade', '1', '0', '0', '');
+INSERT INTO `ci_menu` VALUES ('6', '销货单', '0', '6', '1', '99', 'SA_QUERY', '1', 'trade', '1', '0', '0', '');
 INSERT INTO `ci_menu` VALUES ('7', '新增', '6', '6,7', '2', '99', 'SA_ADD', '1', 'trade', '1', '0', '0', '');
 INSERT INTO `ci_menu` VALUES ('8', '修改', '6', '6,8', '2', '99', 'SA_UPDATE', '1', 'trade', '1', '0', '0', '');
 INSERT INTO `ci_menu` VALUES ('9', '删除', '6', '6,9', '2', '99', 'SA_DELETE', '1', 'trade', '1', '0', '0', '');
@@ -979,7 +979,7 @@ CREATE TABLE `ci_verifica_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `iid` int(11) DEFAULT '0' COMMENT '关联ID',
   `buId` smallint(6) DEFAULT '0' COMMENT '客户ID',
-  `billId` int(11) DEFAULT '0' COMMENT '销售订单号ID',
+  `billId` int(11) DEFAULT '0' COMMENT '销售单号ID',
   `billNo` varchar(25) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '' COMMENT '单编号',
   `billType` varchar(20) DEFAULT '',
   `transType` varchar(50) DEFAULT '',
