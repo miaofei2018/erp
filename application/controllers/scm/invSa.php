@@ -93,6 +93,7 @@ class InvSa extends CI_Controller {
 			$v[$arr]['serialno']     = $row['serialno'];
 			$v[$arr]['description']  = $row['description'];
 			$v[$arr]['billNo']       = $row['billNo'];
+			$v[$arr]['srcOrderNo']       = $row['srcOrderNo'];
 			$v[$arr]['totalAmount']  = (float)abs($row['totalAmount']);
 			$v[$arr]['userName']     = $row['userName'];
 			$v[$arr]['transTypeName']= $row['transTypeName'];
@@ -417,6 +418,17 @@ class InvSa extends CI_Controller {
 				'totalArrears','disRate','postData','disAmount','accId','modifyTime'),$data,NULL);
 			$this->db->trans_begin();
 			
+			//判断分批出库
+			$order =  $this->data_model->get_order('a.isDelete=0 and a.id='.$data['srcOrderId'].' and a.billType="SALE"',1);
+			$sum=$data['totalQty'];
+			$invoice_list = $this->data_model->get_invoice('a.srcOrderId='.$data['srcOrderId'].' and a.checked=1 and a.billType="SALE"');
+			foreach ($invoice_list as $arr=>$row) {
+				$sum += $row['totalQty'];
+			}
+			if($sum >$order['totalQty']){
+				str_alert(-1,'销货单数量不能大于客户订单数量！'); 
+			}	
+			
 			//特殊情况
 			if ($data['id'] < 0) {
 			    $info = elements(array(
@@ -433,7 +445,11 @@ class InvSa extends CI_Controller {
 			}
 			//变更状态
 			if ($data['srcOrderId']>0) {
-				$this->mysql_model->update('order',array('billStatus'=>2),array('id'=>$data['srcOrderId']));
+				if($sum ==$order['totalQty']){
+					$this->mysql_model->update('order',array('billStatus'=>2),array('id'=>$data['srcOrderId']));
+				}else if($sum <$order['totalQty']){
+					$this->mysql_model->update('order',array('billStatus'=>1),array('id'=>$data['srcOrderId']));
+				}	
 			}
 			if ($this->db->trans_status() === FALSE) {
 			    $this->db->trans_rollback();
@@ -458,7 +474,19 @@ class InvSa extends CI_Controller {
 			if ($sql) {
 			    //变更状态
 				if ($data['srcOrderId']>0) {
-				    $this->mysql_model->update('order',array('billStatus'=>0),array('id'=>$data['srcOrderId']));
+					
+					//判断分批出库
+					$order =  $this->data_model->get_order('a.isDelete=0 and a.id='.$data['srcOrderId'].' and a.billType="SALE"',1);
+					$sum=0;
+					$invoice_list = $this->data_model->get_invoice('a.srcOrderId='.$data['srcOrderId'].' and a.checked=1 and a.billType="SALE"');
+					foreach ($invoice_list as $arr=>$row) {
+						$sum += $row['totalQty'];
+					}
+					if($sum==0){//如果没有销货单,客户订单为未出库
+						$this->mysql_model->update('order',array('billStatus'=>0),array('id'=>$data['srcOrderId']));
+					}else{//如果有审核后销货单,客户订单为部分出库
+						$this->mysql_model->update('order',array('billStatus'=>1),array('id'=>$data['srcOrderId']));
+					}  
 				}
 				$this->common_model->logs('采购单据编号：'.$data['billNo'].'的单据已被反审核！');
 				str_alert(200,'success',array('id'=>$data['id'])); 
@@ -474,17 +502,55 @@ class InvSa extends CI_Controller {
 	    $id   = str_enhtml($this->input->post('id',TRUE));
 		$data = $this->mysql_model->get_results('invoice','(id in('.$id.')) and billType="SALE" and checked=0 and isDelete=0');  
 		if (count($data)>0) {
+			
+			
+			foreach($data as $arr=>$row) {
+				$billno[]     = $row['billNo'];
+				$srcOrderId[] = $row['srcOrderId'];
+			}
+			$billno     = join(',',$billno);
+			$srcOrderId = join(',',$srcOrderId);
+		
+			//判断每个客户订单数量与销货单数量
+			$order_list =  $this->data_model->get_order('a.isDelete=0 and (a.id in('.$srcOrderId.')) and a.billType="SALE"');
+			
+			$srcOrderNo;
+			foreach ($order_list as $arr=>$row1) {
+				$sum=0;
+				$invoice_list = $this->data_model->get_invoice('(a.checked=1 or (a.id in('.$id.') and a.checked=0)) and a.srcOrderId='.$row1['id'].' and a.billType="SALE"');
+				
+				foreach ($invoice_list as $arr=>$row2) {
+					$sum += $row2['totalQty'];
+				}
+				if($sum>$row1['totalQty']){
+					$srcOrderNo[] = $row1['billNo'];
+				}
+			}
+			//客户订单数量大于销货单数量
+			if (strlen(join(',',$srcOrderNo))>0) {
+				str_alert(-1,'客户订单：'.join(',',$srcOrderNo).'，所选销货单数量不能大于客户订单数量！'); 
+			}		
+			
 			$sql = $this->mysql_model->update('invoice',array('checked'=>1,'checkName'=>$this->jxcsys['name']),'(id in('.$id.'))'); 
 			if ($sql) {
-				foreach($data as $arr=>$row) {
-				    $billno[]     = $row['billNo'];
-					$srcOrderId[] = $row['srcOrderId'];
-				}
-				$billno     = join(',',$billno);
-				$srcOrderId = join(',',$srcOrderId);
 				//变更状态
 				if (strlen($srcOrderId)>0) {
-				    $this->mysql_model->update('order',array('billStatus'=>2),'(id in('.$srcOrderId.'))');
+					foreach ($order_list as $arr=>$row1) {
+						$sum=0;
+						$invoice_list = $this->data_model->get_invoice('(a.checked=1 or (a.id in('.$id.') and a.checked=0)) and a.srcOrderId='.$row1['id'].' and a.billType="SALE"');
+						
+						foreach ($invoice_list as $arr=>$row2) {
+							$sum += $row2['totalQty'];
+						}
+						//判断客户订单数量是否全部出库
+						if($sum==$row1['totalQty']){
+							$this->mysql_model->update('order',array('billStatus'=>2),'(id in('.$srcOrderId.'))');
+						}
+						//判断客户订单数量是否部分出库
+						if($sum<$row1['totalQty']){
+							$this->mysql_model->update('order',array('billStatus'=>1),'(id in('.$srcOrderId.'))');
+						}
+					}
 				}
 				$this->common_model->logs('销货单编号：'.$billno.'的单据已被审核！');
 				str_alert(200,'销货单编号：'.$billno.'的单据已被审核！');
@@ -504,14 +570,29 @@ class InvSa extends CI_Controller {
 			$sql = $this->mysql_model->update('invoice',array('checked'=>0,'checkName'=>''),'(id in('.$id.'))'); 
 			if ($sql) {
 				foreach($data as $arr=>$row) {
-				    $billno[]     = $row['billNo'];
+					$billno[]     = $row['billNo'];
 					$srcOrderId[] = $row['srcOrderId'];
 				}
 				$billno     = join(',',$billno);
 				$srcOrderId = join(',',$srcOrderId);
-				//变更状态
-				if (strlen($srcOrderId)>0) {
-				    $this->mysql_model->update('order',array('billStatus'=>0),'(id in('.$srcOrderId.'))');
+			
+				//判断每个客户订单数量与销货单数量
+				$order_list =  $this->data_model->get_order('a.isDelete=0 and (a.id in('.$srcOrderId.')) and a.billType="SALE"');
+				
+				$srcOrderNo;
+				foreach ($order_list as $arr=>$row1) {
+					$sum=0;
+					$invoice_list = $this->data_model->get_invoice('(a.checked=1 or (a.id in('.$id.') and a.checked=0)) and a.srcOrderId='.$row1['id'].' and a.billType="SALE"');
+					
+					foreach ($invoice_list as $arr=>$row2) {
+						$sum += $row2['totalQty'];
+					}
+					//变更状态
+					if($sum==0){//如果没有销货单,客户订单为未出库
+						$this->mysql_model->update('order',array('billStatus'=>0),'(id in('.$srcOrderId.'))');
+					}else{//如果有审核后销货单,客户订单为部分出库
+						$this->mysql_model->update('order',array('billStatus'=>1),'(id in('.$srcOrderId.'))');
+					}  
 				}
 				$this->common_model->logs('销货单：'.$billno.'的单据已被反审核！');
 				str_alert(200,'销货单编号：'.$billno.'的单据已被反审核！'); 
@@ -929,6 +1010,3 @@ class InvSa extends CI_Controller {
 	}
 	
 }
-
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */

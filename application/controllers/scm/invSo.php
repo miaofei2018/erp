@@ -58,8 +58,13 @@ class InvSo extends CI_Controller {
 			$v[$arr]['billDate']     = $row['billDate'];
 			$v[$arr]['deliveryDate'] = $row['deliveryDate'];
 			$v[$arr]['billStatus']   = intval($row['billStatus']);
-			$v[$arr]['billStatusName']  = intval($row['billStatus'])==2 ? '全部出库' :'未出库';
- 
+			if (intval($row['billStatus'])==1) {
+				$v[$arr]['billStatusName'] ='部分出库';
+			} else if(intval($row['billStatus'])==2){
+				$v[$arr]['billStatusName'] ='全部出库'; 	
+			} else{
+				$v[$arr]['billStatusName'] ='未出库';
+			}
 			$v[$arr]['totalQty']     = (float)$row['totalQty'];
 			$v[$arr]['id']           = intval($row['id']);
 		    $v[$arr]['amount']       = (float)abs($row['amount']);
