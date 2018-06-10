@@ -29,7 +29,7 @@ try{
   var height = Public.setGrid().h;
   var relation = {
 			"采购单":[{name:'商品',rights:['查询']},{name:'库存',rights:['查询']},{name:'供应商',rights:['查询']}],
-			"销售订单":[{name:'商品',rights:['查询']},{name:'库存',rights:['查询']},{name:'客户',rights:['查询']}],
+			"销货单":[{name:'商品',rights:['查询']},{name:'库存',rights:['查询']},{name:'客户',rights:['查询']}],
 			"调拨单":[{name:'商品',rights:['查询']},{name:'库存',rights:['查询']}]
 	},
 	$grid = $('#grid'),
