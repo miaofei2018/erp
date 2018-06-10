@@ -55,7 +55,7 @@ function validMaxForShare(){
 <div class="wrapper">
     <div class="mod-toolbar-top">
        <a href="javascript:validMaxForShare();" class="ui-btn ui-btn-sp mrb">新增同事</a>
-       <span class="tit" id="shareInfo" style="display:none;">该账套主服务最多支持<strong id="totalUser"></strong>用户共同管理，已共享<strong id="usedTotal"></strong>人，剩余<strong id="leftTotal"></strong>。</span>
+       <!-- <span class="tit" id="shareInfo" style="display:none;">该账套主服务最多支持<strong id="totalUser"></strong>用户共同管理，已共享<strong id="usedTotal"></strong>人，剩余<strong id="leftTotal"></strong>。</span> -->
     </div>    
     <div class="grid-wrap">
       <table id="grid">
