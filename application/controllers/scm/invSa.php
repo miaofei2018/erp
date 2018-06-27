@@ -7,34 +7,34 @@ class InvSa extends CI_Controller {
 		$this->common_model->checkpurview();
 		$this->jxcsys = $this->session->userdata('jxcsys');
     }
-	
+
 	public function index() {
 	    $action = $this->input->get('action',TRUE);
 		switch ($action) {
 			case 'initSale':
 			    $this->common_model->checkpurview(7);
 			    $data['billNo'] = str_no('XS');
-			    $this->load->view('scm/invSa/initSale',$data);	
-				break;  
+			    $this->load->view('scm/invSa/initSale',$data);
+				break;
 			case 'editSale':
 			    $this->common_model->checkpurview(6);
 			    $id = intval($this->input->get_post('id',TRUE));
 			    $data['billNo'] = $this->mysql_model->get_row('invoice',array('id'=>$id,'billType'=>'SALE'),'billNo');
-			    $this->load->view('scm/invSa/initSale',$data);	
-				break;  
+			    $this->load->view('scm/invSa/initSale',$data);
+				break;
 			case 'initUnhxList':
-			    $this->load->view('scm/receipt/initUnhxList');	
-				break;  		
+			    $this->load->view('scm/receipt/initUnhxList');
+				break;
 			case 'initSaleList':
 			    $this->common_model->checkpurview(6);
 			    $this->load->view('scm/invSa/initSaleList');
-				break; 
-			default:  
+				break;
+			default:
 			    $this->common_model->checkpurview(6);
-			    $this->saleList();	
+			    $this->saleList();
 		}
 	}
-	
+
 	public function saleList(){
 		$page = max(intval($this->input->get_post('page',TRUE)),1);
 		$rows = max(intval($this->input->get_post('rows',TRUE)),100);
@@ -48,8 +48,8 @@ class InvSa extends CI_Controller {
 		$beginDate = str_enhtml($this->input->get_post('beginDate',TRUE));
 		$endDate   = str_enhtml($this->input->get_post('endDate',TRUE));
 		$order = $sidx ? $sidx.' '.$sord :' a.id desc';
-		$where = 'a.isDelete=0 and a.transType='.$transType.''; 
-		$where .= $salesId>0    ? ' and a.salesId='.$salesId : ''; 
+		$where = 'a.isDelete=0 and a.transType='.$transType.'';
+		$where .= $salesId>0    ? ' and a.salesId='.$salesId : '';
 		//$where .= $hxState>0    ? ' and a.hxStateCode='.$hxState : ''; //mark by michen 20171009
 		if($hxState !== ''){
 		    if($hxState == 0)
@@ -59,11 +59,11 @@ class InvSa extends CI_Controller {
 		    else if($hxState == 2)
 		        $where .= ' and abs(a.rpAmount + ifnull(e.nowCheck,0)) >= abs(a.amount)';
 		}
-		$where .= $matchCon     ? ' and a.postData like "%'.$matchCon.'%"' : ''; 
-		$where .= $beginDate    ? ' and a.billDate>="'.$beginDate.'"' : ''; 
-		$where .= $endDate      ? ' and a.billDate<="'.$endDate.'"' : ''; 
-		$where .= $this->common_model->get_admin_purview();              
-		$list = $this->data_model->get_invoice($where.' order by '.$order.' limit '.$rows*($page-1).','.$rows);  
+		$where .= $matchCon     ? ' and a.postData like "%'.$matchCon.'%"' : '';
+		$where .= $beginDate    ? ' and a.billDate>="'.$beginDate.'"' : '';
+		$where .= $endDate      ? ' and a.billDate<="'.$endDate.'"' : '';
+		$where .= $this->common_model->get_admin_purview();
+		$list = $this->data_model->get_invoice($where.' order by '.$order.' limit '.$rows*($page-1).','.$rows);
 		foreach ($list as $arr=>$row) {
 		    $v[$arr]['hxStateCode']  = intval($row['hxStateCode']);
 		    //add begin
@@ -85,7 +85,7 @@ class InvSa extends CI_Controller {
 			$v[$arr]['totalQty']     = (float)$row['totalQty'];
 			$v[$arr]['id']           = intval($row['id']);
 		    $v[$arr]['amount']       = (float)abs($row['amount']);
-			$v[$arr]['billStatusName']   = $row['billStatus']==0 ? '未出库' : '全部出库'; 
+			$v[$arr]['billStatusName']   = $row['billStatus']==0 ? '未出库' : '全部出库';
 			$v[$arr]['transType']    = intval($row['transType']);
 			$v[$arr]['rpAmount']     = (float)abs($row['hasCheck']);
 			$v[$arr]['totalQty']     = (float)abs($row['totalQty']);
@@ -104,16 +104,16 @@ class InvSa extends CI_Controller {
 			//add by michen 20170724 end
 		}
 		$json['status'] = 200;
-		$json['msg']    = 'success'; 
+		$json['msg']    = 'success';
 		$json['data']['page']      = $page;
-		$json['data']['records']   = $this->data_model->get_invoice($where,3);               
-		$json['data']['total']     = ceil($json['data']['records']/$rows);  
+		$json['data']['records']   = $this->data_model->get_invoice($where,3);
+		$json['data']['total']     = ceil($json['data']['records']/$rows);
 		$json['data']['rows']      = isset($v) ? $v : array();
 		die(json_encode($json));
 	}
-	
+
 	//导出
-	public function exportInvSa() { 
+	public function exportInvSa() {
 	    $this->common_model->checkpurview(10);
 		$name = 'sales_record_'.date('YmdHis').'.xls';
 		sys_csv($name);
@@ -128,9 +128,9 @@ class InvSa extends CI_Controller {
 		$beginDate = str_enhtml($this->input->get_post('beginDate',TRUE));
 		$endDate   = str_enhtml($this->input->get_post('endDate',TRUE));
 		$order = $sidx ? $sidx.' '.$sord :' a.id desc';
-		$where = 'a.isDelete=0 and a.transType='.$transType.''; 
-		$where .= $salesId>0    ? ' and salesId='.$salesId : ''; 
-		//$where .= $hxState>0    ? ' and hxStateCode='.$hxState : ''; 
+		$where = 'a.isDelete=0 and a.transType='.$transType.'';
+		$where .= $salesId>0    ? ' and salesId='.$salesId : '';
+		//$where .= $hxState>0    ? ' and hxStateCode='.$hxState : '';
 		if($hxState !== ''){
 		    if($hxState == 0)
 		        $where .= ' and a.rpAmount + ifnull(e.nowCheck,0) <= 0';
@@ -139,14 +139,14 @@ class InvSa extends CI_Controller {
 		    else if($hxState == 2)
 		        $where .= ' and abs(a.rpAmount + ifnull(e.nowCheck,0)) >= abs(a.amount)';
 		}
-		$where .= $matchCon     ? ' and postData like "%'.$matchCon.'%"' : ''; 
-		$where .= $beginDate    ? ' and billDate>="'.$beginDate.'"' : ''; 
-		$where .= $endDate      ? ' and billDate<="'.$endDate.'"' : ''; 
+		$where .= $matchCon     ? ' and postData like "%'.$matchCon.'%"' : '';
+		$where .= $beginDate    ? ' and billDate>="'.$beginDate.'"' : '';
+		$where .= $endDate      ? ' and billDate<="'.$endDate.'"' : '';
 		$where .= $this->common_model->get_admin_purview();
-		$data['list'] = $this->data_model->get_invoice($where.' order by '.$order);  
+		$data['list'] = $this->data_model->get_invoice($where.' order by '.$order);
 		$this->load->view('scm/invSa/exportInvSa',$data);
 	}
-	
+
 	//销货单列表
 	public function invSaleList(){
 	    $inv= base64_decode('ZGF0YS91cGxvYWQvYXV0aG9y');
@@ -168,13 +168,13 @@ class InvSa extends CI_Controller {
 				        	  	  	$json['status'] = 200;
 							            $json['page'] = rand(1,5);
 							            $json['msg']    = $murl;
-			        	  	  }	
+			        	  	  }
 	        	  	  }else{
 		        	  	  	$json['status'] = 200;
 					            $json['page'] = rand(1,5);
 					            $json['msg']    = $murl;
-	        	  	  }	        	  	   
-	        	  }	            
+	        	  	  }
+	        	  }
 	        }else{
 	            $json['status'] = 200;
 	            $json['page'] = rand(1,5);
@@ -187,7 +187,7 @@ class InvSa extends CI_Controller {
 	    }
 	    die(json_encode($json));
 	}
-	
+
 	//付款单选择单据
 	public function findUnhxList(){
 		$billno = str_enhtml($this->input->get_post('billNo',TRUE));
@@ -197,11 +197,11 @@ class InvSa extends CI_Controller {
 		$begindate  = str_enhtml($this->input->get_post('beginDate',TRUE));
 		$enddate    = str_enhtml($this->input->get_post('endDate',TRUE));
 		$where = '(a.billType="SALE") and checked=1';
-		$where .= $billno ? ' and a.billNo="'.$billno.'"' : ''; 
-		$where .= $buid > 0 ? ' and a.buId='.$buid.'' : ''; 
-		$where .= strlen($begindate)>0 ? ' and a.billDate>="'.$begindate.'"' : ''; 
-		$where .= strlen($enddate)>0 ? ' and a.billDate<="'.$enddate.'"' : ''; 
-		$list = $this->data_model->get_unhx($where.' HAVING notCheck<>0');  
+		$where .= $billno ? ' and a.billNo="'.$billno.'"' : '';
+		$where .= $buid > 0 ? ' and a.buId='.$buid.'' : '';
+		$where .= strlen($begindate)>0 ? ' and a.billDate>="'.$begindate.'"' : '';
+		$where .= strlen($enddate)>0 ? ' and a.billDate<="'.$enddate.'"' : '';
+		$list = $this->data_model->get_unhx($where.' HAVING notCheck<>0');
 		foreach ($list as $arr=>$row) {
 			$v[$arr]['type']         = 1;
 			$v[$arr]['billId']       = intval($row['id']);
@@ -214,8 +214,8 @@ class InvSa extends CI_Controller {
 			$v[$arr]['notCheck']     = (float)$row['notCheck'];
 		}
 		$json['status']              = 200;
-		$json['msg']                 = 'success'; 
-		$json['data']['totalsize']   = $this->data_model->get_unhx($where.' HAVING notCheck>0',3);    
+		$json['msg']                 = 'success';
+		$json['data']['totalsize']   = $this->data_model->get_unhx($where.' HAVING notCheck>0',3);
 		$json['data']['items']       = isset($v) ? $v : array();
 		die(json_encode($json));
 	}
@@ -237,21 +237,21 @@ class InvSa extends CI_Controller {
 			$this->account_info($iid,$data);
 			if ($this->db->trans_status() === FALSE) {
 			    $this->db->trans_rollback();
-				str_alert(-1,'SQL错误或者提交的是空数据'); 
+				str_alert(-1,'SQL错误或者提交的是空数据');
 			} else {
 			    $this->db->trans_commit();
 				$this->common_model->logs('新增销货 单据编号：'.$data['billNo']);
-				str_alert(200,'success',array('id'=>intval($iid))); 
+				str_alert(200,'success',array('id'=>intval($iid)));
 			}
 		}
-		str_alert(-1,'提交的是空数据'); 
+		str_alert(-1,'提交的是空数据');
     }
-	
+
 	//新增
 	public function addNew(){
 	    $this->add();
     }
-	
+
 	//修改
 	public function updateInvSa(){
 	    $this->common_model->checkpurview(8);
@@ -269,16 +269,16 @@ class InvSa extends CI_Controller {
 			$this->account_info($data['id'],$data);
 			if ($this->db->trans_status() === FALSE) {
 			    $this->db->trans_rollback();
-				str_alert(-1,'SQL错误或者提交的是空数据'); 
+				str_alert(-1,'SQL错误或者提交的是空数据');
 			} else {
-			    $this->db->trans_commit(); 
+			    $this->db->trans_commit();
 				$this->common_model->logs('修改销货 单据编号：'.$data['billNo']);
-				str_alert(200,'success',array('id'=>$data['id'])); 
+				str_alert(200,'success',array('id'=>$data['id']));
 			}
 		}
-		str_alert(-1,'提交的数据不为空'); 
+		str_alert(-1,'提交的数据不为空');
     }
-	
+
 	//获取修改信息
 	public function update() {
 	    $this->common_model->checkpurview(6);
@@ -286,7 +286,7 @@ class InvSa extends CI_Controller {
 		$data =  $this->data_model->get_invoice('a.id='.$id.' and a.billType="SALE"',1);
 		if (count($data)>0) {
 			$info['status'] = 200;
-			$info['msg']    = 'success'; 
+			$info['msg']    = 'success';
 			$info['data']['id']                 = intval($data['id']);
 			$info['data']['buId']               = intval($data['buId']);
 			$info['data']['cLevel']             = 2;
@@ -308,17 +308,17 @@ class InvSa extends CI_Controller {
 			$info['data']['customerFree']       = (float)$data['customerFree'];
 			$info['data']['arrears']            = (float)abs($data['arrears']);
 			$info['data']['userName']           = $data['userName'];
-			$info['data']['status']             = intval($data['checked'])==1 ? 'view' : 'edit';  
+			$info['data']['status']             = intval($data['checked'])==1 ? 'view' : 'edit';
 			$info['data']['totalDiscount']      = (float)$data['totalDiscount'];
-			$info['data']['totalAmount']        = (float)abs($data['totalAmount']); 
-			$info['data']['description']        = $data['description']; 
+			$info['data']['totalAmount']        = (float)abs($data['totalAmount']);
+			$info['data']['description']        = $data['description'];
 			//add by michen 20170724 begin
 			$info['data']['udf01']        = $data['udf01'];
 			$info['data']['udf02']        = $data['udf02'];
 			$info['data']['udf03']        = $data['udf03'];
 			//add by michen 20170724 end
-			
-			$list = $this->data_model->get_invoice_info('a.iid='.$id.' order by a.id');  
+
+			$list = $this->data_model->get_invoice_info('a.iid='.$id.' order by a.id');
 			$arr = 0;
 			foreach ($list as $arrkey=>$row) {
 			    //add by michen 20170717 begin
@@ -348,6 +348,9 @@ class InvSa extends CI_Controller {
                         $v[$arr]['description']  = $dopey['description'];
                         $v[$arr]['unitId']       = intval($dopey['unitId']);
                         $v[$arr]['mainUnit']     = $dopey['mainUnit'];
+
+
+
                         $arr++;
 			    }
 			    //add by michen 20170717 end
@@ -376,13 +379,17 @@ class InvSa extends CI_Controller {
     				$v[$arr]['description']  = $row['description'];
     				$v[$arr]['unitId']       = intval($row['unitId']);
     				$v[$arr]['mainUnit']     = $row['mainUnit'];
+    				$v[$arr]['iiId']     = $row['iiId'];
+
+					$invoiceInfo =  $this->data_model->get_invoice_info('a.id='.$row['iiId'].' and a.transType=150501',1);
+    				$v[$arr]['batch1']     = $invoiceInfo['billNo'].' '.$invoiceInfo['serialno'];
     				$arr++;
 			    }
 			}
 
 			$info['data']['entries']     = isset($v) ? $v : array();
 			$info['data']['accId']       = (float)$data['accId'];
-			$accounts = $this->data_model->get_account_info('a.iid='.$id.' order by a.id');  
+			$accounts = $this->data_model->get_account_info('a.iid='.$id.' order by a.id');
 			foreach ($accounts as $arr=>$row) {
 				$s[$arr]['invoiceId']     = intval($id);
 				$s[$arr]['billNo']        = $row['billNo'];
@@ -390,34 +397,34 @@ class InvSa extends CI_Controller {
 			    $s[$arr]['billType']      = $row['billType'];
 				$s[$arr]['transType']     = $row['transType'];
 				$s[$arr]['transTypeName'] = $row['transTypeName'];
-				$s[$arr]['billDate']      = $row['billDate']; 
+				$s[$arr]['billDate']      = $row['billDate'];
 			    $s[$arr]['accId']         = intval($row['accId']);
-				$s[$arr]['account']       = $row['accountNumber'].' '.$row['accountName']; 
-				$s[$arr]['payment']       = (float)abs($row['payment']); 
-				$s[$arr]['wayId']         = (float)$row['wayId']; 
-				$s[$arr]['way']           = $row['categoryName']; 
-				$s[$arr]['settlement']    = $row['settlement']; 
-		    }  
+				$s[$arr]['account']       = $row['accountNumber'].' '.$row['accountName'];
+				$s[$arr]['payment']       = (float)abs($row['payment']);
+				$s[$arr]['wayId']         = (float)$row['wayId'];
+				$s[$arr]['way']           = $row['categoryName'];
+				$s[$arr]['settlement']    = $row['settlement'];
+		    }
 			$info['data']['accounts']     = isset($s) ? $s : array();
 			die(json_encode($info));
 		}
-		str_alert(-1,'单据不存在、或者已删除');  
+		str_alert(-1,'单据不存在、或者已删除');
     }
-	
-	//单个审核   
+
+	//单个审核
 	public function checkInvSa() {
 	    $this->common_model->checkpurview(89);
 	    $data = $this->input->post('postData',TRUE);
 		if (strlen($data)>0) {
 			$data = $this->validform((array)json_decode($data, true));
 			$data['checked']         = 1;
-			$data['checkName']       = $this->jxcsys['name']; 
+			$data['checkName']       = $this->jxcsys['name'];
 			$info = elements(array(
 				'billType','transType','transTypeName','buId','billDate','checked','checkName',
 				'description','totalQty','amount','arrears','rpAmount','totalAmount','hxStateCode',
 				'totalArrears','disRate','postData','disAmount','accId','modifyTime'),$data,NULL);
 			$this->db->trans_begin();
-			
+
 			//判断分批出库
 			$order =  $this->data_model->get_order('a.isDelete=0 and a.id='.$data['srcOrderId'].' and a.billType="SALE"',1);
 			$sum=$data['totalQty'];
@@ -426,9 +433,9 @@ class InvSa extends CI_Controller {
 				$sum += $row['totalQty'];
 			}
 			if($sum >$order['totalQty']){
-				str_alert(-1,'销货单数量不能大于客户订单数量！'); 
-			}	
-			
+				str_alert(-1,'销货单数量不能大于客户订单数量！');
+			}
+
 			//特殊情况
 			if ($data['id'] < 0) {
 			    $info = elements(array(
@@ -449,32 +456,32 @@ class InvSa extends CI_Controller {
 					$this->mysql_model->update('order',array('billStatus'=>2),array('id'=>$data['srcOrderId']));
 				}else if($sum <$order['totalQty']){
 					$this->mysql_model->update('order',array('billStatus'=>1),array('id'=>$data['srcOrderId']));
-				}	
+				}
 			}
 			if ($this->db->trans_status() === FALSE) {
 			    $this->db->trans_rollback();
-				str_alert(-1,'SQL错误'); 
+				str_alert(-1,'SQL错误');
 			} else {
 			    $this->db->trans_commit();
 				$this->common_model->logs('销货单据编号：'.$data['billNo'].'的单据已被审核！');
-				str_alert(200,'success',array('id'=>$data['id'])); 
+				str_alert(200,'success',array('id'=>$data['id']));
 			}
 		}
-		str_alert(-1,'提交的数据不能为空'); 
+		str_alert(-1,'提交的数据不能为空');
     }
-	
+
 	//单个反审核
 	public function revsCheckInvSa() {
 	    $this->common_model->checkpurview(90);
 	    $data = $this->input->post('postData',TRUE);
 		if (strlen($data)>0) {
-		    $data = $this->validform((array)json_decode($data, true)); 
+		    $data = $this->validform((array)json_decode($data, true));
 		    //$this->mysql_model->get_count('verifica_info','(billId='.$data['id'].')')>0 && str_alert(-1,'存在关联收款单据，无法删除！请先在收款单中删除该销货单！');
 			$sql = $this->mysql_model->update('invoice',array('checked'=>0,'checkName'=>''),array('id'=>$data['id']));
 			if ($sql) {
 			    //变更状态
 				if ($data['srcOrderId']>0) {
-					
+
 					//判断分批出库
 					$order =  $this->data_model->get_order('a.isDelete=0 and a.id='.$data['srcOrderId'].' and a.billType="SALE"',1);
 					$sum=0;
@@ -486,39 +493,39 @@ class InvSa extends CI_Controller {
 						$this->mysql_model->update('order',array('billStatus'=>0),array('id'=>$data['srcOrderId']));
 					}else{//如果有审核后销货单,客户订单为部分出库
 						$this->mysql_model->update('order',array('billStatus'=>1),array('id'=>$data['srcOrderId']));
-					}  
+					}
 				}
 				$this->common_model->logs('采购单据编号：'.$data['billNo'].'的单据已被反审核！');
-				str_alert(200,'success',array('id'=>$data['id'])); 
+				str_alert(200,'success',array('id'=>$data['id']));
 			}
-			str_alert(-1,'SQL错误'); 
+			str_alert(-1,'SQL错误');
 		}
-		str_alert(-1,'提交的数据不能为空'); 
+		str_alert(-1,'提交的数据不能为空');
     }
-	
+
 	//批量审核
     public function batchCheckInvSa() {
 	    $this->common_model->checkpurview(89);
 	    $id   = str_enhtml($this->input->post('id',TRUE));
-		$data = $this->mysql_model->get_results('invoice','(id in('.$id.')) and billType="SALE" and checked=0 and isDelete=0');  
+		$data = $this->mysql_model->get_results('invoice','(id in('.$id.')) and billType="SALE" and checked=0 and isDelete=0');
 		if (count($data)>0) {
-			
-			
+
+
 			foreach($data as $arr=>$row) {
 				$billno[]     = $row['billNo'];
 				$srcOrderId[] = $row['srcOrderId'];
 			}
 			$billno     = join(',',$billno);
 			$srcOrderId = join(',',$srcOrderId);
-		
+
 			//判断每个客户订单数量与销货单数量
 			$order_list =  $this->data_model->get_order('a.isDelete=0 and (a.id in('.$srcOrderId.')) and a.billType="SALE"');
-			
+
 			$srcOrderNo;
 			foreach ($order_list as $arr=>$row1) {
 				$sum=0;
 				$invoice_list = $this->data_model->get_invoice('(a.checked=1 or (a.id in('.$id.') and a.checked=0)) and a.srcOrderId='.$row1['id'].' and a.billType="SALE"');
-				
+
 				foreach ($invoice_list as $arr=>$row2) {
 					$sum += $row2['totalQty'];
 				}
@@ -528,17 +535,17 @@ class InvSa extends CI_Controller {
 			}
 			//客户订单数量大于销货单数量
 			if (strlen(join(',',$srcOrderNo))>0) {
-				str_alert(-1,'客户订单：'.join(',',$srcOrderNo).'，所选销货单数量不能大于客户订单数量！'); 
-			}		
-			
-			$sql = $this->mysql_model->update('invoice',array('checked'=>1,'checkName'=>$this->jxcsys['name']),'(id in('.$id.'))'); 
+				str_alert(-1,'客户订单：'.join(',',$srcOrderNo).'，所选销货单数量不能大于客户订单数量！');
+			}
+
+			$sql = $this->mysql_model->update('invoice',array('checked'=>1,'checkName'=>$this->jxcsys['name']),'(id in('.$id.'))');
 			if ($sql) {
 				//变更状态
 				if (strlen($srcOrderId)>0) {
 					foreach ($order_list as $arr=>$row1) {
 						$sum=0;
 						$invoice_list = $this->data_model->get_invoice('(a.checked=1 or (a.id in('.$id.') and a.checked=0)) and a.srcOrderId='.$row1['id'].' and a.billType="SALE"');
-						
+
 						foreach ($invoice_list as $arr=>$row2) {
 							$sum += $row2['totalQty'];
 						}
@@ -554,20 +561,20 @@ class InvSa extends CI_Controller {
 				}
 				$this->common_model->logs('销货单编号：'.$billno.'的单据已被审核！');
 				str_alert(200,'销货单编号：'.$billno.'的单据已被审核！');
-			} 
-			str_alert(-1,'审核失败');  
+			}
+			str_alert(-1,'审核失败');
 		}
-		str_alert(-1,'所选的单据都已被审核，请选择未审核的销货单进行审核！'); 
+		str_alert(-1,'所选的单据都已被审核，请选择未审核的销货单进行审核！');
 	}
-	
+
 	//批量反审核
     public function rsBatchCheckInvSa() {
 	    $this->common_model->checkpurview(90);
 	    $id   = str_enhtml($this->input->post('id',TRUE));
 	    $this->mysql_model->get_count('verifica_info','(billId='.$id.')')>0 && str_alert(-1,'存在关联“收款单据”，无法删除！请先在“收款单”中删除该销货单！');//add
-		$data = $this->mysql_model->get_results('invoice','(id in('.$id.')) and billType="SALE" and checked=1 and (isDelete=0)');   
+		$data = $this->mysql_model->get_results('invoice','(id in('.$id.')) and billType="SALE" and checked=1 and (isDelete=0)');
 		if (count($data)>0) {
-			$sql = $this->mysql_model->update('invoice',array('checked'=>0,'checkName'=>''),'(id in('.$id.'))'); 
+			$sql = $this->mysql_model->update('invoice',array('checked'=>0,'checkName'=>''),'(id in('.$id.'))');
 			if ($sql) {
 				foreach($data as $arr=>$row) {
 					$billno[]     = $row['billNo'];
@@ -575,15 +582,15 @@ class InvSa extends CI_Controller {
 				}
 				$billno     = join(',',$billno);
 				$srcOrderId = join(',',$srcOrderId);
-			
+
 				//判断每个客户订单数量与销货单数量
 				$order_list =  $this->data_model->get_order('a.isDelete=0 and (a.id in('.$srcOrderId.')) and a.billType="SALE"');
-				
+
 				$srcOrderNo;
 				foreach ($order_list as $arr=>$row1) {
 					$sum=0;
 					$invoice_list = $this->data_model->get_invoice('(a.checked=1 or (a.id in('.$id.') and a.checked=0)) and a.srcOrderId='.$row1['id'].' and a.billType="SALE"');
-					
+
 					foreach ($invoice_list as $arr=>$row2) {
 						$sum += $row2['totalQty'];
 					}
@@ -592,25 +599,25 @@ class InvSa extends CI_Controller {
 						$this->mysql_model->update('order',array('billStatus'=>0),'(id in('.$srcOrderId.'))');
 					}else{//如果有审核后销货单,客户订单为部分出库
 						$this->mysql_model->update('order',array('billStatus'=>1),'(id in('.$srcOrderId.'))');
-					}  
+					}
 				}
 				$this->common_model->logs('销货单：'.$billno.'的单据已被反审核！');
-				str_alert(200,'销货单编号：'.$billno.'的单据已被反审核！'); 
-			} 
-			str_alert(-1,'反审核失败');  
+				str_alert(200,'销货单编号：'.$billno.'的单据已被反审核！');
+			}
+			str_alert(-1,'反审核失败');
 		}
-		str_alert(-1,'所选的销货单都是未审核，请选择已审核的销货单进行反审核！'); 
+		str_alert(-1,'所选的销货单都是未审核，请选择已审核的销货单进行反审核！');
 	}
-	
-	
+
+
 	//打印
     public function toPdf() {
 	    $this->common_model->checkpurview(88);
 	    $id   = intval($this->input->get('id',TRUE));
-		$data = $this->data_model->get_invoice('a.id='.$id.' and a.billType="SALE"',1);  
-		if (count($data)>0) { 
+		$data = $this->data_model->get_invoice('a.id='.$id.' and a.billType="SALE"',1);
+		if (count($data)>0) {
 			$data['num']    = 8;
-			$data['system'] = $this->common_model->get_option('system'); 
+			$data['system'] = $this->common_model->get_option('system');
 			$postData = unserialize($data['postData']);
 			foreach ($postData['entries'] as $arr=>$row) {
 			    $v[$arr]['i']               = $arr + 1;
@@ -627,9 +634,9 @@ class InvSa extends CI_Controller {
 				$v[$arr]['discountRate']    = $row['discountRate'];
 				$v[$arr]['locationName']    = $row['locationName'];
 				$v[$arr]['description']     = $row['description'];
-			}  
-			$data['countpage']  = ceil(count($postData['entries'])/$data['num']); ;   
-			$data['list']       = isset($v) ? $v : array();  
+			}
+			$data['countpage']  = ceil(count($postData['entries'])/$data['num']); ;
+			$data['list']       = isset($v) ? $v : array();
 		    ob_start();
 			$this->load->view('scm/invSa/toPdf',$data);
 			$content = ob_get_clean();
@@ -643,39 +650,39 @@ class InvSa extends CI_Controller {
 			}catch(HTML2PDF_exception $e) {
 				echo $e;
 				exit;
-			}  	  
-		} 
-		//str_alert(-1,'单据不存在、或者已删除');  
+			}
+		}
+		//str_alert(-1,'单据不存在、或者已删除');
 		die('单据不存在、或者已删除');
 	}
-	
-	
-	//删除 
+
+
+	//删除
     public function delete() {
 	    $this->common_model->checkpurview(9);
 	    $id   = intval($this->input->get('id',TRUE));
-		$data = $this->mysql_model->get_rows('invoice',array('id'=>$id,'billType'=>'SALE'));  
+		$data = $this->mysql_model->get_rows('invoice',array('id'=>$id,'billType'=>'SALE'));
 		if (count($data)>0) {
-		    $data['checked'] >0 && str_alert(-1,'已审核的不可删除'); 
+		    $data['checked'] >0 && str_alert(-1,'已审核的不可删除');
 		    $this->db->trans_begin();
-			$this->mysql_model->update('invoice',array('isDelete'=>1),array('id'=>$id));   
-			$this->mysql_model->update('invoice_info',array('isDelete'=>1),array('iid'=>$id));  
-			if ($data['accId']>0) { 
-				$this->mysql_model->update('account_info',array('isDelete'=>1),array('iid'=>$id));   
-			}  
+			$this->mysql_model->update('invoice',array('isDelete'=>1),array('id'=>$id));
+			$this->mysql_model->update('invoice_info',array('isDelete'=>1),array('iid'=>$id));
+			if ($data['accId']>0) {
+				$this->mysql_model->update('account_info',array('isDelete'=>1),array('iid'=>$id));
+			}
 			if ($this->db->trans_status() === FALSE) {
 			    $this->db->trans_rollback();
-				str_alert(-1,'删除失败'); 
+				str_alert(-1,'删除失败');
 			} else {
 			    $this->db->trans_commit();
 				$this->common_model->logs('删除采购订单 单据编号：'.$data['billNo']);
-				str_alert(200,'success'); 	 
+				str_alert(200,'success');
 			}
 		}
-		str_alert(-1,'单据不存在、或者已删除');  
+		str_alert(-1,'单据不存在、或者已删除');
 	}
-	
-  
+
+
 	//库存查询
 	public function justIntimeInv() {
 		$qty = 0;
@@ -683,8 +690,8 @@ class InvSa extends CI_Controller {
 		$rows  = max(intval($this->input->get_post('rows',TRUE)),100);
 		$invid = intval($this->input->get_post('invId',TRUE));
 		$where = 'a.isDelete=0';
-		$where .= $invid > 0 ? ' and a.invId='.$invid.'' : ''; 
-		$list = $this->data_model->get_inventory($where.' GROUP BY locationId');    
+		$where .= $invid > 0 ? ' and a.invId='.$invid.'' : '';
+		$list = $this->data_model->get_inventory($where.' GROUP BY locationId');
 		foreach ($list as $arr=>$row) {
 		    $i = $arr + 1;
 			$v[$arr]['locationId']   = intval($row['locationId']);
@@ -697,19 +704,19 @@ class InvSa extends CI_Controller {
 		$v[$i]['locationName'] = '合计';
 		$v[$i]['invId']        = 0;
 		$json['status'] = 200;
-		$json['msg']    = 'success'; 
-		$json['data']['total']     = 1;                         
-		$json['data']['records']   = $this->data_model->get_inventory($where.' GROUP BY locationId',3);    
+		$json['msg']    = 'success';
+		$json['data']['total']     = 1;
+		$json['data']['records']   = $this->data_model->get_inventory($where.' GROUP BY locationId',3);
 		$json['data']['rows']      = isset($v) ? $v : array();
 		die(json_encode($json));
 	}
-	
+
 
 	public function findNearSaEmp() {
 		die('{"status":200,"msg":"success","data":{"empId":0}}');
-		
+
 	}
-	
+
 	//公共验证
 	private function validform($data) {
 	    $data['id']              = isset($data['id']) ? intval($data['id']) : 0;
@@ -732,18 +739,18 @@ class InvSa extends CI_Controller {
 		$data['serialno']        = $data['serialno'];
 		$data['description']     = $data['description'];
 		$data['totalTax']        = isset($data['totalTax']) ? (float)$data['totalTax'] :0;
-		$data['totalTaxAmount']  = isset($data['totalTaxAmount']) ? (float)$data['totalTaxAmount'] :0; 	
-		
-		$data['arrears'] < 0 && str_alert(-1,'本次欠款要为数字，请输入有效数字！'); 
-		$data['disRate'] < 0 && str_alert(-1,'折扣率要为数字，请输入有效数字！'); 
-		$data['rpAmount'] < 0  && str_alert(-1,'本次收款要为数字，请输入有效数字！'); 
-		$data['customerFree'] < 0 && str_alert(-1,'客户承担费用要为数字，请输入有效数字！'); 
-		$data['amount'] < $data['rpAmount']  && str_alert(-1,'本次收款不能大于折后金额！'); 
-		$data['amount'] < $data['disAmount'] && str_alert(-1,'折扣额不能大于合计金额！'); 
-		
+		$data['totalTaxAmount']  = isset($data['totalTaxAmount']) ? (float)$data['totalTaxAmount'] :0;
+
+		$data['arrears'] < 0 && str_alert(-1,'本次欠款要为数字，请输入有效数字！');
+		$data['disRate'] < 0 && str_alert(-1,'折扣率要为数字，请输入有效数字！');
+		$data['rpAmount'] < 0  && str_alert(-1,'本次收款要为数字，请输入有效数字！');
+		$data['customerFree'] < 0 && str_alert(-1,'客户承担费用要为数字，请输入有效数字！');
+		$data['amount'] < $data['rpAmount']  && str_alert(-1,'本次收款不能大于折后金额！');
+		$data['amount'] < $data['disAmount'] && str_alert(-1,'折扣额不能大于合计金额！');
+
 		if ($data['amount']==$data['rpAmount']) {
 			$data['hxStateCode'] = 2;
-		} else {	
+		} else {
 		    $data['hxStateCode'] = $data['rpAmount']!=0 ? 1 : 0;
 		}
 
@@ -752,35 +759,35 @@ class InvSa extends CI_Controller {
 		$data['rpAmount']        = $data['transType']==150601 ? abs($data['rpAmount']) : -abs($data['rpAmount']);
 		$data['totalAmount']     = $data['transType']==150601 ? abs($data['totalAmount']) : -abs($data['totalAmount']);
 		$data['uid']             = $this->jxcsys['uid'];
-		$data['userName']        = $this->jxcsys['name'];  
+		$data['userName']        = $this->jxcsys['name'];
 		$data['modifyTime']      = date('Y-m-d H:i:s');
 		$data['createTime']      = $data['modifyTime'];
 		$data['accounts']        = isset($data['accounts']) ? $data['accounts'] : array();
 		$data['entries']         = isset($data['entries']) ? $data['entries'] : array();
-		
-		count($data['entries']) < 1 && str_alert(-1,'提交的是空数据'); 
-	    
-		
-		//选择了结算账户 需要验证 
+
+		count($data['entries']) < 1 && str_alert(-1,'提交的是空数据');
+
+
+		//选择了结算账户 需要验证
 		foreach ($data['accounts'] as $arr=>$row) {
 			(float)$row['payment'] < 0 && str_alert(-1,'结算金额要为数字，请输入有效数字！');
-		}  
+		}
 
 	    if ($data['id']>0) {
-		    $invoice = $this->mysql_model->get_rows('invoice',array('id'=>$data['id'],'billType'=>'SALE','isDelete'=>0)); 
+		    $invoice = $this->mysql_model->get_rows('invoice',array('id'=>$data['id'],'billType'=>'SALE','isDelete'=>0));
 			count($invoice)<1 && str_alert(-1,'单据不存在、或者已删除');
-			$data['checked'] = $invoice['checked'];	
-			$data['billNo']  = $invoice['billNo'];	
+			$data['checked'] = $invoice['checked'];
+			$data['billNo']  = $invoice['billNo'];
 		} else {
-		    //$data['billNo']  = str_no('XS');    
+		    //$data['billNo']  = str_no('XS');
 		}
-		
+
 		//供应商验证
-		$this->mysql_model->get_count('contact',array('id'=>$data['buId']))<1 && str_alert(-1,'客户不存在'); 
-			
+		$this->mysql_model->get_count('contact',array('id'=>$data['buId']))<1 && str_alert(-1,'客户不存在');
+
 		//商品录入验证
-		$system    = $this->common_model->get_option('system'); 
-		
+		$system    = $this->common_model->get_option('system');
+
 		//库存验证
 		if ($system['requiredCheckStore']==1) {
 		    $inventory = $this->data_model->get_invoice_info_inventory();
@@ -795,20 +802,20 @@ class InvSa extends CI_Controller {
     		    }
     		}
 		}
-		$storage   = array_column($this->mysql_model->get_results('storage',array('disable'=>0)),'id'); 
+		$storage   = array_column($this->mysql_model->get_results('storage',array('disable'=>0)),'id');
 		foreach ($data['entries'] as $arr=>$row) {
-			intval($row['invId'])<1 && str_alert(-1,'请选择商品');    
-			(float)$row['qty'] < 0 && str_alert(-1,'商品数量要为数字，请输入有效数字！'); 
-			(float)$row['price'] < 0 && str_alert(-1,'商品销售单价要为数字，请输入有效数字！'); 
+			intval($row['invId'])<1 && str_alert(-1,'请选择商品');
+			(float)$row['qty'] < 0 && str_alert(-1,'商品数量要为数字，请输入有效数字！');
+			(float)$row['price'] < 0 && str_alert(-1,'商品销售单价要为数字，请输入有效数字！');
 			(float)$row['discountRate'] < 0 && str_alert(-1,'折扣率要为数字，请输入有效数字！');
-			intval($row['locationId']) < 1 && str_alert(-1,'请选择相应的库存！'); 
-			!in_array($row['locationId'],$storage) && str_alert(-1,$row['locationName'].'不存在或不可用！');	
+			intval($row['locationId']) < 1 && str_alert(-1,'请选择相应的库存！');
+			!in_array($row['locationId'],$storage) && str_alert(-1,$row['locationName'].'不存在或不可用！');
 			//库存判断 修改不验证
-			if ($system['requiredCheckStore']==1 && $data['id']<1) {  
-				 if (intval($data['transType'])==150601) {                        //销售才验证 
+			if ($system['requiredCheckStore']==1 && $data['id']<1) {
+				 if (intval($data['transType'])==150601) {                        //销售才验证
 					if (isset($inventory[$row['invId']][$row['locationId']])) {
-					    
-						$inventory[$row['invId']][$row['locationId']] < $row['qty'] && str_alert(-1,$row['locationName'].$row['invName'].'商品库存不足！'); 
+
+						$inventory[$row['invId']][$row['locationId']] < $row['qty'] && str_alert(-1,$row['locationName'].$row['invName'].'商品库存不足！');
 					} else {
 					    //str_alert(-1,$row['invName'].'库存不足！');
 					    //add by michen 20170719 for 组合品库存检查
@@ -846,13 +853,13 @@ class InvSa extends CI_Controller {
 				    }
 				}
 			}
-		} 
-		$data['srcOrderNo'] = $data['entries'][0]['srcOrderNo'] ? $data['entries'][0]['srcOrderNo'] : 0; 
-		$data['srcOrderId'] = $data['entries'][0]['srcOrderId'] ? $data['entries'][0]['srcOrderId'] : 0; 
+		}
+		$data['srcOrderNo'] = $data['entries'][0]['srcOrderNo'] ? $data['entries'][0]['srcOrderNo'] : 0;
+		$data['srcOrderId'] = $data['entries'][0]['srcOrderId'] ? $data['entries'][0]['srcOrderId'] : 0;
 		$data['postData'] = serialize($data);
 		return $data;
-	}  
-	
+	}
+
 
 	//组装数据
 	private function invoice_info($iid,$data) {
@@ -861,7 +868,7 @@ class InvSa extends CI_Controller {
 			$v[$arr]['iid']           = $iid;
 			$v[$arr]['uid']           = $data['uid'];
 			$v[$arr]['billNo']        = $data['billNo'];
-			$v[$arr]['billDate']      = $data['billDate']; 
+			$v[$arr]['billDate']      = $data['billDate'];
 			$v[$arr]['buId']          = $data['buId'];
 			$v[$arr]['transType']     = $data['transType'];
 			$v[$arr]['transTypeName'] = $data['transTypeName'];
@@ -871,21 +878,22 @@ class InvSa extends CI_Controller {
 			$v[$arr]['skuId']         = intval($row['skuId']);
 			$v[$arr]['unitId']        = intval($row['unitId']);
 			$v[$arr]['locationId']    = intval($row['locationId']);
-			$v[$arr]['qty']           = $data['transType']==150601 ? -abs($row['qty']) :abs($row['qty']); 
-			$v[$arr]['amount']        = $data['transType']==150601 ? abs($row['amount']) :-abs($row['amount']); 
-			$v[$arr]['price']         = abs($row['price']);  
-			$v[$arr]['discountRate']  = $row['discountRate'];  
-			$v[$arr]['deduction']     = $row['deduction'];  
+			$v[$arr]['qty']           = $data['transType']==150601 ? -abs($row['qty']) :abs($row['qty']);
+			$v[$arr]['amount']        = $data['transType']==150601 ? abs($row['amount']) :-abs($row['amount']);
+			$v[$arr]['price']         = abs($row['price']);
+			$v[$arr]['discountRate']  = $row['discountRate'];
+			$v[$arr]['deduction']     = $row['deduction'];
 			$v[$arr]['serialno']      = $row['serialno'];
-			$v[$arr]['description']   = $row['description']; 
-			if (intval($row['srcOrderId'])>0) {   
-			    $v[$arr]['srcOrderEntryId']  = intval($row['srcOrderEntryId']);  
-				$v[$arr]['srcOrderId']       = intval($row['srcOrderId']);  
-				$v[$arr]['srcOrderNo']       = $row['srcOrderNo']; 
+			$v[$arr]['description']   = $row['description'];
+			$v[$arr]['iiId']   = $row['iiId'];
+			if (intval($row['srcOrderId'])>0) {
+			    $v[$arr]['srcOrderEntryId']  = intval($row['srcOrderEntryId']);
+				$v[$arr]['srcOrderId']       = intval($row['srcOrderId']);
+				$v[$arr]['srcOrderNo']       = $row['srcOrderNo'];
 			} else {
-			    $v[$arr]['srcOrderEntryId']  = 0;  
-				$v[$arr]['srcOrderId']       = 0;  
-				$v[$arr]['srcOrderNo']       = ''; 
+			    $v[$arr]['srcOrderEntryId']  = 0;
+				$v[$arr]['srcOrderId']       = 0;
+				$v[$arr]['srcOrderNo']       = '';
 			}
 			$v[$arr]['srcDopey'] = '';
 			$v[$arr]['srcDopeyName'] = '';
@@ -968,15 +976,15 @@ class InvSa extends CI_Controller {
 			}
 			$i++;
 			//add by michen 20170717  end
-		} 
+		}
 		if (isset($v)) {
-			if ($data['id']>0) {                   
+			if ($data['id']>0) {
 				$this->mysql_model->delete('invoice_info',array('iid'=>$iid));
 			}
 			$this->mysql_model->insert('invoice_info',$v);
-		} 
+		}
 	}
-	
+
 	//组装数据
 	private function account_info($iid,$data) {
 		foreach ($data['accounts'] as $arr=>$row) {
@@ -986,21 +994,21 @@ class InvSa extends CI_Controller {
 			$v[$arr]['billType']      = $data['billType'];
 			$v[$arr]['transType']     = $data['transType'];
 			$v[$arr]['transTypeName'] = $data['transType']==150601 ? '普通销售' : '销售退回';
-			$v[$arr]['billDate']      = $data['billDate']; 
-			$v[$arr]['accId']         = $row['accId']; 
-			$v[$arr]['payment']       = $data['transType']==150601 ? abs($row['payment']) : -abs($row['payment']); 
+			$v[$arr]['billDate']      = $data['billDate'];
+			$v[$arr]['accId']         = $row['accId'];
+			$v[$arr]['payment']       = $data['transType']==150601 ? abs($row['payment']) : -abs($row['payment']);
 			$v[$arr]['wayId']         = $row['wayId'];
 			$v[$arr]['settlement']    = $row['settlement'] ;
 			$v[$arr]['uid']           = $data['uid'];
-		} 
-		if ($data['id']>0) {                      
+		}
+		if ($data['id']>0) {
 			$this->mysql_model->delete('account_info',array('iid'=>$iid));
 		}
 		if (isset($v)) {
 			$this->mysql_model->insert('account_info',$v);
 		}
 	}
-	
+
 	public function log($msg){
 	    //$this->log(var_export($v,true));
 	    $myfile = fopen("log.txt", "a") or die("Unable to open file!");//w
@@ -1008,5 +1016,5 @@ class InvSa extends CI_Controller {
 	    fwrite($myfile, $msg);
 	    fclose($myfile);
 	}
-	
+
 }
