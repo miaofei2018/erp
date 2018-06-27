@@ -1,7 +1,7 @@
-<?php 
+<?php
 $this->load->view('header');
 ?>
- 
+
 <script type="text/javascript">
 var DOMAIN = document.domain;
 var WDURL = "";
@@ -28,8 +28,8 @@ $(document).keydown(function(event) {
 	}
 });
 
-$(function() { 
-	$("#Contract").click(function (){  
+$(function() {
+	$("#Contract").click(function (){
 		$.dialog({
 			content: "url:../settings/Contract",
 			data: {
@@ -45,8 +45,8 @@ $(function() {
 			cache: !1,
 			lock: !0
 		})
-	}); 
-	$("#Contract1").click(function (){  
+	});
+	$("#Contract1").click(function (){
 		$.dialog({
 			content: "url:../settings/Contract",
 			data: {
@@ -63,7 +63,7 @@ $(function() {
 			lock: !0
 		})
 	})
-}); 
+});
 </script>
 
 <link href="<?php echo base_url()?>statics/css/<?php echo sys_skin()?>/bills.css?ver=201505122" rel="stylesheet" type="text/css">
@@ -129,24 +129,24 @@ $(function() {
           <label>本次欠款:</label>
           <input type="text" id="arrears" class="ui-input ui-input-dis" disabled>
         </li>
-		
+
 		<li>
           <label>采购合同:</label>
           <input type="text" class="ui-input ui-input-dis" disabled>
-		  <?php 
+		  <?php
 		  if ($this->common_model->checkpurviews(203)){
 		  ?>
 		  <a id="Contract" class="ui-btn">上传</a>
-		  <?php 
+		  <?php
 		  }
 		  if ($this->common_model->checkpurviews(204)){
 		  ?>
 		  <a id="Contract1" class="ui-btn">查看</a>
-		  <?php 
+		  <?php
 		  }
 		  ?>
         </li>
-		
+
         <li class="dn">
           <label>累计欠款:</label>
           <input type="text" id="totalArrears" class="ui-input ui-input-dis" disabled>
@@ -176,7 +176,7 @@ $(function() {
     </div>
     <div id="mark"></div>
   </div>
-  
+
   <div id="initCombo" class="dn">
     <input type="text" class="textbox goodsAuto" name="goods" autocomplete="off">
     <input type="text" class="textbox storageAuto" name="storage" autocomplete="off">
@@ -192,4 +192,3 @@ $(function() {
 <script src="<?php echo base_url()?>statics/js/dist/purchase.js?ver=201510241557"></script>
 </body>
 </html>
- 
