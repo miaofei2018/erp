@@ -252,7 +252,10 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 				label: " ",
 				width: 60,
 				fixed: !0,
-				formatter: Public.billsOper_goods,
+				formatter:  function(val, opt, row) {
+					var html_con = '<div class="operating" data-id="' + opt.rowId + '"><span class="ui-icon ui-icon-plus" title="新增行"></span><span class="ui-icon ui-icon-trash" title="删除行"></span><span class="ui-icon ui-icon-cart" title="商品库存查询"></span><span class="ui-icon ui-icon-sale" title="销售查询"></span></div>';
+					return html_con;
+				},
 				align: "center"
 			}, {
 				name: "goods",
@@ -479,7 +482,7 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 					decimalPlaces: amountPlaces
 				},
 				editable: !0
-			}), this.calAmount = "taxAmount"), 
+			}), this.calAmount = "taxAmount"),
 			B.push({
 				name: "serialno",
 				label: "序列号",
@@ -554,6 +557,7 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 							if ($.isEmptyObject(b[d])) break;
 							var g = $.extend(!0, {
 								id: f.invId,
+								iiid:f.iiid,
 								number: f.invNumber,
 								name: f.invName,
 								spec: f.invSpec,
@@ -1042,17 +1046,17 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 			}).getCombo()
 		},
 		disableEdit: function() {
-			this.customerCombo.disable(), this.$_date.attr("disabled", "disabled").addClass("ui-input-dis"), 
+			this.customerCombo.disable(), this.$_date.attr("disabled", "disabled").addClass("ui-input-dis"),
 			this.$_serialno.attr("disabled", "disabled").addClass("ui-input-dis"),
 			this.$_note.attr("disabled", "disabled").addClass("ui-input-dis"), this.$_discountRate.attr("disabled", "disabled").addClass("ui-input-dis"), this.$_deduction.attr("disabled", "disabled").addClass("ui-input-dis"), this.$_payment.attr("disabled", "disabled").addClass("ui-input-dis"), this.accountCombo.disable(), $("#grid").jqGrid("setGridParam", {
 				cellEdit: !1
 			}), this.editable = !1
 		},
 		enableEdit: function() {
-			disEditable || (!hideCustomerCombo && this.customerCombo.enable(), this.$_date.removeAttr("disabled").removeClass("ui-input-dis"), 
+			disEditable || (!hideCustomerCombo && this.customerCombo.enable(), this.$_date.removeAttr("disabled").removeClass("ui-input-dis"),
 					this.$_serialno.removeAttr("disabled").removeClass("ui-input-dis"),
-					this.$_note.removeAttr("disabled").removeClass("ui-input-dis"), this.$_discountRate.removeAttr("disabled").removeClass("ui-input-dis"), this.$_deduction.removeAttr("disabled").removeClass("ui-input-dis"), 
-					this.$_payment.removeAttr("disabled").removeClass("ui-input-dis"), this.accountCombo.enable(), 
+					this.$_note.removeAttr("disabled").removeClass("ui-input-dis"), this.$_discountRate.removeAttr("disabled").removeClass("ui-input-dis"), this.$_deduction.removeAttr("disabled").removeClass("ui-input-dis"),
+					this.$_payment.removeAttr("disabled").removeClass("ui-input-dis"), this.accountCombo.enable(),
 					$("#grid").jqGrid("setGridParam", {
 							cellEdit: !0
 					}), this.editable = !0)

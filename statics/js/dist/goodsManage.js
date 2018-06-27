@@ -460,7 +460,7 @@ function initCombo() {
 	}).getCombo(),
 	this.goodsCombo = Business.billGoodsCombo($(".goodsAuto"), {
 		userData: {
-			
+
 		}
 	})
 }
@@ -553,7 +553,7 @@ function initEvent() {
 				}
 			})
 		}
-	}), initValidator(), bindEventForEnterKey(), 
+	}), initValidator(), bindEventForEnterKey(),
 	$("#grid").on("click", ".ui-icon-plus", function(a) {
 		cancleGridEdit();
 		var b = $(this).parent().data("id"),
@@ -736,7 +736,7 @@ function initEvent() {
 				cache: !1,
 				lock: !1
 			})
-	}), 
+	}),
 	Business.queryGoodEvent(this)//add by michen 20170717
 }
 function addStorage(a) {
@@ -941,7 +941,7 @@ function initGrid(a) {
 			title: !1,
 			formatter: "number",
 			formatoptions: {
-				decimalPlaces: qtyPlaces
+				//decimalPlaces: qtyPlaces
 			},
 			editable: !0,
 			align: "right"
@@ -1101,16 +1101,16 @@ function initGrid(a) {
 function initCombinationGrid(a){
 	a || (a = []);
 	var i = newSonId - 1;
-	if (a.length < i) 
+	if (a.length < i)
 		for (var j = i - a.length, k = 0; j > k; k++) {
 			a.push({
 						id: "sonnum_" + (i - k)
 					});
 			curSonId = "sonnum_" + (i - k);
 		}
-	else 
+	else
 		newSonId = a.length + 1;
-	
+
 	function fun_element(a, b) {
 		var c = $(".goodsAuto")[0];
 		return c
@@ -1215,14 +1215,14 @@ function initCombinationGrid(a){
 		},
 		loadComplete: function() {},
 		gridComplete: function() {
-			
+
 		},
 		afterEditCell: function(a, b, c, d, e) {
 			curSonId = a;
 		},
 		beforeSaveCell: function(a, b, c, d, e) {},
 		afterSaveCell: function(a, b, c, d, e) {
-			
+
 		}
 	})
 }

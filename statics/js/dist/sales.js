@@ -4,6 +4,7 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 	taxRequiredCheck = system.taxRequiredCheck,
 	taxRequiredInput = system.taxRequiredInput,
 	hiddenAmount = !1,
+	hiddenBatch = !1,
 	hideCustomerCombo = !1,
 	urlParam = Public.urlParam(),
 	disEditable = urlParam.disEditable,
@@ -21,7 +22,7 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 		},
 		initDom: function(a) {
 			var b = this;
-			if (this.$_customer = $("#customer"), 
+			if (this.$_customer = $("#customer"),
 				//add by michen 20170724 begin
 				this.$linkMan = $("#linkMan"),
 				this.$linkPhone = $("#linkPhone"),
@@ -50,15 +51,15 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 						linkMen=$.grep(linkMen,function(n,i){
 							return n.linkFirst==1;
 						});
-						
-						linkMan=linkMen[0];	
+
+						linkMan=linkMen[0];
 						if(linkMan){
 							//b.$linkMan.find("input").val(linkMan.linkName);
 							//b.$linkPhone.find("input").val(linkMan.linkMobile?linkMan.linkMobile:linkMan.linkPhone);
 							//b.$linkAddress.find("input").val(linkMan.province+linkMan.city+linkMan.county+linkMan.address);
 							THISPAGE.linkCombo.selectByValue(linkMan.linkName);
 						}
-						
+
 						}
 						//add by michen 20170724 end
 						a ? ($("#customer").data("contactInfo", a), b.setSaleByContact(a)) : $("#customer").removeData("contactInfo")
@@ -70,7 +71,7 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 					name: a.contactName,
 					cLevel: a.cLevel
 				};
-				this.$_customer.data("contactInfo", d), 
+				this.$_customer.data("contactInfo", d),
 				this.customerCombo.input.val(a.contactName);
 				//add by michen 20170724 begin
 				SYSTEM.mbuId = a.buId;
@@ -82,7 +83,7 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 					this.salesCombo.input.val(SYSTEM.salesInfo[e].name);
 					break
 				}
-			} else Public.ajaxPost("../basedata/contact/getRecentlyContact?action=getRecentlyContact", 
+			} else Public.ajaxPost("../basedata/contact/getRecentlyContact?action=getRecentlyContact",
 					{
 						transType: originalData.transType,
 						billType: "SALE"
@@ -101,8 +102,8 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 						linkMen=$.grep(linkMen,function(n,i){
 							return n.linkFirst==1;
 						});
-						
-						linkMan=linkMen[0];	
+
+						linkMan=linkMen[0];
 						if(linkMan){
 							b.$linkMan.find("input").val(linkMan.linkName);
 							b.$linkPhone.find("input").val(linkMan.linkMobile?linkMan.linkMobile:linkMan.linkPhone);
@@ -113,10 +114,10 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 						//add by michen 20170724 end
 					}
 			});
-			hideCustomerCombo && this.customerCombo.disable(), 
+			hideCustomerCombo && this.customerCombo.disable(),
 			$("#customer").data("callback", function(a) {
 				b.setSaleByContact(a)
-			}), 
+			}),
 			this.$_date.datepicker({
 				onSelect: function(a) {
 					if (!(originalData.id > 0)) {
@@ -132,7 +133,7 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 						})
 					}
 				}
-			}), 
+			}),
 			a.description && this.$_note.val(a.description),
 			//add by michen 20170724 begin
 			/*this.linkCombo = Business.linkCombo(this),
@@ -143,11 +144,11 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 			//a.udf02 && this.$linkPhone.find("input").val(a.udf02),
 			//a.udf03 && this.$linkAddress.find("input").val(a.udf03),
 			//add by michen 20170724 end
-			this.$_discountRate.val(a.disRate), 
-			this.$_deduction.val(a.disAmount), 
-			this.$_discount.val(a.amount), 
-			this.$_payment.val(a.rpAmount), 
-			this.$_arrears.val(a.arrears), 
+			this.$_discountRate.val(a.disRate),
+			this.$_deduction.val(a.disAmount),
+			this.$_discount.val(a.amount),
+			this.$_payment.val(a.rpAmount),
+			this.$_arrears.val(a.arrears),
 			this.$_customerFree.val(a.customerFree),
 			requiredMoney && ($("#accountWrap").show(), SYSTEM.isAdmin !== !1 || SYSTEM.rights.SettAcct_QUERY ? this.accountCombo = Business.accountCombo($("#account"), {
 				width: 112,
@@ -419,7 +420,7 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 				hidden: !0
 			}, {
 				name: "locationName",
-				label: "库存",
+				label: "仓库",
 				nameExt: '<small id="batchStorage">(批量)</small>',
 				width: 100,
 				editable: !0,
@@ -431,15 +432,14 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 					trigger: "ui-icon-triangle-1-s"
 				}
 			}, {
-				name: "batch",
-				label: "批次",
-				width: 90,
+				name: "batch1",
+				label: "采购批次",
+				width: 200,
 				classes: "ui-ellipsis batch",
-				hidden: !0,
+				hidden: hiddenBatch,
 				title: !1,
 				editable: !0,
 				align: "left",
-				edittype: "custom",
 				edittype: "custom",
 				editoptions: {
 					custom_element: p,
@@ -448,13 +448,16 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 					trigger: "ui-icon-ellipsis"
 				}
 			}, {
+				name: "iiId",
+				label: "采购Id",
+				hidden: !0
+			},  {
 				name: "prodDate",
 				label: "生产日期",
 				width: 90,
 				hidden: !0,
 				title: !1,
 				editable: !0,
-				edittype: "custom",
 				edittype: "custom",
 				editoptions: {
 					custom_element: m,
@@ -663,6 +666,7 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 								h = b[f];
 							if ($.isEmptyObject(b[f]) || !b[f].goods) break;
 							d += d ? "," + g : g, e[h.invId] = g;
+							console.log(h);
 							var i = $.extend(!0, {
 								id: h.invId,
 								number: h.invNumber,
@@ -670,6 +674,7 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 								spec: h.invSpec,
 								unitId: h.unitId,
 								unitName: h.mainUnit,
+								iiId: h.iiId,
 								isSerNum: h.isSerNum,
 								serNumList: h.serNumList || h.invSerNumList
 							}, h);
@@ -736,10 +741,11 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 							isCreate: "150602" == originalData.transType
 						})
 					}
-					if ("batch" === b) {
-						var g = $("#" + a).data("goodsInfo");
-						if (!g) return $("#grid").jqGrid("restoreCell", d, e), curCol = e + 1, void $("#grid").jqGrid("nextCell", d, e + 1);
-						$("#" + d + "_batch", "#grid").val(c), THISPAGE.batchCombo.selectByText(c)
+					if ("batch1" === b) {
+						//var g = $("#" + a).data("goodsInfo");
+						$("#" + d + "_batch1", "#grid").val(c);
+						//if (!g) return $("#grid").jqGrid("restoreCell", d, e), curCol = e + 1, void $("#grid").jqGrid("nextCell", d, e + 1);
+						//$("#" + d + "_batch", "#grid").val(c), THISPAGE.batchCombo.selectByText(c)
 					}
 					if ("prodDate" === b) {
 						var g = $("#" + a).data("goodsInfo");
@@ -1518,7 +1524,8 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 							srcOrderEntryId: h.srcOrderEntryId,
 							srcOrderId: h.srcOrderId,
 							srcOrderNo: h.srcOrderNo,
-							serNumList: m
+							serNumList: m,
+							iiId: h.iiId
 						}, SYSTEM.ISWARRANTY && $.extend(!0, f, {
 							batch: h.batch || "",
 							prodDate: h.prodDate || "",
@@ -1618,7 +1625,7 @@ $(function() {
 			urlParam.turn ? Public.ajaxGet("../scm/invSo/queryDetails?action=queryDetails", {
 				id: urlParam.id
 			}, function(b) {
-				200 === b.status ? (originalData = b.data, originalData.id = -1, originalData.orderId = b.data.id, originalData.orderNo = b.data.billNo, originalData.status = "add", THISPAGE.init(b.data), a.show(), hasLoaded = !0) : 
+				200 === b.status ? (originalData = b.data, originalData.id = -1, originalData.orderId = b.data.id, originalData.orderNo = b.data.billNo, originalData.status = "add", THISPAGE.init(b.data), a.show(), hasLoaded = !0) :
 				(parent.Public.tips({
 					type: 1,
 					content: b.msg
