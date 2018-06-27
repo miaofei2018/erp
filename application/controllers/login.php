@@ -69,19 +69,12 @@ class Login extends CI_Controller {
 					$username = $userArr['name'];  
 					$userimg = $userArr['avatar'];  
 					$user = $this->mysql_model->get_rows('admin','(username="'.$userid.'") or (mobile="'.$userid.'") ');
-					$data['jxcsys']['uid']      = $user['uid'];
-					$data['jxcsys']['name']     = $user['name'];
-					$data['jxcsys']['roleid']   = $user['roleid'];
-					$data['jxcsys']['username'] = $user['username'];
-					$data['jxcsys']['login']    = 'jxc'; 
-					if (isset($data['ispwd']) && $data['ispwd'] == 1) {
-					    $this->input->set_cookie('username',$data['username'],3600000); 
-						$this->input->set_cookie('userpwd',$data['userpwd'],3600000); 
-					} 
-					$this->input->set_cookie('ispwd',$data['ispwd'],3600000);
-					$this->session->set_userdata($data); 
-					$this->common_model->logs('登陆成功 用户名：'.$data['username']);
-					header("Location:".WEB_HOME);  
+					$this->input->set_cookie('user',$user['username'],3600000);
+	                $this->input->set_cookie('pwd',$user['userpwd'],3600000);
+					$this->input->set_cookie('uid',$user['uid'],3600000);
+					$this->input->set_cookie('userName',$user['name'],3600000);
+					$u['boss'] = 1;
+					$this->load->view('mobile/main',$u);
 				 }  
 			}else{//没有获取user_ticket两种情况 1出错2非成员  
 				if($tokenArr['errcode']>0){  
