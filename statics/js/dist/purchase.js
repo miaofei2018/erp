@@ -250,7 +250,7 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 			var B = [{
 				name: "operating",
 				label: " ",
-				width: 60,
+				width: 80,
 				fixed: !0,
 				formatter:  function(val, opt, row) {
 					var html_con = '<div class="operating" data-id="' + opt.rowId + '"><span class="ui-icon ui-icon-plus" title="新增行"></span><span class="ui-icon ui-icon-trash" title="删除行"></span><span class="ui-icon ui-icon-cart" title="商品库存查询"></span><span class="ui-icon ui-icon-sale" title="销售查询"></span></div>';
@@ -341,20 +341,6 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 					trigger: "ui-icon-ellipsis"
 				}
 			}, {
-				name: "prodDate",
-				label: "生产日期",
-				width: 90,
-				hidden: !0,
-				title: !1,
-				editable: !0,
-				edittype: "custom",
-				edittype: "custom",
-				editoptions: {
-					custom_element: m,
-					custom_value: n,
-					handle: o
-				}
-			}, {
 				name: "safeDays",
 				label: "保质期(天)",
 				width: 90,
@@ -398,10 +384,22 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 					handle: u,
 					trigger: "ui-icon-triangle-1-s"
 				}
-			}, {
+			},{
+				name: "priceClause",
+				label: "价格条款",
+				width: 100,
+				editable: !0,
+				edittype: "custom",
+				editoptions: {
+					custom_element: g,
+					custom_value: h,
+					handle: i,
+					trigger: "ui-icon-triangle-1-s"
+				}
+			},{
 				name: "discountRate",
 				label: "折扣率(%)",
-				hidden: hiddenAmount,
+				hidden: 1,
 				width: 70,
 				fixed: !0,
 				align: "right",
@@ -410,7 +408,7 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 			}, {
 				name: "deduction",
 				label: "折扣额",
-				hidden: hiddenAmount,
+				hidden: 1,
 				width: 70,
 				fixed: !0,
 				align: "right",
@@ -483,7 +481,38 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 				},
 				editable: !0
 			}), this.calAmount = "taxAmount"),
-			B.push({
+			B.push( {
+				name: "contractDate",
+				label: "合同日期",
+				width: 90,
+				title: !1,
+				editable: !0,
+				edittype: "custom",
+				edittype: "custom",
+				editoptions: {
+					custom_element: m,
+					custom_value: n,
+					handle: o
+				}
+			},{
+				name: "contractNo",
+				label: "合同号",
+				width: 50,
+				title: !0,
+				editable: !0
+			},{
+				name: "contractQty",
+				label: "合同数量",
+				width: 50,
+				title: !0,
+				editable: !0
+			},{
+				name: "invoiceAmount",
+				label: "已开发票",
+				width: 50,
+				title: !0,
+				editable: !0
+			},{
 				name: "serialno",
 				label: "序列号",
 				width: 200,

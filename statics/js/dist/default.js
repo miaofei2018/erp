@@ -153,7 +153,7 @@ var dataReflush, list = {
 		dataRight: "",
 		target: "vip-JDStorage"
 	},
-	
+
 	purchase: {
 		name: "采购单",
 		href: "../scm/invPu?action=initPur",
@@ -169,7 +169,7 @@ var dataReflush, list = {
 		list: "../scm/invPu?action=initPurList&transType=150502"
 	},
 	salesOrder: {
-		name: "客户订单",
+		name: "预售单",
 		href: "../scm/invSo?action=initSo",
 		dataRight: "SO_ADD",
 		target: "sales",
@@ -223,8 +223,8 @@ var dataReflush, list = {
 		target: "storage",
 		list: "../scm/invOi?action=initOiList&type=cbtz"
 	},*/
-	 
- 
+
+
 	receipt: {
 		name: "收款单",
 		href: "../scm/receipt?action=initReceipt",
@@ -260,22 +260,22 @@ var dataReflush, list = {
 		target: "money",
 		list: "../scm/ori?action=initExpList"
 	},
-	 
-	//puOrderTracking: {
-//		name: "采购订单跟踪表",
-//		href: "../report/pu_order_tracking",
-//		dataRight: "PURCHASEORDER_QUERY",
-//		target: "report-purchase"
-//	},
-	
-	
+
+	puOrderTracking: {
+		name: "采购订单跟踪表",
+		href: "../report/pu_order_tracking",
+		dataRight: "PURCHASEORDER_QUERY",
+		target: "report-purchase"
+	},
+
+
 	puDetail: {
 		name: "采购明细表",
 		href: "../report/pu_detail_new",
 		dataRight: "PUREOORTDETAIL_QUERY",
 		target: "report-purchase"
 	},
-	
+
 	//puDetail: {
 //		name: "采购明细表",
 //		href: "../report/puDetail_detail?action=detail",
@@ -296,7 +296,7 @@ var dataReflush, list = {
 //		target: "report-purchase"
 //	},
 
-    
+
 	puSummarySupply: {
 		name: "采购汇总表（按供应商）",
 		href: "../report/pu_summary_supply_new",
@@ -309,12 +309,12 @@ var dataReflush, list = {
 //		dataRight: "PUREPORTPUR_QUERY",
 //		target: "report-purchase"
 //	},
-	//salesOrderTracking: {
-//		name: "销售订单跟踪表",
-//		href: "../report/sales_order_tracking",
-//		dataRight: "SALESORDER_QUERY",
-//		target: "report-sales"
-//	},
+	salesOrderTracking: {
+		name: "销售订单跟踪表",
+		href: "../report/sales_order_tracking",
+		dataRight: "SALESORDER_QUERY",
+		target: "report-sales"
+	},
 	salesDetail: {
 		name: "销售明细表",
 		href: "../report/sales_detail",
@@ -327,7 +327,7 @@ var dataReflush, list = {
 		dataRight: "SAREPORTINV_QUERY",
 		target: "report-sales"
 	},
-	
+
 	salesSummaryCustomer: {
 		name: "销售汇总表（按客户）",
 		href: "../report/sales_summary_customer_new",
@@ -340,7 +340,7 @@ var dataReflush, list = {
 //		dataRight: "SAREPORTBU_QUERY",
 //		target: "report-sales"
 //	},
-    
+
 	contactDebt: {
 		name: "往来单位欠款表",
 		href: "../report/contact_debt_new",
@@ -419,7 +419,7 @@ var dataReflush, list = {
 		dataRight: "SUPPLIERBALANCE_QUERY",
 		target: "report-money"
 	},
-	
+
 	otherIncomeExpenseDetail: {
 		name: "其他收支明细表",
 		href: "../report/other_income_expense_detail",
@@ -462,6 +462,12 @@ var dataReflush, list = {
 		dataRight: "SettAcct_QUERY",
 		target: "setting-base"
 	},
+	shippingAddress: {
+		name: "价格条款管理",
+		href: "../settings/priceClause_list",
+		dataRight: "PriceClause_QUERY",
+		target: "setting-base"
+	},
 	//shippingAddress: {
 //		name: "发货地址管理",
 //		href: "../settings/shippingaddress",
@@ -486,7 +492,7 @@ var dataReflush, list = {
 		dataRight: "TRADETYPE_QUERY",
 		target: "setting-auxiliary"
 	},
-	
+
 	payCategoryList: {
 		name: "支出类别",
 		href: "../settings/category_list?typeNumber=paccttype",
@@ -499,7 +505,7 @@ var dataReflush, list = {
 		dataRight: "TRADETYPE_QUERY",
 		target: "setting-auxiliary"
 	},
-	
+
 	unitList: {
 		name: "计量单位",
 		href: "../settings/unit_list",
@@ -548,13 +554,13 @@ var dataReflush, list = {
 		href: "../settings/backup",
 		dataRight: "",
 		target: "setting-advancedSetting"
-	} 
+	}
 	//backup: {
 //		name: "备份与恢复",
 //		href: "../settings/backup",
 //		dataRight: "",
 //		target: "setting-advancedSetting"
-//	} 
+//	}
 	//backup: {
 //		name: "备份与恢复",
 //		href: "../../ebak",
