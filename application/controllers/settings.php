@@ -275,6 +275,17 @@ class Settings extends CI_Controller {
 		$this->load->view('settings/purchase-batch');
 	}
 
+
+	public function priceClause_list() {
+	    $this->common_model->checkpurview(97);
+		$this->load->view('settings/priceClause-list');
+	}
+
+
+	public function priceClause_manage() {
+		$this->load->view('settings/priceClause-manage');
+	}
+
 }
 
 /* End of file welcome.php */
