@@ -16,6 +16,15 @@
         <script src="<?php echo base_url()?>statics/login/<?php echo sys_skin()?>/Scripts/minijs/jquery-1.7.1.js"></script>
         <script src="<?php echo base_url()?>statics/login/<?php echo sys_skin()?>/Scripts/minijs/common.js"></script>
         <script src="<?php echo base_url()?>statics/login/<?php echo sys_skin()?>/Scripts/minijs/minicheck.js"></script>
+        
+        <style type="text/css">
+        	#body {
+	        	background-image:url(../statics/login/bg/home_bg.jpg);
+				background-repeat:no-repeat;
+				background-size:100% 100%;
+				-moz-background-size:100% 100%;
+        	}
+        </style>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>    
 <body id="body">
     <div class="connext">

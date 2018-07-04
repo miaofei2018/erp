@@ -299,7 +299,7 @@ div.untreated .RelevanState{ color:#82d156}
 .colsTh{ width:100%; text-align:center;font-weight:bold; }
 
 /*登录*/
-.LoginBox{ width:400px; margin-left:auto; margin-right:auto; margin-top:10px;}
+.LoginBox{ width:380px; margin-left:auto; margin-right:auto; margin-top:50px;padding-left: 10px;background: rgba(25,0,0,0.5);padding-bottom: 10px;border-radius: 10px;}
 .LoginLog{ height:224px; background:url(../Images/loginlogo.png) no-repeat left top;}
 .Loginc{  height:153px; background:url(../Images/loginbox.png) no-repeat left top; margin-top:20px;}
 .loginBtn{ width:400px; height:60px; background:url(../Images/loginbtn.png) no-repeat left top; border:none; background-color:transparent; cursor:pointer}
