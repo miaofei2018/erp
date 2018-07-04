@@ -21,8 +21,8 @@
         	#body {
 	        	background-image:url(../statics/login/bg/home_bg.jpg);
 				background-repeat:no-repeat;
-				background-size:100% 100%;
-				-moz-background-size:100% 100%;
+				background-size:100% 110%;
+				-moz-background-size:100% 110%;
         	}
         </style>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>    
