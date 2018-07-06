@@ -255,6 +255,23 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 			function i() {
 				$("#initCombo").append($(".storageAuto").val(""))
 			}
+
+			function g1(a, b) {
+				var c = $(".priceClauseAuto")[0];
+				return c
+			}
+			function h1(a, b, c) {
+				if ("get" === b) {
+					if ("" !== $(".priceClauseAuto").getCombo().getValue()) return $(a).val();
+					var d = $(a).parents("tr");
+					return d.removeData("storageInfo"), ""
+				}
+				"set" === b && $("input", a).val(c)
+			}
+			function i1() {
+				$("#initCombo").append($(".priceClauseAuto").val(""))
+			}
+
 			function j(a, b) {
 				var c = $(".unitAuto")[0];
 				return c
@@ -421,7 +438,6 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 			}, {
 				name: "locationName",
 				label: "仓库",
-				nameExt: '<small id="batchStorage">(批量)</small>',
 				width: 100,
 				editable: !0,
 				edittype: "custom",
@@ -478,6 +494,36 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 				hidden: !0,
 				title: !1,
 				align: "left"
+			},{
+				name: "contractNo",
+				label: "合同号",
+				width: 100,
+				title: !0,
+				editable: !0
+			},{
+				name: "contractDate",
+				label: "合同日期",
+				width: 90,
+				title: !1,
+				editable: !0,
+				edittype: "custom",
+				editoptions: {
+					custom_element: m,
+					custom_value: n,
+					handle: o
+				}
+			},{
+				name: "contractQty",
+				label: "合同数量",
+				width: 60,
+				title: !0,
+				editable: !0
+			},{
+				name: "invoiceAmount",
+				label: "已开发票",
+				width: 80,
+				title: !0,
+				editable: !0
 			}, {
 				name: "qty",
 				label: "数量",
@@ -508,10 +554,22 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 					handle: u,
 					trigger: "ui-icon-triangle-1-s"
 				}
+			},{
+				name: "priceClause",
+				label: "价格条款",
+				width: 150,
+				editable: !0,
+				edittype: "custom",
+				editoptions: {
+					custom_element: g1,
+					custom_value: h1,
+					handle: i1,
+					trigger: "ui-icon-triangle-1-s"
+				}
 			}, {
 				name: "discountRate",
 				label: "折扣率(%)",
-				hidden: hiddenAmount,
+				hidden: 1,
 				width: 70,
 				fixed: !0,
 				align: "right",
@@ -520,7 +578,7 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 			}, {
 				name: "deduction",
 				label: "折扣额",
-				hidden: hiddenAmount,
+				hidden: 1,
 				width: 70,
 				fixed: !0,
 				align: "right",
@@ -1097,7 +1155,9 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 				}
 			}), this.skuCombo = Business.billskuCombo($(".skuAuto"), {
 				data: []
-			}), this.storageCombo = Business.billStorageCombo($(".storageAuto")), this.unitCombo = Business.unitCombo($(".unitAuto"), {
+			}), this.storageCombo = Business.billStorageCombo($(".storageAuto")),
+			this.priceClauseCombo = Business.billPriceClauseCombo($(".priceClauseAuto")),
+			this.unitCombo = Business.unitCombo($(".unitAuto"), {
 				defaultSelected: -1,
 				forceSelection: !1
 			}), this.cellPikaday = new Pikaday({
@@ -1514,6 +1574,11 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 							mainUnit: l.name || "",
 							qty: h.qty,
 							price: h.price,
+							contractNo: h.contractNo,
+							contractDate: h.contractDate,
+							contractQty: h.contractQty,
+							invoiceAmount: h.invoiceAmount,
+							priceClause: h.priceClause,
 							discountRate: h.discountRate,
 							deduction: h.deduction,
 							amount: h.amount,

@@ -153,12 +153,10 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 			}
 
 			function g1(a, b) {
-			console.log(1111);
 				var c = $(".priceClauseAuto")[0];
 				return c
 			}
 			function h1(a, b, c) {
-				console.log(2222);
 				if ("get" === b) {
 					if ("" !== $(".priceClauseAuto").getCombo().getValue()) return $(a).val();
 					var d = $(a).parents("tr");
@@ -167,7 +165,6 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 				"set" === b && $("input", a).val(c)
 			}
 			function i1() {
-				console.log(3333);
 				$("#initCombo").append($(".priceClauseAuto").val(""))
 			}
 
@@ -437,7 +434,7 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 			},{
 				name: "priceClause",
 				label: "价格条款",
-				width: 100,
+				width: 150,
 				editable: !0,
 				edittype: "custom",
 				editoptions: {
