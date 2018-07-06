@@ -46,7 +46,7 @@ var SYSTEM = {
 	site:"",
 	curDate: "1033737952010",  //系统当前日期
 	DBID: "88886683", //账套ID
-	serviceType: "12", //账套类型，13：表示收费服务，12：表示免费服务
+	serviceType: "13", //账套类型，13：表示收费服务，12：表示免费服务
 	realName: "<?php echo $name;?>", //真实姓名
 	userName: "<?php echo $username;?>", //用户名
 	companyName: "<?php echo $system['companyName']?>",	//公司名称
@@ -66,21 +66,21 @@ var SYSTEM = {
 	requiredCheckStore: <?php echo $system['requiredCheckStore']?>, //是否检查负库存  1：是、0：否
 	hasOnlineStore: 0,	//是否启用网店
 	enableStorage: 0,	//是否启用仓储
-	genvChBill: 0,	//生成凭证后是否允许修改单据
+	genvChBill: 1,	//生成凭证后是否允许修改单据
 	requiredMoney: 1, //是否启用资金功能  1：是、0：否
-	taxRequiredCheck: 0,
+	taxRequiredCheck: 1,
 	taxRequiredInput: 17,
 	isAdmin:<?php echo $roleid==0 ? 'true' : 'false'?>, //是否管理员
 	siExpired:false,//是否过期
 	siType:2, //服务版本，1表示基础版，2表示标准版
-	siVersion:1, //1表示试用、2表示免费（百度版）、3表示收费，4表示体验版
+	siVersion:4, //1表示试用、2表示免费（百度版）、3表示收费，4表示体验版
 	Mobile:"",//当前用户手机号码
 	isMobile:true,//是否验证手机
 	isshortUser:false,//是否联邦用户
 	shortName:"",//shortName
 	isOpen:false,//是否弹出手机验证
 	enableAssistingProp:0, //是否开启辅助属性功能  1：是、0：否
-	ISSERNUM: 0, //是否启用序列号 1：是、0：否 （与enableAssistingProp对立，只能启用其一）
+	ISSERNUM: 1, //是否启用序列号 1：是、0：否 （与enableAssistingProp对立，只能启用其一）
 	ISWARRANTY: 0 //是否启用保质期  1：是、0：否
 };
 //区分服务支持
@@ -88,7 +88,7 @@ SYSTEM.servicePro = SYSTEM.siType === 2 ? 'forbscm3' : 'forscm3';
 var cacheList = {};	//缓存列表查询
 //全局基础数据
 (function(){
-	/* 
+	/*
 	 * 判断IE6，提示使用高级版本
 	 */
 	if(Public.isIE6) {
@@ -97,7 +97,7 @@ var cacheList = {};	//缓存列表查询
 				 this.addDom();
 			 },
 			 addDom: function() {
-			 	var html = $('<div id="browser">您使用的浏览器版本过低，影响网页性能，建议您换用<a href="http://www.google.cn/chrome/intl/zh-CN/landing_chrome.html" target="_blank">谷歌</a>、<a href="http://download.microsoft.com/download/4/C/A/4CA9248C-C09D-43D3-B627-76B0F6EBCD5E/IE9-Windows7-x86-chs.exe" target="_blank">IE9</a>、或<a href=http://firefox.com.cn/" target="_blank">火狐浏览器</a>，以便更好的使用！<a id="bClose" title="关闭">x</a></div>').insertBefore('#container').slideDown(500); 
+			 	var html = $('<div id="browser">您使用的浏览器版本过低，影响网页性能，建议您换用<a href="http://www.google.cn/chrome/intl/zh-CN/landing_chrome.html" target="_blank">谷歌</a>、<a href="http://download.microsoft.com/download/4/C/A/4CA9248C-C09D-43D3-B627-76B0F6EBCD5E/IE9-Windows7-x86-chs.exe" target="_blank">IE9</a>、或<a href=http://firefox.com.cn/" target="_blank">火狐浏览器</a>，以便更好的使用！<a id="bClose" title="关闭">x</a></div>').insertBefore('#container').slideDown(500);
 			 	this._colse();
 			 },
 			 _colse: function() {
@@ -111,6 +111,7 @@ var cacheList = {};	//缓存列表查询
 	getPageConfig();
 	getGoods();
 	getStorage();
+	getPriceClause();
 	getCustomer();
 	getSupplier();
 	getAddr();
@@ -188,6 +189,22 @@ function getStorage() {
 		});
 	} else {
 		SYSTEM.storageInfo = [];
+	}
+};
+//缓存价格条款信息
+function getPriceClause() {
+	if(SYSTEM.isAdmin || SYSTEM.rights.INVLOCTION_QUERY) {
+		Public.ajaxGet('<?php echo site_url()?>/basedata/priceClause?action=list&isDelete=2', {}, function(data){
+			if(data.status === 200) {
+				SYSTEM.priceClauseInfo = data.data.items;
+			} else if (data.status === 250){
+				SYSTEM.priceClauseInfo = [];
+			}  else {
+				Public.tips({type: 1, content : data.msg});
+			}
+		});
+	} else {
+		SYSTEM.priceClauseInfo = [];
 	}
 };
 //缓存客户信息
@@ -431,7 +448,7 @@ function markupVension(){
 				break;
 		};
 	};
-	
+
 	$('#col-side').prepend(imgModel);
 };
 
@@ -441,7 +458,7 @@ var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
   hm.src = "//hm.baidu.com/hm.js?0613c265aa34b0ca0511eba4b45d2f5e";
-  var s = document.getElementsByTagName("script")[0]; 
+  var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>-->
@@ -481,10 +498,10 @@ var _hmt = _hmt || [];
           <ul class="sub-nav" id="storage">
           </ul>
         </div>
-      </li>           
+      </li>
       <li class="item item-money"> <a href="javascript:void(0);" class="money main-nav">资金<span class="arrow">&gt;</span></a>
         <div class="sub-nav-wrap single-nav">
-          <ul class="sub-nav" id="money"> 
+          <ul class="sub-nav" id="money">
           </ul>
         </div>
       </li>
@@ -505,13 +522,13 @@ var _hmt = _hmt || [];
             <ul class="sub-nav" id="report-storage">
             </ul>
           </div>
-          
+
           <div class="nav-item nav-fund last">
             <h3>资金报表</h3>
             <ul class="sub-nav" id="report-money">
             </ul>
           </div>
-          
+
        </div>
       </li>
       <li class="item item-setting"> <a href="javascript:void(0);" class="setting main-nav">配置<span class="arrow">&gt;</span></a>
@@ -537,7 +554,7 @@ var _hmt = _hmt || [];
       </li>
     </ul>
     <!--<div id="navScroll" class="cf"><span id="scollUp"><i>dd</i></span><span id="scollDown"><i>aa</i></span></div>-->
-    <!--<a href="#" class="side_fold">收起</a>--> 
+    <!--<a href="#" class="side_fold">收起</a>-->
   </div>
   <div id="col-main">
     <div id="main-hd" class="cf">
@@ -547,35 +564,35 @@ var _hmt = _hmt || [];
       	<li class="space">|</li>
       	<li class="qq"><a href="" onClick="return false;" id="wpa">QQ咨询：471607572</a></li>
       	<li class="space">|</li>
-        
+
       	<li class="telphone">电话：400-800-1234</li>
         <li class="space">|</li>-->
       	<li id="sysSkin">换肤</li>
         <li class="space">|</li>
-        <!-- 
+        <!--
       	<li><a class="service-tab" data-tab="3">服务支持</a></li>
 		<li class="space">|</li>
-        
+
         <li><a href="javascript:void(0);" onClick="window.location.href='';return false;">返回助手</a></li>-->
         <!--<li class="space">|</li>-->
-        <!-- 
+        <!--
         <li id="yswb-tab"><a href="" target="_blank">社区</a></li>
         <li class="space">|</li>
          -->
        <!-- <li><a href="" target="_blank">帮助</a></li>
         <li class="space">|</li>-->
         <li><a href="<?php echo site_url('login/out')?>">退出</a></li>
-      </ul>  
+      </ul>
     </div>
     <div id="main-bd">
-      <div class="page-tab" id="page-tab"> 
+      <div class="page-tab" id="page-tab">
         <!--<ul class="tab_hd">
 					<li><a href="#">首页</a></li>
 					<li><a href="#">会计科目</a></li>
 				</ul>
 				<div class="tab_bd">
 					内容
-				</div>--> 
+				</div>-->
       </div>
     </div>
   </div>

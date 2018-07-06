@@ -103,15 +103,15 @@ $(function() {
       	<textarea type="text" id="note" class="ui-input ui-input-ph">暂无备注信息</textarea>
       </div>
       <ul id="amountArea" class="cf">
-        <li>
+        <li style="display:none;">
           <label>优惠率:</label>
           <input type="text" id="discountRate" class="ui-input" data-ref="deduction">%
         </li>
-        <li>
+        <li style="display:none;">
           <label>优惠金额:</label>
           <input type="text" id="deduction" class="ui-input" data-ref="payment">
         </li>
-        <li>
+        <li style="display:none;">
           <label>优惠后金额:</label>
           <input type="text" id="discount" class="ui-input ui-input-dis" data-ref="discountRate" disabled>
         </li>
@@ -180,6 +180,7 @@ $(function() {
   <div id="initCombo" class="dn">
     <input type="text" class="textbox goodsAuto" name="goods" autocomplete="off">
     <input type="text" class="textbox storageAuto" name="storage" autocomplete="off">
+    <input type="text" class="textbox priceClauseAuto" name="priceClause" autocomplete="off">
     <input type="text" class="textbox unitAuto" name="unit" autocomplete="off">
     <input type="text" class="textbox batchAuto" name="batch" autocomplete="off">
     <input type="text" class="textbox dateAuto" name="date" autocomplete="off">

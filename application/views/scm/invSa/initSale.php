@@ -1,5 +1,5 @@
 <?php $this->load->view('header');?>
- 
+
 
 <script type="text/javascript">
 var DOMAIN = document.domain;
@@ -27,8 +27,8 @@ $(document).keydown(function(event) {
 	}
 });
 
-$(function() { 
-	$("#Contract").click(function (){  
+$(function() {
+	$("#Contract").click(function (){
 		$.dialog({
 			content: "url:../settings/Contract",
 			data: {
@@ -44,8 +44,8 @@ $(function() {
 			cache: !1,
 			lock: !0
 		})
-	}); 
-	$("#Contract1").click(function (){  
+	});
+	$("#Contract1").click(function (){
 		$.dialog({
 			content: "url:../settings/Contract",
 			data: {
@@ -62,7 +62,7 @@ $(function() {
 			lock: !0
 		})
 	})
-}); 
+});
 </script>
 
 <link href="<?php echo base_url()?>statics/css/<?php echo sys_skin()?>/bills.css?ver=20150522" rel="stylesheet" type="text/css">
@@ -141,7 +141,7 @@ $(function() {
         	<textarea type="text" id="note" class="ui-input ui-input-ph">暂无备注信息</textarea>
       </div>
       <ul id="amountArea" class="cf">
-        <li>
+        <!--<li>
           <label>优惠率:</label>
           <input type="text" id="discountRate" class="ui-input" data-ref="deduction">%
         </li>
@@ -152,7 +152,7 @@ $(function() {
         <li>
           <label>优惠后金额:</label>
           <input type="text" id="discount" class="ui-input ui-input-dis" data-ref="discountRate" disabled>
-        </li>
+        </li>-->
         <li>
           <label>客户承担费用:</label>
           <input type="text" id="customerFree" class="ui-input" data-ref="customerFree">
@@ -174,16 +174,16 @@ $(function() {
         <li>
           <label>销售附件:</label>
           <!-- <input type="text" class="ui-input ui-input-dis" disabled> -->
-		  <?php 
+		  <?php
 		  if ($this->common_model->checkpurviews(203)){
 		  ?>
 		  <a id="Contract" class="ui-btn">上传</a>
-		  <?php 
+		  <?php
 		  }
 		  if ($this->common_model->checkpurviews(204)){
 		  ?>
 		  <a id="Contract1" class="ui-btn">查看</a>
-		  <?php 
+		  <?php
 		  }
 		  ?>
         </li>
@@ -216,7 +216,7 @@ $(function() {
     </div>
     <div id="mark"></div>
   </div>
-  
+
   <div id="initCombo" class="dn">
     <input type="text" class="textbox goodsAuto" name="goods" autocomplete="off">
     <input type="text" class="textbox storageAuto" name="storage" autocomplete="off">
