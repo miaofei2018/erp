@@ -286,6 +286,10 @@ class Settings extends CI_Controller {
 		$this->load->view('settings/priceClause-manage');
 	}
 
+	//价格条款选择
+	public function priceClause_batch() {
+		$this->load->view('settings/priceClause-batch');
+	}
 }
 
 /* End of file welcome.php */

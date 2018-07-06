@@ -27,7 +27,6 @@ class InvPu extends CI_Controller {
 			    $this->load->view('scm/invPu/initPurList');
 				break;
 			case 'invoiceInfoList':
-			    $this->common_model->checkpurview(1);
 			    $this->invoiceInfoList();
 				break;
 			default:
@@ -341,6 +340,11 @@ class InvPu extends CI_Controller {
 				$v[$arr]['description']         = $row['description'];
 				$v[$arr]['skuId']               = intval($row['skuId']);
 				$v[$arr]['skuName']             = '';
+				$v[$arr]['contractNo']         = $row['contractNo'];
+				$v[$arr]['contractDate']         = $row['contractDate'];
+				$v[$arr]['contractQty']         = $row['contractQty'];
+				$v[$arr]['invoiceAmount']         = $row['invoiceAmount'];
+				$v[$arr]['priceClause']         = $row['priceClause'];
 			}
 			$info['data']['entries']            = isset($v) ? $v : array();
 			$info['data']['accId']              = (float)$data['accId'];
@@ -697,6 +701,13 @@ class InvPu extends CI_Controller {
 			$v[$arr]['deduction']        = $row['deduction'];
 			$v[$arr]['serialno']      = $row['serialno'];
 			$v[$arr]['description']      = $row['description'];
+
+			$v[$arr]['contractNo']         = $row['contractNo'];
+			$v[$arr]['contractDate']         = $row['contractDate'];
+			$v[$arr]['contractQty']         = $row['contractQty'];
+			$v[$arr]['invoiceAmount']         = $row['invoiceAmount'];
+			$v[$arr]['priceClause']         = $row['priceClause'];
+
 			if (intval($row['srcOrderId'])>0) {
 			    $v[$arr]['srcOrderEntryId']  = intval($row['srcOrderEntryId']);
 				$v[$arr]['srcOrderId']       = intval($row['srcOrderId']);
