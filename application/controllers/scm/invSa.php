@@ -336,6 +336,13 @@ class InvSa extends CI_Controller {
                         $v[$arr]['amount']       = (float)abs($dopey['amount']);
                         $v[$arr]['taxAmount']    = (float)0;
                         $v[$arr]['price']        = (float)$dopey['price'];
+
+                        $v[$arr]['contractNo']         = $row['contractNo'];
+						$v[$arr]['contractDate']         = $row['contractDate'];
+						$v[$arr]['contractQty']         = $row['contractQty'];
+						$v[$arr]['invoiceAmount']         = $row['invoiceAmount'];
+						$v[$arr]['priceClause']         = $row['priceClause'];
+
                         $v[$arr]['tax']          = (float)0;
                         $v[$arr]['mainUnit']     = $dopey['mainUnit'];
                         $v[$arr]['deduction']    = (float)$dopey['deduction'];
@@ -367,6 +374,13 @@ class InvSa extends CI_Controller {
     				$v[$arr]['amount']       = (float)abs($row['amount']);
     				$v[$arr]['taxAmount']    = (float)$row['taxAmount'];
     				$v[$arr]['price']        = (float)$row['price'];
+
+    				$v[$arr]['contractNo']         = $row['contractNo'];
+					$v[$arr]['contractDate']         = $row['contractDate'];
+					$v[$arr]['contractQty']         = $row['contractQty'];
+					$v[$arr]['invoiceAmount']         = $row['invoiceAmount'];
+					$v[$arr]['priceClause']         = $row['priceClause'];
+
     				$v[$arr]['tax']          = (float)$row['tax'];
     				$v[$arr]['mainUnit']     = $row['mainUnit'];
     				$v[$arr]['deduction']    = (float)$row['deduction'];
@@ -881,6 +895,13 @@ class InvSa extends CI_Controller {
 			$v[$arr]['qty']           = $data['transType']==150601 ? -abs($row['qty']) :abs($row['qty']);
 			$v[$arr]['amount']        = $data['transType']==150601 ? abs($row['amount']) :-abs($row['amount']);
 			$v[$arr]['price']         = abs($row['price']);
+
+			$v[$arr]['contractNo']         = $row['contractNo'];
+			$v[$arr]['contractDate']         = $row['contractDate'];
+			$v[$arr]['contractQty']         = $row['contractQty'];
+			$v[$arr]['invoiceAmount']         = $row['invoiceAmount'];
+			$v[$arr]['priceClause']         = $row['priceClause'];
+
 			$v[$arr]['discountRate']  = $row['discountRate'];
 			$v[$arr]['deduction']     = $row['deduction'];
 			$v[$arr]['serialno']      = $row['serialno'];

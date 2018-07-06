@@ -220,6 +220,7 @@ $(function() {
   <div id="initCombo" class="dn">
     <input type="text" class="textbox goodsAuto" name="goods" autocomplete="off">
     <input type="text" class="textbox storageAuto" name="storage" autocomplete="off">
+    <input type="text" class="textbox priceClauseAuto" name="priceClause" autocomplete="off">
     <input type="text" class="textbox unitAuto" name="unit" autocomplete="off">
     <input type="text" class="textbox batchAuto" name="batch" autocomplete="off">
     <input type="text" class="textbox dateAuto" name="date" autocomplete="off">

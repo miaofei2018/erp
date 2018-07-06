@@ -1,5 +1,5 @@
 <?php $this->load->view('header');?>
- 
+
 <script type="text/javascript">
 var DOMAIN = document.domain;
 var WDURL = "";
@@ -27,7 +27,7 @@ $(document).keydown(function(event) {
 });
 </script>
 <link href="<?php echo base_url()?>statics/css/<?php echo sys_skin()?>/bills.css?ver=201511241412" rel="stylesheet" type="text/css">
- 
+
 <style>
 #barCodeInsert{margin-left: 10px;font-weight: 100;font-size: 12px;color: #fff;background-color: #B1B1B1;padding: 0 5px;border-radius: 2px;line-height: 19px;height: 20px;display: inline-block;}
 #barCodeInsert.active{background-color: #23B317;}
@@ -81,6 +81,7 @@ $(document).keydown(function(event) {
       	<textarea type="text" id="note" class="ui-input ui-input-ph">暂无备注信息</textarea>
       </div>
        <ul id="amountArea" class="cf">
+       <!--
         <li>
           <label>优惠率:</label>
           <input type="text" id="discountRate" class="ui-input" data-ref="deduction">%
@@ -92,7 +93,7 @@ $(document).keydown(function(event) {
         <li>
           <label>优惠后金额:</label>
           <input type="text" id="discount" class="ui-input ui-input-dis" data-ref="discountRate" disabled>
-        </li>
+        </li>-->
       </ul>
       <ul class="dn">
         <li>
@@ -138,11 +139,13 @@ $(document).keydown(function(event) {
     </div>
     <div id="mark"></div>
   </div>
-  
+
   <div id="initCombo" class="dn">
     <input type="text" class="textbox goodsAuto" name="goods" autocomplete="off">
     <input type="text" class="textbox storageAuto" name="storage" autocomplete="off">
+    <input type="text" class="textbox priceClauseAuto" name="priceClause" autocomplete="off">
     <input type="text" class="textbox unitAuto" name="unit" autocomplete="off">
+    <input type="text" class="textbox dateAuto" name="date" autocomplete="off">
     <input type="text" class="textbox priceAuto" name="price" autocomplete="off">
     <input type="text" class="textbox skuAuto" name="price" autocomplete="off">
   </div>
