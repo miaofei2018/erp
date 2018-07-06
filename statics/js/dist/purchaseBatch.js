@@ -36,7 +36,7 @@ var api = frameElement.api,
 		loadGrid: function() {
 			$(window).height() - $(".grid-wrap").offset().top - 84;
 			$grid.jqGrid({
-				url: "../scm/InvPu?action=invoiceInfoList",
+				url: "../scm/invPu?action=invoiceInfoList",
 				postData: queryConditions,
 				datatype: "json",
 				autoWidth: !0,

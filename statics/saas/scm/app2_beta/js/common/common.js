@@ -128,31 +128,31 @@ Public.dateCheck = function(){
 	});
 }
 //日期格式化
-Date.prototype.format = function(format){ 
+Date.prototype.format = function(format){
 	if(!format){
 		format = 'yyyy-MM-dd';//默认1997-01-01这样的格式
 	}
-	var o = { 
-		"M+" : this.getMonth()+1, //month 
-		"d+" : this.getDate(), //day 
-		"h+" : this.getHours(), //hour 
-		"m+" : this.getMinutes(), //minute 
-		"s+" : this.getSeconds(), //second 
-		"q+" : Math.floor((this.getMonth()+3)/3), //quarter 
-		"S" : this.getMilliseconds() //millisecond 
-	} 
+	var o = {
+		"M+" : this.getMonth()+1, //month
+		"d+" : this.getDate(), //day
+		"h+" : this.getHours(), //hour
+		"m+" : this.getMinutes(), //minute
+		"s+" : this.getSeconds(), //second
+		"q+" : Math.floor((this.getMonth()+3)/3), //quarter
+		"S" : this.getMilliseconds() //millisecond
+	}
 
-	if(/(y+)/.test(format)) { 
-		format = format.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length)); 
-	} 
+	if(/(y+)/.test(format)) {
+		format = format.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+	}
 
-	for(var k in o) { 
-		if(new RegExp("("+ k +")").test(format)) { 
-			format = format.replace(RegExp.$1, RegExp.$1.length==1 ? o[k] : ("00"+ o[k]).substr((""+ o[k]).length)); 
-		} 
-	} 
-	return format; 
-} 
+	for(var k in o) {
+		if(new RegExp("("+ k +")").test(format)) {
+			format = format.replace(RegExp.$1, RegExp.$1.length==1 ? o[k] : ("00"+ o[k]).substr((""+ o[k]).length));
+		}
+	}
+	return format;
+}
 Date.prototype.addMonths= function(m)
 {
     var d = this.getDate();
@@ -235,11 +235,11 @@ Public.getRequest = Public.urlParam = function() {
  * 默认post方式
  * @return {[type]}          [description]
  */
-Public.ajax = function(ajaxOpts){    
+Public.ajax = function(ajaxOpts){
 	var opts = {
 	   type: "POST",
-	   dataType: "json",  
-	   error: function(err){  
+	   dataType: "json",
+	   error: function(err){
 			parent.Public.tips({type: 1, content : '服务端响应错误！'});
 	   }
 	};
@@ -256,22 +256,22 @@ Public.ajax = function(ajaxOpts){
 		   		defaultPage.Public.tips({type:1, content:errorStr});
 		   		return;
 		   	}*/
-			success && success(data, status); 
+			success && success(data, status);
 	}
-	$.ajax(opts);  
-};  
+	$.ajax(opts);
+};
 /*
   通用post请求，返回json
   url:请求地址， params：传递的参数{...}， callback：请求成功回调
 
-*/ 
-Public.ajaxPost = function(url, params, callback, errCallback){    
-	$.ajax({  
+*/
+Public.ajaxPost = function(url, params, callback, errCallback){
+	$.ajax({
 	   type: "POST",
 	   url: url,
-	   data: params, 
-	   dataType: "json",  
-	   success: function(data, status){ 
+	   data: params,
+	   dataType: "json",
+	   success: function(data, status){
 		   	/*if(data.status != 200){
 		   		var defaultPage = Public.getDefaultPage();
 		   		var msg = data.msg || '出错了=. =||| ,请点击这里拷贝错误信息 :)';
@@ -282,14 +282,14 @@ Public.ajaxPost = function(url, params, callback, errCallback){
 		   		defaultPage.Public.tips({type:1, content:errorStr});
 		   		return;
 		   	}*/
-			callback(data);  
-	   },  
-	   error: function(err,ms){  
+			callback(data);
+	   },
+	   error: function(err,ms){
 			parent.Public.tips({type: 1, content : '服务端响应错误！'});
 			errCallback && errCallback(err);
-	   }  
-	});  
-};  
+	   }
+	});
+};
 //扩展对象方法
 $.fn.extend({
 	//为对象新增ajaxPost方法
@@ -298,18 +298,18 @@ $.fn.extend({
 		var loading;
 		var myTimer;
 		var preventTooFast = 'ui-btn-dis';
-		var ajaxOpts = {  
+		var ajaxOpts = {
 		   type: "POST",
 		   url: url,
-		   data: params, 
-		   dataType: "json",  
-		   success: function(data, status){  
-			   callback(data);  
-		   },  
-		   error: function(err){  
+		   data: params,
+		   dataType: "json",
+		   success: function(data, status){
+			   callback(data);
+		   },
+		   error: function(err){
 				parent.Public.tips({type: 1, content : '服务端响应错误！'});
 				errCallback && errCallback(err);
-		   }  
+		   }
 		}
 		$.extend(true, ajaxOpts, {
 			timeout : 20000,
@@ -331,12 +331,12 @@ $.fn.extend({
 			   		defaultPage.Public.tips({type:1, content:errorStr});
 			   		return;
 			   	}*/
-				callback(data);  
+				callback(data);
 			},
 			complete : function(){
 				loading.close();
 			},
-			error: function(err){  
+			error: function(err){
 				parent.Public.tips({type: 1, content : '操作无法成功，请稍后重试！'});
 				try{
 					console.log(err)
@@ -349,16 +349,16 @@ $.fn.extend({
 		if($this.hasClass(preventTooFast)){
 			return;
 		}
-		$.ajax(ajaxOpts); 
+		$.ajax(ajaxOpts);
 	}
 });
-Public.ajaxGet = function(url, params, callback, errCallback){    
-	$.ajax({  
+Public.ajaxGet = function(url, params, callback, errCallback){
+	$.ajax({
 	   type: "GET",
 	   url: url,
-	   dataType: "json",  
+	   dataType: "json",
 	   data: params,
-	   success: function(data, status){  
+	   success: function(data, status){
 		   /*if(data.status != 200){
 		   		var defaultPage = Public.getDefaultPage();
 		   		var msg = data.msg || '出错了=. =||| ,请点击这里拷贝错误信息 :)';
@@ -369,13 +369,13 @@ Public.ajaxGet = function(url, params, callback, errCallback){
 		   		defaultPage.Public.tips({type:1, content:errorStr});
 		   		return;
 		   	}*/
-			callback(data);   
-	   },   
-	   error: function(err){  
+			callback(data);
+	   },
+	   error: function(err){
 			parent.Public.tips({type: 1, content : '服务端响应错误！'});
 			errCallback && errCallback(err);
-	   }  
-	});  
+	   }
+	});
 };
 /*操作提示*/
 Public.tips = function(options){ return new Public.Tips(options); }
@@ -392,9 +392,9 @@ Public.Tips = function(options){
 	}
 	this.options = $.extend({},defaults,options);
 	this._init();
-	
+
 	!Public.Tips._collection ?  Public.Tips._collection = [this] : Public.Tips._collection.push(this);
-	
+
 }
 
 Public.Tips.removeAll = function(){
@@ -422,7 +422,7 @@ Public.Tips.prototype = {
 		}
 
 	},
-	
+
 	_create : function(){
 		var opts = this.options, self = this;
 		if(opts.autoClose) {
@@ -434,22 +434,22 @@ Public.Tips.prototype = {
 				self.remove();
 			});
 		};
-		
+
 		switch(opts.type){
-			case 0 : 
+			case 0 :
 				this.obj.addClass('ui-tips-success');
 				break ;
-			case 1 : 
+			case 1 :
 				this.obj.addClass('ui-tips-error');
 				break ;
-			case 2 : 
+			case 2 :
 				this.obj.addClass('ui-tips-warning');
 				break ;
 			default :
 				this.obj.addClass('ui-tips-success');
 				break ;
 		}
-		
+
 		this.obj.appendTo('body').hide();
 		this._setPos();
 		if(opts.onShow){
@@ -471,7 +471,7 @@ Public.Tips.prototype = {
 			left : '50%',
 			top : top,
 			zIndex : '9999',
-			marginLeft : -self.obj.outerWidth()/2	
+			marginLeft : -self.obj.outerWidth()/2
 		});
 
 		window.setTimeout(function(){
@@ -500,7 +500,7 @@ Public.Tips.prototype = {
 };
 //数值显示格式转化
 Public.numToCurrency = function(val, dec) {
-	val = parseFloat(val);	
+	val = parseFloat(val);
 	dec = dec || 2;	//小数位
 	if(val === 0 || isNaN(val)){
 		return '';
@@ -524,7 +524,7 @@ Public.numerical = function(e){
 	var allowed = '0123456789.-', allowedReg;
 	allowed = allowed.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
 	allowedReg = new RegExp('[' + allowed + ']');
-	var charCode = typeof e.charCode != 'undefined' ? e.charCode : e.keyCode; 
+	var charCode = typeof e.charCode != 'undefined' ? e.charCode : e.keyCode;
 	var keyChar = String.fromCharCode(charCode);
 	if(!e.ctrlKey && charCode != 0 && ! allowedReg.test(keyChar)){
 		e.preventDefault();
@@ -538,11 +538,11 @@ Public.limitInput = function(obj, allowedReg){
         ctrlKey = e.ctrlKey;
     }).on('keypress',function(e){
         allowedReg = typeof allowedReg == 'string' ? new RegExp(allowedReg) : allowedReg;
-        var charCode = typeof e.charCode != 'undefined' ? e.charCode : e.keyCode; 
+        var charCode = typeof e.charCode != 'undefined' ? e.charCode : e.keyCode;
         var keyChar = $.trim(String.fromCharCode(charCode));
         if(!ctrlKey && charCode != 0 && charCode != 13 && !allowedReg.test(keyChar)){
             e.preventDefault();
-        } 
+        }
     });
 };
 //限制输入的字符长度
@@ -592,7 +592,7 @@ $.fn.artTab = function(options) {
 		  var tabs = location.hash.substr(1);
 		  $tab_a.eq(tabs).trigger("click");
 	  }
-  });	  
+  });
 };
 
 //文本列表滚动
@@ -721,12 +721,12 @@ $.fn.cssCheckbox = function() {
 		$(this).find("input")[0].checked = !$(this).find("input")[0].checked;
 		event.preventDefault();
 	});
-	
+
 	return {
 		chkAll:function(){
 			$_chk.addClass("checked");
 			$_chk.find("input").attr("checked","checked");
-		},	
+		},
 		chkNot:function(){
 			$_chk.removeClass("checked");
 			$_chk.find("input").removeAttr("checked");
@@ -826,7 +826,7 @@ Business.getFile = function(url, args, isNewWinOpen){
 	} else {
 		url += '&random=' + new Date().getTime();
 	};
-	
+
 	var downloadForm = parent.$('form#downloadForm');
 	if (downloadForm.length == 0) {
 		downloadForm = parent.$('<form method="post" />').attr('id', 'downloadForm').hide().appendTo('body');
@@ -879,7 +879,7 @@ Business.customerCombo = function($_obj, opts){
 			formatData: function(data){
 				defaultPage.SYSTEM.customerInfo = data.data.rows;	//更新
 				return data.data.rows;
-			}	
+			}
 		},
 		width: 200,
 		height: 300,
@@ -896,7 +896,7 @@ Business.customerCombo = function($_obj, opts){
 		cache: false,
 		forceSelection: false,
 		maxFilter: 100,
-		trigger: false,	
+		trigger: false,
 		callback: {
 			onChange: function(data){
 				if(data) {
@@ -916,8 +916,8 @@ Business.customerCombo = function($_obj, opts){
 			}
 		}
 	}, opts);
-	
-	var customerCombo = $_obj.combo(opts).getCombo();	
+
+	var customerCombo = $_obj.combo(opts).getCombo();
 	//新增客户
 	$('#quickAddCustomer').on('click', function(e){
 		e.preventDefault();
@@ -947,14 +947,14 @@ Business.customerCombo = function($_obj, opts){
 			lock: true
 		});
 	});
-	
+
 	customerCombo.input.focus(function() {
 		var $_this = $(this);
 		setTimeout(function(){
 			$_this.select();
 		}, 15);
 	});
-	
+
 	return customerCombo;
 };
 
@@ -991,7 +991,7 @@ Business.linkCombo = function(page, opts){
 			}
 		}
 	}, opts);
-	
+
 	var linkCombo = page.$linkMan.combo(opts).getCombo();
 	return linkCombo;
 }
@@ -1030,7 +1030,7 @@ Business.salesCombo = function($_obj, opts){
 			formatData: function(data){
 				defaultPage.SYSTEM.salesInfo = data.data.items;	//更新
 				return data.data.items;
-			}	
+			}
 		},
 		width: 120,
 		height: 300,
@@ -1047,8 +1047,8 @@ Business.salesCombo = function($_obj, opts){
 		},
 		extraListHtml: '<a href="javascript:void(0);" id="quickAddSales" class="quick-add-link"><i class="ui-icon-add"></i>新增职员</a>'
 	}, opts);
-	
-	var salesCombo = $_obj.combo(opts).getCombo();	
+
+	var salesCombo = $_obj.combo(opts).getCombo();
 	//新增客户
 	$('#quickAddSales').on('click', function(e){
 		e.preventDefault();
@@ -1105,8 +1105,8 @@ Business.supplierCombo = function($_obj, opts){
 			formatData: function(data){
 				defaultPage.SYSTEM.supplierInfo = data.data.rows;	//更新
 				return data.data.rows;
-			}	
-		},			
+			}
+		},
 		width: 200,
 		height: 300,
 		formatText: function(row){
@@ -1122,7 +1122,7 @@ Business.supplierCombo = function($_obj, opts){
 		cache: false,
 		forceSelection: false,
 		maxFilter: 10,
-		trigger: false,	
+		trigger: false,
 		callback: {
 			onChange: function(data){
 				if(data) {
@@ -1139,10 +1139,10 @@ Business.supplierCombo = function($_obj, opts){
 					$_obj.find('.ui-icon-ellipsis').data('skey',skey).data('type','supplierInfo').trigger('click');
 				}
 			}
-		}			
+		}
 	}, opts);
-	
-	var supplierCombo = $_obj.combo(opts).getCombo();	
+
+	var supplierCombo = $_obj.combo(opts).getCombo();
 	//新增供应商
 	$('#quickAddVendor').on('click', function(e){
 		e.preventDefault();
@@ -1166,7 +1166,7 @@ Business.supplierCombo = function($_obj, opts){
 			lock: true
 		});
 	});
-	
+
 	supplierCombo.input.focus(function() {
 		var $_this = $(this);
 		setTimeout(function(){
@@ -1218,7 +1218,7 @@ Business.settlementAccountCombo = function($_obj, opts){
 			formatData: function(data){
 				defaultPage.SYSTEM.settlementAccountInfo = data.data.items;	//更新
 				return data.data.items;
-			}	
+			}
 		},
 		width: 200,
 		height: 300,
@@ -1238,8 +1238,8 @@ Business.settlementAccountCombo = function($_obj, opts){
 		},
 		extraListHtml: '<a href="javascript:void(0);" id="quickAddVendor" class="quick-add-link"><i class="ui-icon-add"></i>新增结算账户</a>'
 	}, opts);
-	
-	var settlementAccountCombo = $_obj.combo(opts).getCombo();	
+
+	var settlementAccountCombo = $_obj.combo(opts).getCombo();
 	//新增结算账户
 	$('#quickAddVendor').on('click', function(e){
 		e.preventDefault();
@@ -1394,13 +1394,13 @@ Business.serNumManage = function(opts){
 	$grid = parentTr.closest('table'),
 	defaultPage = Public.getDefaultPage();
 
-	
+
 	var oldData = {
 		goodsInfo: goodsInfo,
 		storageInfo : parentTr.data('storageInfo') || {},
 		unitInfo : parentTr.data('unitInfo')||{},
 		skuInfo: parentTr.data('skuInfo')||{}
-	} 
+	}
 	/*if(!view){
 		//非查询模式
 		$grid.jqGrid("restoreCell", curRow, curCol);
@@ -1494,13 +1494,13 @@ Business.serNumManage = function(opts){
 						} else {
 							var su = $grid.jqGrid('addRowData', Number(THISPAGE.newId), {}, 'last');
 							THISPAGE.newId++;
-						};	
+						};
 						var rowData = $grid.jqGrid('getRowData',curID);
 						var tempRowData = $.extend(true, {}, goodsInfo);//克隆对象，不然会污染combo的数据
 						tempRowData.goods = goodsInfo.number + ' ' + goodsInfo.name + (goodsInfo.spec ? '_' + goodsInfo.spec: '');
 						tempRowData.qty = serNums.length;
 						tempRowData.serNumList = serNums;
-						
+
 						//计算金额和税率start
 						if(tempRowData.qty >0 && rowData.goods){
 							var _qty = parseFloat(tempRowData.qty);
@@ -1541,8 +1541,8 @@ Business.serNumManage = function(opts){
 						}
 						if(su){
 							$('#' + addId).data('goodsInfo',tempRowData)
-							.data('storageInfo', { 
-								id: tempRowData.locationId, 
+							.data('storageInfo', {
+								id: tempRowData.locationId,
 								name: tempRowData.locationName
 							}).data('unitInfo',{
 								unitId: tempRowData.unitId,
@@ -1573,15 +1573,15 @@ Business.serNumManage = function(opts){
 							$grid.jqGrid('addRowData', THISPAGE.newId, {}, 'last');
 							THISPAGE.newId = THISPAGE.newId + 1;
 						};
-						THISPAGE.calTotal();	
+						THISPAGE.calTotal();
 						/*if(serNumUsedList){
-							//有使用过的说明是修改状态 
+							//有使用过的说明是修改状态
 							setTimeout( function() { $grid.jqGrid("nextCell") }, 10);
 						}else{
 							setTimeout( function() { $grid.jqGrid("editCell", curRow, 2, true) }, 10);
 						}*/
 					}
-					typeof opts.afterSelected === 'function' && opts.afterSelected(); 
+					typeof opts.afterSelected === 'function' && opts.afterSelected();
 					win.close();
 				}
 			}
@@ -1593,8 +1593,8 @@ Business.serNumManage = function(opts){
 		focus:false,//很奇葩，不配置这个按回车会触发该控件上close按钮的click事件~~~
 		/*cancel:function(){
 			$('#' + THISPAGE.curID).data('goodsInfo',oldData.goodsInfo)
-			.data('storageInfo', { 
-				id: oldData.storageInfo.id, 
+			.data('storageInfo', {
+				id: oldData.storageInfo.id,
 				name: oldData.storageInfo.name
 			}).data('unitInfo',{
 				unitId: oldData.unitInfo.unitId,
@@ -1609,7 +1609,7 @@ Business.serNumManage = function(opts){
 		}
 	};
 	if(!isCreate && (!serNumUsedList || (enableSku || enableStorage))){
-		//出库,没有选序列号或者要更换库存或者属性的时候 
+		//出库,没有选序列号或者要更换库存或者属性的时候
 		params.title = '选择【'+goodsInfo.name+'】的序列号',
 		params.content = 'url:../settings/serNumList';
 		params.button = [{name: '确认',defClass:'ui_state_highlight', callback: function () {
@@ -1666,8 +1666,8 @@ Business.billSkuManage = function(parentTr , data, isSkuSingle){
 						tempRowData.skuName = tempData.skuName;
 						tempRowData.skuId = tempData.skuId;
 						$('#' + addId).data('goodsInfo',tempRowData)
-						/*.data('storageInfo', { 
-							id: tempRowData.locationId, 
+						/*.data('storageInfo', {
+							id: tempRowData.locationId,
 							name: tempRowData.locationName
 						})
 						.data('unitInfo',{
@@ -1680,8 +1680,8 @@ Business.billSkuManage = function(parentTr , data, isSkuSingle){
 						});
 						var goodsData = $.extend(true, {}, tempRowData);
 						delete goodsData.id;
-						$grid.jqGrid('setRowData', addId, goodsData);	
-					}					
+						$grid.jqGrid('setRowData', addId, goodsData);
+					}
 				}else{
 					for(var i = 0 ,len = goodsPropList.length; i<len; i++){
 						var addId = curID || THISPAGE.newId;
@@ -1727,8 +1727,8 @@ Business.billSkuManage = function(parentTr , data, isSkuSingle){
 								id: tempRowData.skuId,
 								name: tempRowData.skuName
 							});
-							!$('#' + addId).data('storageInfo') && $('#' + addId).data('storageInfo', { 
-								id: tempRowData.locationId, 
+							!$('#' + addId).data('storageInfo') && $('#' + addId).data('storageInfo', {
+								id: tempRowData.locationId,
 								name: tempRowData.locationName
 							});
 							!$('#' + addId).data('unitInfo') && $('#' + addId).data('unitInfo',{
@@ -1758,7 +1758,7 @@ Business.billSkuManage = function(parentTr , data, isSkuSingle){
 						$grid.jqGrid('addRowData', THISPAGE.newId, {}, 'last');
 						THISPAGE.newId = THISPAGE.newId + 1;
 					};
-					THISPAGE.calTotal();	
+					THISPAGE.calTotal();
 					// setTimeout( function() { $grid.jqGrid("editCell", curRow, 2, true) }, 10);
 				}
 				win.close();
@@ -1858,7 +1858,7 @@ Business.goodsCombo = function($_obj, opts){
 			formatData: function(data){
 				defaultPage.SYSTEM.goodsInfo = data.data.rows;	//更新
 				return data.data.rows;
-			}	
+			}
 		},
 		formatText: function(data){
 			return Business.formatGoodsName(data);
@@ -1904,8 +1904,8 @@ Business.goodsCombo = function($_obj, opts){
 				var query = $_obj.val()
 				Public.ajaxGet('../basedata/inventory?action=list', { rows: 20, skey: query }, function(data){
 					if(data.status === 200 || data.status === 250) {
-						//SYSTEM.goodsInfo.push(data.data.rows);				
-						_self.rawData = _self.addData = data.data.rows;	
+						//SYSTEM.goodsInfo.push(data.data.rows);
+						_self.rawData = _self.addData = data.data.rows;
 						if(data.data.rows.length < _self.opts.maxFilter) {
 							_self.addQuery = false;
 						} else {
@@ -1914,7 +1914,7 @@ Business.goodsCombo = function($_obj, opts){
 						callback.call(_self);
 						var addId = [];
 						$.each(data.data.rows, function(i, n){
-							addId.push(n.id);	
+							addId.push(n.id);
 						});
 						$.each(pos, function(i, n){
 							if($.inArray(n.value, addId) !== -1) {
@@ -1923,7 +1923,7 @@ Business.goodsCombo = function($_obj, opts){
 								} else {
 									defaultPage.SYSTEM.goodsInfo.splice(i - 1, 1);
 								};
-							};	
+							};
 						});
 						$.merge(defaultPage.SYSTEM.goodsInfo, data.data.rows);
 						var goodsInfo = defaultPage.SYSTEM.goodsInfo;
@@ -1952,9 +1952,9 @@ Business.goodsCombo = function($_obj, opts){
 		disabledCls: '',
 		activeCls: ''
 	}, opts);
-	
+
 	var goodsCombo = $_obj.combo(opts).getCombo();
-	
+
 	//新增商品
 	$('.quickAddGoods').unbind('click').on('click', function(e){
 		e.preventDefault();
@@ -1981,7 +1981,7 @@ Business.goodsCombo = function($_obj, opts){
 					 goodsCombo.selectByValue(goodID, true);
 					 $_obj.focus();
 				}, 10);
-				
+
 			}},
 			width : _w,
 			height : _h,
@@ -2015,7 +2015,7 @@ Business.categoryCombo = function($_obj, opts, type){
 				defaultPage.SYSTEM.categoryInfo = defaultPage.SYSTEM.categoryInfo ||{};
 				defaultPage.SYSTEM.categoryInfo[typeNumber] = data.data.items;	//更新
 				return data.data.items;
-			}	
+			}
 		},
 		text: 'name',
 		value: 'id',
@@ -2040,7 +2040,7 @@ Business.categoryCombo = function($_obj, opts, type){
 		},
 		queryDelay: 0
 	}, opts);
-	
+
 	var categoryCombo = $_obj.combo(opts).getCombo();
 	var rights = {
 			'customertype' : 'BUTYPE_ADD',// '客户',
@@ -2076,7 +2076,7 @@ Business.forSearch = function(id, text){
 			cancel: true,
 			lock: true,
 			cancelVal: '关闭'
-			
+
 		});
 		//goodsCombo.removeSelected(false);
 	} else {
@@ -2114,7 +2114,7 @@ Business.storageCombo = function($_obj, opts){
 /*			ajaxOptions: {
 				formatData: function(data){
 					return data.data.items;
-				}	
+				}
 			},*/
 			text: 'name',
 			value: 'id',
@@ -2139,7 +2139,7 @@ Business.storageCombo = function($_obj, opts){
 				}
 			}
 		}, opts);
-	
+
 	var storageCombo = $_obj.combo(opts).getCombo();
 	return storageCombo;
 };
@@ -2164,7 +2164,7 @@ Business.billskuCombo = function($_obj, opts){
 						id: data.skuId
 					});
 				}else{
-					
+
 				}
 			}
 		}
@@ -2189,7 +2189,7 @@ Business.skuCombo = function($_obj, opts){
 			extraListHtml: $extraListHtml,
 			callback: {
 				onChange: function(data){
-					
+
 				}
 			}
 		}, opts);
@@ -2224,7 +2224,7 @@ Business.skuCombo = function($_obj, opts){
 										id: data.skuId
 									});
 									skuCombo.collapse();	//关闭下拉
-								}								
+								}
 								// win && win.close();
 							}
 						},
@@ -2234,7 +2234,7 @@ Business.skuCombo = function($_obj, opts){
 						min : false,
 						cache : false,
 						lock: true
-					});					
+					});
 				}
 			}
 	});
@@ -2260,7 +2260,7 @@ Business.batchCombo = function($_obj, opts){
 				}
 			}
 		}, opts);
-	
+
 	var batchCombo = $_obj.combo(opts).getCombo();
 	return batchCombo;
 };
@@ -2275,7 +2275,7 @@ Business.unitCombo = function($_obj, opts){
 /*			ajaxOptions: {
 				formatData: function(data){
 					return data.data.items;
-				}	
+				}
 			},*/
 			text: 'name',
 			value: 'id',
@@ -2302,7 +2302,7 @@ Business.unitCombo = function($_obj, opts){
 				}
 			}
 		}, opts);
-	
+
 	var unitCombo = $_obj.combo(opts).getCombo();
 	return unitCombo;
 };
@@ -2320,7 +2320,7 @@ Business.accountCombo = function($_obj, opts){
 			formatData: function(data){
 				SYSTEM.accountInfo = data.data.items;	//更新
 				return data.data.items;
-			}	
+			}
 		},
 		formatText: function(data){
 			return data.number + ' ' + data.name;
@@ -2330,7 +2330,7 @@ Business.accountCombo = function($_obj, opts){
 		defaultFlag: false,
 		cache: false,
 		editable: true
-	}, opts);	
+	}, opts);
 	var accountCombo = $_obj.combo(opts).getCombo();
 	return accountCombo;
 };
@@ -2349,7 +2349,7 @@ Business.paymentCombo = function($_obj, opts){
 			formatData: function(data){
 				SYSTEM.paymentInfo = data.data.items;	//更新缓存
 				return data.data.items;
-			}	
+			}
 		},
 		emptyOptions: true,
 		text: 'name',
@@ -2359,9 +2359,9 @@ Business.paymentCombo = function($_obj, opts){
 		editable: false,
 		trigger: false,
 		defaultFlag: false
-		
+
 	}, opts);
-	var paymentCombo = $_obj.combo(opts).getCombo();	
+	var paymentCombo = $_obj.combo(opts).getCombo();
 	return paymentCombo;
 };
 /*
@@ -2383,7 +2383,7 @@ Business.storeCombo = function($_obj, opts){
 			formatData: function(data){
 				SYSTEM.storeInfo = data.data.items;	//更新
 				return data.data.items;
-			}	
+			}
 		},
 		formatText: function(data){
 			return data.name;
@@ -2394,7 +2394,7 @@ Business.storeCombo = function($_obj, opts){
 		defaultFlag: false,
 		cache: false,
 		editable: true
-	}, opts);	
+	}, opts);
 	var storeCombo = $_obj.combo(opts).getCombo();
 	return storeCombo;
 };
@@ -2417,7 +2417,7 @@ Business.logisticCombo = function($_obj, opts){
 			formatData: function(data){
 				SYSTEM.logisticInfo = data.data.items;	//更新
 				return data.data.items;
-			}	
+			}
 		},
 		formatText: function(data){
 			return data.number + ' ' + data.name;
@@ -2428,7 +2428,7 @@ Business.logisticCombo = function($_obj, opts){
 		defaultFlag: false,
 		cache: false,
 		editable: true
-	}, opts);	
+	}, opts);
 	var logisticCombo = $_obj.combo(opts).getCombo();
 	return logisticCombo;
 };
@@ -2473,7 +2473,7 @@ Business.billsEvent = function(obj, type, flag){
 
 	//区分组装拆卸单
 	if(type !== 'assemble') {
-		$('#customer').on('click', '.ui-icon-ellipsis', function(e){	
+		$('#customer').on('click', '.ui-icon-ellipsis', function(e){
 			var skey = $(this).data('skey');
 			var lable = $('#customer').prev().text().slice(0, -1);
 			var title = '选择' + lable;
@@ -2554,7 +2554,7 @@ Business.billsEvent = function(obj, type, flag){
 				});
 				$(this).data('hasInstance', true);
 		});
-		
+
 		//取消分录编辑状态
 		$(document).bind('click.cancel', function(e){
 			if(!$(e.target).closest(".ui-jqgrid-bdiv").length > 0 && $(e.target).closest(".pika-single").length == 0 && curRow !== null && curCol !== null){
@@ -2563,7 +2563,7 @@ Business.billsEvent = function(obj, type, flag){
 			   curCol = null;
 			};
 		});
-	};	
+	};
 	//批量添加批次
 		$('.grid-wrap').on('click', '.batch .ui-icon-ellipsis', function(e){
 			var _$this = $(this);
@@ -2596,7 +2596,7 @@ Business.billsEvent = function(obj, type, flag){
 								if(batchId != 'function'){
 									if(isfirst){
 										storageInfo = {
-											id: batchData.locationId, 
+											id: batchData.locationId,
 											name: batchData.locationName
 										};
 										var editData = $.extend(true, {
@@ -2604,7 +2604,7 @@ Business.billsEvent = function(obj, type, flag){
 											prodDate: batchData.prodDate,
 											safeDays: goodsInfo.safeDays,
 											validDate: batchData.validDate,
-											locationId: batchData.locationId, 
+											locationId: batchData.locationId,
 											locationName: batchData.locationName,
 											outLocationId: batchData.locationId, //调拨单中使用
 											outLocationName: batchData.locationName //调拨单中使用
@@ -2643,8 +2643,123 @@ Business.billsEvent = function(obj, type, flag){
 										});
 										_$grid.jqGrid('setRowData', nextId, _rowData);
 										$('#'+nextId).data('goodsInfo',_rowData)
-										.data('storageInfo', { 
-											id: _rowData.locationId, 
+										.data('storageInfo', {
+											id: _rowData.locationId,
+											name: _rowData.locationName
+										}).data('unitInfo',{
+											unitId: _rowData.unitId,
+											name: _rowData.unitName
+										});
+										_lastId = nextId;
+									}
+								}
+							}
+							if(isSingle){
+								//_$grid.jqGrid('editCellByColName', Number(_lastId) + 1, 'goods');
+							}else{
+								_$grid.jqGrid('editCellByColName', Number(_lastId) + 1, 'goods');
+								_self.calTotal && _self.calTotal();
+							}
+						}
+					},
+					lock: true,
+					button:[{name: '选中',defClass:'ui_state_highlight fl', callback: function () {
+						this.content.callback(type);
+				        return false;
+					}},
+					{name: '选中并关闭',defClass:'ui_state_highlight', callback: function () {
+						this.content.callback(type);
+						this.close();
+				        return false;
+					}},
+					{name: '关闭', callback: function () {
+				        return true;
+					}}]
+				});
+				$(this).data('hasInstance', true);
+		});
+
+		//批量添加批次
+		$('.grid-wrap').on('click', '.priceClause-batch .ui-icon-ellipsis', function(e){
+			var _$this = $(this);
+			var _$grid = _$this.closest('.ui-jqgrid-btable');
+			var _$tr = _$this.closest('tr');
+			var goodsInfo = _$tr.data('goodsInfo');
+			var storageInfo = _$tr.data('storageInfo');
+			var isSingle = _$this.closest('td').hasClass('isSingle');
+			if(!goodsInfo){
+				defaultPage.Public.tips({type:2, content:"请先选择一个商品！"});
+				return;
+			}
+			$.dialog({
+					width: 570,
+					height: 500,
+					title: '选择商品【'+ goodsInfo.number +' ' + goodsInfo.name +'】的批号',
+					content: 'url:../settings/batch_batch',
+					data: {
+						isSingle: isSingle,
+						skey:_self.skey,
+						goodsInfo:goodsInfo,
+						storageInfo:storageInfo,
+						callback: function(batchList){
+							if(!batchList)return;
+							var rowId = _$tr[0].id;
+							var isfirst = true;
+							var firstItem = _$grid.jqGrid('getRowData', rowId);
+							for (batchId in batchList){
+								var batchData = batchList[batchId];
+								if(batchId != 'function'){
+									if(isfirst){
+										storageInfo = {
+											id: batchData.locationId,
+											name: batchData.locationName
+										};
+										var editData = $.extend(true, {
+											batch: batchData.batch,
+											prodDate: batchData.prodDate,
+											safeDays: goodsInfo.safeDays,
+											validDate: batchData.validDate,
+											locationId: batchData.locationId,
+											locationName: batchData.locationName,
+											outLocationId: batchData.locationId, //调拨单中使用
+											outLocationName: batchData.locationName //调拨单中使用
+										});
+										_$grid.jqGrid('setRowData', rowId, editData);
+										_$tr.data('storageInfo',storageInfo);
+										var _lastId = rowId;
+										isfirst = false;
+									}else{
+										var nextId = (function(rowId){
+											var $nextRow = $('#'+rowId).next();
+											if($nextRow.length){
+												if($nextRow.data('goodsInfo')){
+													return arguments.callee($nextRow[0].id);
+												}else{
+													return $nextRow[0].id;
+												}
+											}else{
+												var newId = Number(rowId) + 1;
+												_$grid.jqGrid('addRowData', newId, 'last');
+												_$grid.jqGrid('addRowData', newId + 1, {}, 'last');
+												_self.newId = newId + 	2;
+												return newId;
+											}
+										})(rowId);
+										firstItem.locationId = batchData.locationId;
+										firstItem.locationName = batchData.locationName;
+										firstItem.outLocationId = batchData.locationId;//调拨单中使用
+										firstItem.outLocationName = batchData.locationName;//调拨单中使用
+										var _rowData = $.extend(true, goodsInfo, firstItem );
+										$.extend(true, _rowData, {
+											batch: batchData.batch,
+											prodDate: batchData.prodDate,
+											safeDays: goodsInfo.safeDays,
+											validDate: batchData.validDate
+										});
+										_$grid.jqGrid('setRowData', nextId, _rowData);
+										$('#'+nextId).data('goodsInfo',_rowData)
+										.data('storageInfo', {
+											id: _rowData.locationId,
 											name: _rowData.locationName
 										}).data('unitInfo',{
 											unitId: _rowData.unitId,
@@ -2679,7 +2794,7 @@ Business.billsEvent = function(obj, type, flag){
 				$(this).data('hasInstance', true);
 		});
 	initStorage();
-	
+
 	function initStorage() {
 		var data = []//获取启用状态的;
 		for (var i = 0; i < defaultPage.SYSTEM.storageInfo.length; i++) {
@@ -2699,7 +2814,7 @@ Business.billsEvent = function(obj, type, flag){
 	if(type === 'transfers') {
 		return;
 	};
-	
+
 	$("#batchStorage").powerFloat({
 		eventType: "click",
 		hoverHold: false,
@@ -2747,7 +2862,7 @@ Business.filterCustomer = function(){
 		forceSelection: false,
 		noDataText: '',
 		extraListHtmlCls: '',
-		extraListHtml: '', 
+		extraListHtml: '',
 		callback: {
 			onChange: function(data){
 				if(data) {
@@ -2757,7 +2872,7 @@ Business.filterCustomer = function(){
 			}
 		}
 	});
-	
+
 	//客户
 	$('#filter-customer .ui-icon-ellipsis').on('click', function(){
 		var $input = $(this).prev('input');
@@ -2788,7 +2903,7 @@ Business.filterSupplier = function(){
 		forceSelection: false,
 		noDataText: '',
 		extraListHtmlCls: '',
-		extraListHtml: '', 
+		extraListHtml: '',
 		callback: {
 			onChange: function(data){
 				if(data) {
@@ -2798,7 +2913,7 @@ Business.filterSupplier = function(){
 			}
 		}
 	});
-	
+
 	//客户
 	$('#filter-customer .ui-icon-ellipsis').on('click', function(){
 		var $input = $(this).prev('input');
@@ -2829,7 +2944,7 @@ Business.filterSettlementAccount = function(){
 		forceSelection: false,
 		noDataText: '',
 		extraListHtmlCls: '',
-		extraListHtml: '', 
+		extraListHtml: '',
 		callback: {
 			onChange: function(data){
 				if(data) {
@@ -2839,7 +2954,7 @@ Business.filterSettlementAccount = function(){
 			}
 		}
 	});
-	
+
 	//结算账户
 	$('#filter-settlementAccount .ui-icon-ellipsis').on('click', function(){
 		var $input = $(this).prev('input');
@@ -2861,11 +2976,11 @@ Business.filterSettlementAccount = function(){
 };
 
 Business.filterGoods = function(){
-	Business.goodsCombo($('#goodsAuto'), { 
+	Business.goodsCombo($('#goodsAuto'), {
 		forceSelection: false,
 		noDataText: '',
 		extraListHtmlCls: '',
-		extraListHtml: '', 
+		extraListHtml: '',
 		forceSelection: false,
 		callback: {
 			onChange: function(data){
@@ -2876,7 +2991,7 @@ Business.filterGoods = function(){
 			}
 		}
 	});
-	//商品	
+	//商品
 	$('#filter-goods .ui-icon-ellipsis').on('click', function(){
 		var $input = $(this).prev('input');
 		$.dialog({
@@ -2899,7 +3014,7 @@ Business.filterGoods = function(){
 };
 Business.filterStorage = function(){
 	var defaultPage = Public.getDefaultPage();
-	Business.storageCombo($('#storageAuto'), { 
+	Business.storageCombo($('#storageAuto'), {
 		data: function(){
 			return defaultPage.SYSTEM.storageInfo;
 		},
@@ -3049,8 +3164,8 @@ $.fn.digital = function() {
 	});
 };
 
-/** 
- 1. 配置cookie的值，把name变量的值设为value   
+/**
+ 1. 配置cookie的值，把name变量的值设为value
 example $.cookie(’name’, ‘value’);
  2.新建一个cookie 包括有效期 路径 域名等
 example $.cookie(’name’, ‘value’, {expires: 7, path: ‘/’, domain: ‘jquery.com’, secure: true});
@@ -3178,7 +3293,7 @@ Public.zTree = {
         var self = this;
         self.opts = $.extend(true, self.opts, opts);
         self.container = $($target);
-        self.obj = $(self._getTemplate(opts)); 
+        self.obj = $(self._getTemplate(opts));
         self.container.append(self.obj);
         setting = $.extend(true, self.setting, setting);
         Public.ajaxPost(opts.url || '../basedata/assist?action=list&typeNumber=trade&isDelete=2', {}, function(data) {
@@ -3355,7 +3470,7 @@ Public.categoryTree = function($obj, opts) {
  * type string 分类类型
  * parentWin object 父窗口对象,决定弹窗的覆盖范围，默认当前窗口的parent
  */
-Public.categoryPop = function(type,targetWin,callback){ 
+Public.categoryPop = function(type,targetWin,callback){
 	var defaultPage = Public.getDefaultPage();
 	var self = {
 			init:function(){
@@ -3388,7 +3503,7 @@ Public.categoryPop = function(type,targetWin,callback){
 							category.focus();
 							return false;
 						}
-						var oper = 'add'; 
+						var oper = 'add';
 						var params = { name: category ,typeNumber: type};
 						var msg = '新增类别';
 						Public.ajaxPost('../basedata/assist/' + oper, params, function(data){
@@ -3554,7 +3669,7 @@ $(function(){
 								cellsubmit: 'clientArray',
 								afterSaveCell: function(rowid,name,val,iRow,iCol) {
 									switch(name){
-										case 'aname': 
+										case 'aname':
 										if(!$.trim(val)) {
 											defaultPage.Public.tips({type:2 , content:'请输入别名！'});
 											return;
@@ -3780,12 +3895,12 @@ $(function(){
  * 区下拉框ID：areaCombo
  * 需要搭配COMBO插件
  * 默认值放在data('defaultValue')
- */	
+ */
 var mod_AreasCombo = (function(mod) {
 	var	_areasList = [],
 		_capable = false,//模块启动开关
 		_provinceList = [],
-		_cityList = [], 
+		_cityList = [],
 		_areasCahe = {},
 		_pCombo,_cCombo,_aCombo;
 
@@ -3860,7 +3975,7 @@ var mod_AreasCombo = (function(mod) {
 		for (i = 0,len = _provinceList.length; i < len; i++) {
 			if (_provinceList[i].type === 2 && _provinceList[i].parent_id === 1) {
 				_data.push({name:_provinceList[i].name,id:_provinceList[i].id});
-			} 
+			}
 		}
 		return _data;
 	};
@@ -3869,7 +3984,7 @@ var mod_AreasCombo = (function(mod) {
 		for (i = 0,len = _cityList.length; i < len; i++) {
 			if (_cityList[i].parent_id === PID) {
 				_data.push({name:_cityList[i].name,id:_cityList[i].id});
-			} 
+			}
 		}
 		return _data;
 	};

@@ -151,6 +151,26 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 			function i() {
 				$("#initCombo").append($(".storageAuto").val(""))
 			}
+
+			function g1(a, b) {
+			console.log(1111);
+				var c = $(".priceClauseAuto")[0];
+				return c
+			}
+			function h1(a, b, c) {
+				console.log(2222);
+				if ("get" === b) {
+					if ("" !== $(".priceClauseAuto").getCombo().getValue()) return $(a).val();
+					var d = $(a).parents("tr");
+					return d.removeData("storageInfo"), ""
+				}
+				"set" === b && $("input", a).val(c)
+			}
+			function i1() {
+				console.log(3333);
+				$("#initCombo").append($(".priceClauseAuto").val(""))
+			}
+
 			function j(a, b) {
 				var c = $(".unitAuto")[0];
 				return c
@@ -187,6 +207,7 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 			function r() {
 				$("#initCombo").append($(".batchAuto").val(""))
 			}
+
 			function s(a, b) {
 				var c = $(".priceAuto")[0];
 				return c
@@ -312,8 +333,7 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 				hidden: !0
 			}, {
 				name: "locationName",
-				label: "库存",
-				nameExt: '<small id="batchStorage">(批量)</small>',
+				label: "仓库",
 				width: 100,
 				editable: !0,
 				edittype: "custom",
@@ -354,6 +374,36 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 				hidden: !0,
 				title: !1,
 				align: "left"
+			},{
+				name: "contractNo",
+				label: "合同号",
+				width: 100,
+				title: !0,
+				editable: !0
+			},{
+				name: "contractDate",
+				label: "合同日期",
+				width: 90,
+				title: !1,
+				editable: !0,
+				edittype: "custom",
+				editoptions: {
+					custom_element: m,
+					custom_value: n,
+					handle: o
+				}
+			},{
+				name: "contractQty",
+				label: "合同数量",
+				width: 60,
+				title: !0,
+				editable: !0
+			},{
+				name: "invoiceAmount",
+				label: "已开发票",
+				width: 80,
+				title: !0,
+				editable: !0
 			}, {
 				name: "qty",
 				label: "数量",
@@ -391,9 +441,9 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 				editable: !0,
 				edittype: "custom",
 				editoptions: {
-					custom_element: g,
-					custom_value: h,
-					handle: i,
+					custom_element: g1,
+					custom_value: h1,
+					handle: i1,
 					trigger: "ui-icon-triangle-1-s"
 				}
 			},{
@@ -480,39 +530,8 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 					decimalPlaces: amountPlaces
 				},
 				editable: !0
-			}), this.calAmount = "taxAmount"),
-			B.push( {
-				name: "contractDate",
-				label: "合同日期",
-				width: 90,
-				title: !1,
-				editable: !0,
-				edittype: "custom",
-				edittype: "custom",
-				editoptions: {
-					custom_element: m,
-					custom_value: n,
-					handle: o
-				}
-			},{
-				name: "contractNo",
-				label: "合同号",
-				width: 50,
-				title: !0,
-				editable: !0
-			},{
-				name: "contractQty",
-				label: "合同数量",
-				width: 50,
-				title: !0,
-				editable: !0
-			},{
-				name: "invoiceAmount",
-				label: "已开发票",
-				width: 50,
-				title: !0,
-				editable: !0
-			},{
+			}),this.calAmount = "taxAmount"),
+			B.push({
 				name: "serialno",
 				label: "序列号",
 				width: 200,
@@ -651,6 +670,17 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 					}
 					if ("price" === b && $("#" + d + "_price", "#grid").val(c), "locationName" === b) {
 						$("#" + d + "_locationName", "#grid").val(c), THISPAGE.storageCombo.selectByText(c);
+						var g = $("#" + a).data("goodsInfo");
+						if (!g || "150502" != originalData.transType) return;
+						SYSTEM.ISSERNUM && 1 == g.isSerNum && Business.serNumManage({
+							row: $("#" + a),
+							enableStorage: !0,
+							enableSku: !0,
+							isCreate: "150502" != originalData.transType
+						})
+					}
+					if ("priceClause" === b) {
+						$("#" + d + "_priceClause", "#grid").val(c), THISPAGE.priceClauseCombo.selectByText(c);
 						var g = $("#" + a).data("goodsInfo");
 						if (!g || "150502" != originalData.transType) return;
 						SYSTEM.ISSERNUM && 1 == g.isSerNum && Business.serNumManage({
@@ -1004,7 +1034,9 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 				}
 			}), this.skuCombo = Business.billskuCombo($(".skuAuto"), {
 				data: []
-			}), this.storageCombo = Business.billStorageCombo($(".storageAuto")), this.unitCombo = Business.unitCombo($(".unitAuto"), {
+			}), this.storageCombo = Business.billStorageCombo($(".storageAuto")),
+			this.priceClauseCombo = Business.billPriceClauseCombo($(".priceClauseAuto")),
+			this.unitCombo = Business.unitCombo($(".unitAuto"), {
 				defaultSelected: -1,
 				forceSelection: !1
 			}), this.cellPikaday = new Pikaday({
@@ -1387,6 +1419,11 @@ var curRow, curCol, loading, SYSTEM = system = parent.SYSTEM,
 							mainUnit: l.name || "",
 							qty: h.qty,
 							price: h.price,
+							contractNo: h.contractNo,
+							contractDate: h.contractDate,
+							contractQty: h.contractQty,
+							invoiceAmount: h.invoiceAmount,
+							priceClause: h.priceClause,
 							discountRate: h.discountRate,
 							deduction: h.deduction,
 							amount: h.amount,
