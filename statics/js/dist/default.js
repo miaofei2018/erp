@@ -182,6 +182,13 @@ var dataReflush, list = {
 		target: "sales",
 		list: "../scm/invSa?action=initSaleList"
 	},
+	oto: {
+		name: "出库单",
+		href: "../scm/invSa?action=initSale",
+		dataRight: "SA_ADD",
+		target: "sales",
+		list: "../scm/invSa?action=initSaleList"
+	},
 	salesBack: {
 		name: "销货退货单",
 		href: "../scm/invSa?action=initSale&transType=150602",
