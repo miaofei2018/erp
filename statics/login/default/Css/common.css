@@ -305,7 +305,7 @@ div.untreated .RelevanState{ color:#82d156}
 .loginBtn{ width:400px; height:60px; background:url(../Images/loginbtn.png) no-repeat left top; border:none; background-color:transparent; cursor:pointer}
 .checkboxfalse{ height:29px; display:block; background:url(../Images/checkbox.png) no-repeat left top; cursor:pointer; padding-left:40px; line-height:29px; font-size:16px; font-weight:bold}
 .checkboxtrue{ height:29px; display:block; background:url(../Images/checkboxtrue.png) no-repeat left top; cursor:pointer; padding-left:40px; line-height:29px; font-size:16px; font-weight:bold}
-.logininput{ height:60px; margin-top:10px; width:280px; background-color:transparent; font-size:20px;}
+.logininput{ height:60px; margin-top:8px; width:260px; background-color:transparent; font-size:20px;border-radius:5px;}
 .loginInputc{ margin-left:95px;}
 .checkMMBox{ clear:both; margin-top:40px;}
 .LoginBtn{ margin-top:35px;}
